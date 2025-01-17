@@ -10,6 +10,9 @@ export default {
   ],
   darkMode: "class",
   theme: {
+    fontFamily: {
+      roboto: ["Roboto", "serif"],
+    },
     colors: {
       azul1: "#9CFFE5",
       azul2: "#6C9DFF",

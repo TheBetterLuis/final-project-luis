@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Test from "./components/Test";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
+import Login from "./components/Login";
 
 const Application = () => {
   return (
@@ -9,7 +10,7 @@ const Application = () => {
         <DarkThemeToggle />
         <Routes>
           <Route path="/" element={<>Inicio</>} />
-          <Route path="/comp" element={<Test />} />
+          <Route path="/comp" element={<Login />} />
           <Route path="/*" element={<>not found</>} />
         </Routes>
       </div>
