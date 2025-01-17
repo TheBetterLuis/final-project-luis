@@ -2,6 +2,7 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import Test from "./components/Test";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -22,6 +23,7 @@ function App() {
           count is {count}
         </button>
         <p className="bg-gray-300 text-blue-600">Ya esta instalado tailwind</p>
+        <Test />
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
