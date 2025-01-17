@@ -3,15 +3,16 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Test from "./components/Test";
-import Themetoggle from "./components/Themetoggle";
 import { Button } from "flowbite-react";
-
+import { DarkThemeToggle, Flowbite } from "flowbite-react";
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <Button>This is a flowbite button</Button>
+      <Flowbite>
+        <Button>This is a flowbite button</Button>
+      </Flowbite>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -34,7 +35,8 @@ function App() {
         <p className="text-[#333] dark:text-[#dddcdc] hover:text-[#878787] dark:hover:text-[#fff]">
           Puedes probar cambiar al modo oscuro/claro
         </p>
-        <Themetoggle />
+
+        <DarkThemeToggle></DarkThemeToggle>
         <p className="text-[#333] dark:text-[#dddcdc] hover:text-[#878787] dark:hover:text-[#fff]">
           Ya esta instalado tailwind
         </p>
