@@ -10,6 +10,14 @@ export default {
   ],
   darkMode: "class",
   theme: {
+    colors: {
+      azul1: "#9CFFE5",
+      azul2: "#6C9DFF",
+      azul3: "#4491A1",
+      azul4: "#074572",
+      azul5: "#0B2545",
+      azul6: "#00171F",
+    },
     extend: {},
   },
   plugins: [flowbite.plugin()],
