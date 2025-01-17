@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Test from "./components/Test";
+import Themetoggle from "./components/Themetoggle";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,15 +19,24 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p className="bg-gray-300 text-blue-600">Ya esta instalado tailwind</p>
-        <Test />
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
+      </div>
+      <div className="bg-[#dddcdc] dark:bg-[#333] text-[#333] dark:text-[#dddcdc]  grid place-items-center">
+        <p className="text-[#333] dark:text-[#dddcdc] hover:text-[#878787] dark:hover:text-[#fff]">
+          Puedes probar cambiar al modo oscuro/claro
+        </p>
+        <Themetoggle />
+        <p className="text-[#333] dark:text-[#dddcdc] hover:text-[#878787] dark:hover:text-[#fff]">
+          Ya esta instalado tailwind
+        </p>
+        <Test />
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
