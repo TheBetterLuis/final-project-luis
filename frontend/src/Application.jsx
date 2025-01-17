@@ -6,7 +6,7 @@ import Login from "./components/Login";
 const Application = () => {
   return (
     <Flowbite>
-      <div className="grid place-items-center py-10 ">
+      <div className="grid place-items-center py-10 font-roboto">
         <DarkThemeToggle />
         <Routes>
           <Route path="/" element={<>Inicio</>} />
