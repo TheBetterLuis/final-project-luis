@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Test from "./components/Test";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
 import Login from "./components/Login";
+import Register from "./components/Register";
+
 /*
     colors: {
       azul1: "#9CFFE5",
@@ -25,7 +27,8 @@ const Application = () => {
         {/* */}
         <Routes>
           <Route path="/" element={<>Inicio</>} />
-          <Route path="/comp" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/*" element={<>not found</>} />
         </Routes>
       </div>
