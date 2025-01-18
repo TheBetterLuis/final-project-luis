@@ -3,6 +3,7 @@ import Test from "./components/Test";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Ticket from "./components/Ticket";
 
 /*
     colors: {
@@ -29,6 +30,7 @@ const Application = () => {
           <Route path="/" element={<>Inicio</>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/ticket" element={<Ticket />} />
           <Route path="/*" element={<>not found</>} />
         </Routes>
       </div>
