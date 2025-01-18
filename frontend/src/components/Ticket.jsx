@@ -5,6 +5,7 @@ import {
   Textarea,
   TextInput,
   FileInput,
+  Datepicker,
 } from "flowbite-react";
 
 const Ticket = () => {
@@ -57,26 +58,12 @@ const Ticket = () => {
             <div className="mb-2 block">
               <Label
                 className="text-white drop-shadow-md"
-                htmlFor="email2"
-                value="EMAIL"
-              />
-            </div>
-            <TextInput
-              id="email2"
-              type="email"
-              placeholder="name@flowbite.com"
-              required
-            />
-          </div>
-          <div>
-            <div className="mb-2 block">
-              <Label
-                className="text-white drop-shadow-md"
                 htmlFor="fecha3"
                 value="FECHA"
               />
+
+              <Datepicker id="fecha3" minDate={new Date()} />
             </div>
-            <TextInput id="fecha3" type="password" required />
           </div>
           <div>
             <div className="mb-2 block">
@@ -86,9 +73,8 @@ const Ticket = () => {
                 value="ADJUNTAR ARCHIVO"
               />
             </div>
-            <FileInput id="small-file-upload" sizing="sm" />
+            <FileInput id="adjuntar3" sizing="sm" />
           </div>
-
           <Button className="bg-azul2 drop-shadow-md" type="submit">
             <p>Guardar Ticket</p>
           </Button>
