@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Ticket from "./components/Ticket";
 import TicketList from "./components/TicketList";
+import TicketView from "./components/TicketView";
 
 /*
     colors: {
@@ -19,12 +20,14 @@ import TicketList from "./components/TicketList";
 const Application = () => {
   const styles = {
     background: "bg-gradient-to-tr from-azul4 via-[#52A2AB] to-azul1",
+    background_feed:
+      "bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]",
   };
 
   return (
     <Flowbite>
       <div
-        className={`${styles.background} grid place-items-center py-2 font-roboto`}
+        className={`${styles.background_feed} grid place-items-center py-2 font-roboto`}
       >
         {/* */}
         <Routes>
@@ -33,6 +36,7 @@ const Application = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/ticket" element={<Ticket />} />
           <Route path="/ticketlist" element={<TicketList />} />
+          <Route path="/ticketview" element={<TicketView />} />
           <Route path="/*" element={<>not found</>} />
         </Routes>
       </div>
