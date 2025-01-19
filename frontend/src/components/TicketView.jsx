@@ -1,12 +1,5 @@
-import {
-  Button,
-  Card,
-  Label,
-  Textarea,
-  TextInput,
-  FileInput,
-  Datepicker,
-} from "flowbite-react";
+import { Card } from "flowbite-react";
+import { FaHeart, FaCommentDots } from "react-icons/fa";
 
 const TicketView = () => {
   /*
@@ -29,12 +22,12 @@ const TicketView = () => {
             src="../../public/vite.svg"
             alt="foto de perfil de Juan"
           />
-          <span className="text-sm text-black flex items-center justify-center drop-shadow-md">
+          <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md">
             Juan Hernandez
           </span>
         </div>
 
-        <Card className="max-w-sm bg-[#074572] bg-opacity-25 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-black drop-shadow-2xl shadow-2xl">
+        <Card className="max-w-sm bg-[#074572] bg-opacity-20 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-black drop-shadow-2xl shadow-2xl">
           <form className="flex max-w-md flex-col gap-4 ">
             <div>
               <div className="mb-2 block">
@@ -44,7 +37,7 @@ const TicketView = () => {
               </div>
             </div>
             <div class="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs h-32 overflow-y-auto">
-              <p class="text-gray-500 dark:text-gray-400">
+              <p class="text-black dark:text-gray-400">
                 This is an example of a paragraph element styled with Flowbite.
                 You can easily customize the appearance of this paragraph by
                 adding utility classes from Tailwind CSS. This is an example of
@@ -58,27 +51,20 @@ const TicketView = () => {
                 paragraph by adding utility classes from Tailwind CSS.
               </p>
             </div>
-            <div>
-              <div className="mb-2 block">
-                <Label
-                  className="text-white drop-shadow-md"
-                  htmlFor="fecha3"
-                  value="FECHA"
-                />
-
-                <Datepicker id="fecha3" minDate={new Date()} />
-              </div>
+            <div class="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs w-20 text-center">
+              <p class="text-black dark:text-gray-400">26/1/2025</p>
             </div>
             <img
               src="../../public/vite.svg"
               alt="Meaningful alt text for an image that is not purely decorative"
+              className="mb-4"
             />
-
-            <Button className="bg-azul2 drop-shadow-md" type="submit">
-              <p>Guardar Ticket</p>
-            </Button>
           </form>
         </Card>
+        <div className="flex justify-between">
+          <FaHeart size={26} />
+          <FaCommentDots size={26} className="text-white" />
+        </div>
       </Card>
     </div>
   );
