@@ -22,44 +22,42 @@ const TicketView = () => {
 
   return (
     <div className="py-2 bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]">
-      <h1 className="drop-shadow-md text-center text-white text-xl pb-4">
-        Ticket
-      </h1>
       <Card className="max-w-sm bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl">
+        <div className="flex gap-3">
+          <img
+            className="rounded-full border border-azul5 w-20"
+            src="../../public/vite.svg"
+            alt="foto de perfil de Juan"
+          />
+          <span className="text-sm text-black flex items-center justify-center drop-shadow-md">
+            Juan Hernandez
+          </span>
+        </div>
+
         <Card className="max-w-sm bg-[#074572] bg-opacity-25 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-black drop-shadow-2xl shadow-2xl">
           <form className="flex max-w-md flex-col gap-4 ">
             <div>
               <div className="mb-2 block">
-                <Label
-                  className="text-white drop-shadow-md"
-                  htmlFor="titulo3"
-                  value="TITULO"
-                />
+                <span className="text-black flex items-center justify-center drop-shadow-md">
+                  Internet lento
+                </span>
               </div>
-              <TextInput
-                id="titulo3"
-                type="text"
-                placeholder="titulo"
-                required
-              />
             </div>
-            <div>
-              <div className="mb-2 block">
-                <Label
-                  className="text-white drop-shadow-md"
-                  htmlFor="descripcion3"
-                  value="DESCRIPCION"
-                />
-              </div>
-              <Textarea
-                className="text-xs"
-                id="descripcion3"
-                placeholder="describe de que se trata este ticket"
-                required
-                rows={4}
-              />
+            <div class="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs h-32 overflow-y-auto">
+              <p class="text-gray-500 dark:text-gray-400">
+                This is an example of a paragraph element styled with Flowbite.
+                You can easily customize the appearance of this paragraph by
+                adding utility classes from Tailwind CSS. This is an example of
+                a paragraph element styled with Flowbite. You can easily
+                customize the appearance of this paragraph by adding utility
+                classes from Tailwind CSS. This is an example of a paragraph
+                element styled with Flowbite. You can easily customize the
+                appearance of this paragraph by adding utility classes from
+                Tailwind CSS. This is an example of a paragraph element styled
+                with Flowbite. You can easily customize the appearance of this
+                paragraph by adding utility classes from Tailwind CSS.
+              </p>
             </div>
-
             <div>
               <div className="mb-2 block">
                 <Label
