@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Test from "./components/Test";
 import PageFooter from "./components/Footer";
-import { DarkThemeToggle, Flowbite } from "flowbite-react";
+import { DarkThemeToggle, Flowbite, Navbar } from "flowbite-react";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Ticket from "./components/Ticket";
 import TicketList from "./components/TicketList";
 import TicketView from "./components/TicketView";
+import TestPage from "./pages/TestPage";
 
 /*
     colors: {
@@ -26,27 +27,30 @@ const Application = () => {
   };
 
   return (
-    <Flowbite>
-      <div
-        className={`${styles.background_feed} grid place-items-center py-2 font-roboto`}
-      >
-        {/* */}
-        <Routes>
-          <Route path="/" element={<>Inicio</>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/test" element={<Test />} />
-          <Route path="/footer" element={<PageFooter />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/ticket" element={<Ticket />} />
-          <Route path="/ticketlist" element={<TicketList />} />
-          <Route path="/ticketview" element={<TicketView />} />
-          <Route path="/*" element={<>not found</>} />
-        </Routes>
-      </div>
-      <div className="grid place-items-center my-2">
-        <DarkThemeToggle />
-      </div>
-    </Flowbite>
+    <>
+      <Flowbite>
+        <div
+          className={`${styles.background_feed} grid place-items-center py-2 font-roboto`}
+        >
+          {/* */}
+          <Routes>
+            <Route path="/" element={<>Inicio</>} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/test" element={<Test />} />
+            <Route path="/footer" element={<PageFooter />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/ticket" element={<Ticket />} />
+            <Route path="/ticketlist" element={<TicketList />} />
+            <Route path="/ticketview" element={<TicketView />} />
+            <Route path="/testpage" element={<TestPage />} />
+            <Route path="/*" element={<>not found</>} />
+          </Routes>
+        </div>
+        <div className="grid place-items-center my-2">
+          <DarkThemeToggle />
+        </div>
+      </Flowbite>
+    </>
   );
 };
 
