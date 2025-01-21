@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Test from "./components/Test";
+import PageFooter from "./components/Footer";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -33,6 +34,8 @@ const Application = () => {
         <Routes>
           <Route path="/" element={<>Inicio</>} />
           <Route path="/login" element={<Login />} />
+          <Route path="/test" element={<Test />} />
+          <Route path="/footer" element={<PageFooter />} />
           <Route path="/register" element={<Register />} />
           <Route path="/ticket" element={<Ticket />} />
           <Route path="/ticketlist" element={<TicketList />} />
