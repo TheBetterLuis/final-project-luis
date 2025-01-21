@@ -46,6 +46,7 @@ const Application = () => {
             <Route path="/*" element={<>not found</>} />
           </Routes>
         </div>
+
         <div className="grid place-items-center my-2">
           <DarkThemeToggle />
         </div>
