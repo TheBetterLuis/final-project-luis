@@ -7,7 +7,9 @@ import Register from "./components/Register";
 import Ticket from "./components/Ticket";
 import TicketList from "./components/TicketList";
 import TicketView from "./components/TicketView";
+import Tarjeta from "./components/Tarjeta";
 import TestPage from "./pages/TestPage";
+import FeedPage from "./pages/FeedPage";
 
 /*
     colors: {
@@ -30,7 +32,7 @@ const Application = () => {
     <>
       <Flowbite>
         <div
-          className={`${styles.background_feed} grid place-items-center py-2 font-roboto`}
+          className={`${styles.background} grid place-items-center py-2 font-roboto`}
         >
           {/* */}
           <Routes>
@@ -40,9 +42,14 @@ const Application = () => {
             <Route path="/footer" element={<PageFooter />} />
             <Route path="/register" element={<Register />} />
             <Route path="/ticket" element={<Ticket />} />
+            <Route path="/tarjeta" element={<Tarjeta />} />
             <Route path="/ticketlist" element={<TicketList />} />
             <Route path="/ticketview" element={<TicketView />} />
             <Route path="/testpage" element={<TestPage />} />
+
+            {/*Pages */}
+
+            <Route path="/feed" element={<FeedPage />} />
             <Route path="/*" element={<>not found</>} />
           </Routes>
         </div>
