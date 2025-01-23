@@ -1,13 +1,6 @@
-import {
-  Button,
-  Card,
-  Label,
-  Textarea,
-  TextInput,
-  FileInput,
-  Datepicker,
-} from "flowbite-react";
 import { NavBar } from "../components/NavBar";
+import TicketView from "../components/TicketView";
+import PageFooter from "../components/Footer";
 
 const FeedPage = () => {
   /*
@@ -20,76 +13,21 @@ const FeedPage = () => {
       azul6: "#00171F",
     }
     */
+  const styles = {
+    background: "bg-gradient-to-tr from-azul4 via-[#52A2AB] to-azul1",
+    background_feed:
+      "bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]",
+  };
 
   return (
     <>
-      <div>
-        <NavBar></NavBar>
-        <div className="py-2">
-          <h1 className="drop-shadow-md text-center text-white text-xl pb-4">
-            Ticket
-          </h1>
-          <Card className="max-w-sm bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl">
-            <form className="flex max-w-md flex-col gap-4 ">
-              <div>
-                <div className="mb-2 block">
-                  <Label
-                    className="text-white drop-shadow-md"
-                    htmlFor="titulo3"
-                    value="TITULO"
-                  />
-                </div>
-                <TextInput
-                  id="titulo3"
-                  type="text"
-                  placeholder="titulo"
-                  required
-                />
-              </div>
-              <div>
-                <div className="mb-2 block">
-                  <Label
-                    className="text-white drop-shadow-md"
-                    htmlFor="descripcion3"
-                    value="DESCRIPCION"
-                  />
-                </div>
-                <Textarea
-                  className="text-xs"
-                  id="descripcion3"
-                  placeholder="describe de que se trata este ticket"
-                  required
-                  rows={4}
-                />
-              </div>
-
-              <div>
-                <div className="mb-2 block">
-                  <Label
-                    className="text-white drop-shadow-md"
-                    htmlFor="fecha3"
-                    value="FECHA"
-                  />
-
-                  <Datepicker id="fecha3" minDate={new Date()} />
-                </div>
-              </div>
-              <div>
-                <div className="mb-2 block">
-                  <Label
-                    className="text-white drop-shadow-md"
-                    htmlFor="adjuntar3"
-                    value="ADJUNTAR ARCHIVO"
-                  />
-                </div>
-                <FileInput id="adjuntar3" sizing="sm" />
-              </div>
-              <Button className="bg-azul2 drop-shadow-md" type="submit">
-                <p>Guardar Ticket</p>
-              </Button>
-            </form>
-          </Card>
+      <div className={`${styles.background}`}>
+        <NavBar />
+        <div className="grid place-items-center py-2 font-roboto">
+          {/*COMPONENT GOES HERE*/}
+          <TicketView />
         </div>
+        <PageFooter />
       </div>
     </>
   );

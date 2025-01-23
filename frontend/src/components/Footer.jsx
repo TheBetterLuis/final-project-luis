@@ -1,15 +1,24 @@
 import { Footer } from "flowbite-react";
 
 const PageFooter = () => {
+  const textStyles = {
+    color:
+      "text-white dark:text-white hover:text-gray-400 md:dark:hover:text-gray-400",
+  };
+
   return (
-    <Footer container>
-      <Footer.Copyright href="#" by="Flowbite™" year={2022} />
-      <Footer.LinkGroup>
-        <Footer.Link href="#">About</Footer.Link>
-        <Footer.Link href="#">Privacy Policy</Footer.Link>
-        <Footer.Link href="#">Licensing</Footer.Link>
-        <Footer.Link href="#">Contact</Footer.Link>
-      </Footer.LinkGroup>
+    <Footer className="bg-azul6 " container>
+      <img
+        src="../../public/img/logo2.png"
+        className="mr-3 h-6 sm:h-9"
+        alt=""
+      />
+      <Footer.Copyright
+        href="#"
+        by="L&E copyright"
+        year={new Date().getFullYear()}
+        className={`${textStyles.color}`}
+      />
     </Footer>
   );
 };

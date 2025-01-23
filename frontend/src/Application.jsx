@@ -32,34 +32,33 @@ const Application = () => {
   return (
     <>
       <Flowbite>
-        <div
+        {/*        <div
           className={`${styles.background} grid place-items-center py-2 font-roboto`}
-        >
-          {/* */}
-          <Routes>
-            <Route path="/" element={<>Inicio</>} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/test" element={<Test />} />
-            <Route path="/footer" element={<PageFooter />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/ticket" element={<Ticket />} />
-            <Route path="/tarjeta" element={<Tarjeta />} />
-            <Route path="/ticketlist" element={<TicketList />} />
-            <Route path="/ticketview" element={<TicketView />} />
-            <Route path="/testpage" element={<TestPage />} />
+        >*/}
+        <Routes>
+          <Route path="/" element={<>Inicio</>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/test" element={<Test />} />
+          <Route path="/footer" element={<PageFooter />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/ticket" element={<Ticket />} />
+          <Route path="/tarjeta" element={<Tarjeta />} />
+          <Route path="/ticketlist" element={<TicketList />} />
+          <Route path="/ticketview" element={<TicketView />} />
+          <Route path="/testpage" element={<TestPage />} />
 
-            {/*Pages */}
+          {/*Pages */}
 
-            <Route path="/feed" element={<FeedPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/feed" element={<FeedPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
 
-            <Route path="/*" element={<>not found</>} />
-          </Routes>
-        </div>
+          <Route path="/*" element={<>not found</>} />
+        </Routes>
 
-        <div className="grid place-items-center my-2">
+        {/*        <div className="grid place-items-center my-2">
           <DarkThemeToggle />
         </div>
+ */}
       </Flowbite>
     </>
   );

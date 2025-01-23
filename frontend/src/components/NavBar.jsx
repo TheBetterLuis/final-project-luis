@@ -72,8 +72,13 @@ export function NavBar() {
   const locationName = myLocation.pathname.slice(1);
   const currentRoute = navRoutes[locationName] || navRoutes.default;
 
+  const textStyles = {
+    color:
+      "text-white dark:text-white hover:text-black md:hover:text-gray-400 md:dark:hover:text-gray-400",
+  };
+
   return (
-    <Navbar className="bg-azul6">
+    <Navbar className="bg-azul6 ">
       <Navbar.Brand href={`/#${currentRoute.logo.link}`}>
         <img
           src="../../public/img/logo1.png"
@@ -81,15 +86,24 @@ export function NavBar() {
           alt="L&E Telecoms Logo"
         />
       </Navbar.Brand>
-      <Navbar.Toggle />
+      <Navbar.Toggle className={`${textStyles.color}`} />
       <Navbar.Collapse>
-        <Navbar.Link href={`/#${currentRoute.first.link}`}>
+        <Navbar.Link
+          href={`/#${currentRoute.first.link}`}
+          className={`${textStyles.color}`}
+        >
           {currentRoute.first.name}
         </Navbar.Link>
-        <Navbar.Link href={`/#${currentRoute.second.link}`}>
+        <Navbar.Link
+          href={`/#${currentRoute.second.link}`}
+          className={`${textStyles.color}`}
+        >
           {currentRoute.second.name}
         </Navbar.Link>
-        <Navbar.Link href={`/#${currentRoute.third.link}`}>
+        <Navbar.Link
+          href={`/#${currentRoute.third.link}`}
+          className={`${textStyles.color}`}
+        >
           {currentRoute.third.name}
         </Navbar.Link>
       </Navbar.Collapse>
