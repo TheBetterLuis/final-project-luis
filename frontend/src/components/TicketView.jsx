@@ -13,16 +13,21 @@ const TicketView = () => {
     }
     */
 
+  const textStyles = {
+    color:
+      "text-white dark:text-white hover:text-black md:hover:text-gray-400 md:dark:hover:text-gray-400",
+  };
+
   return (
-    <div className="py-2 bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]">
+    <div className="rounded-lg  bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996] mb-4">
       <Card className="max-w-sm bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl">
         <div className="flex gap-3">
           <img
-            className="rounded-full border border-azul5 w-20"
+            className="rounded-full border border-azul5 w-20 dark:border-white"
             src="../../public/vite.svg"
             alt="foto de perfil de Juan"
           />
-          <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md">
+          <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white">
             Juan Hernandez
           </span>
         </div>
@@ -31,7 +36,7 @@ const TicketView = () => {
           <form className="flex max-w-md flex-col gap-4 ">
             <div>
               <div className="mb-2 block">
-                <span className="text-black flex items-center justify-center drop-shadow-md">
+                <span className="text-black flex items-center justify-center drop-shadow-md dark:text-white">
                   Internet lento
                 </span>
               </div>
@@ -62,8 +67,14 @@ const TicketView = () => {
           </form>
         </Card>
         <div className="flex justify-between">
-          <FaHeart size={26} />
-          <FaCommentDots size={26} className="text-white" />
+          <FaHeart
+            size={26}
+            className="dark:text-white hover:text-red-500 dark:hover:text-red-500  cursor-pointer"
+          />
+          <FaCommentDots
+            size={26}
+            className="text-white hover:text-black dark:hover:text-gray-400 cursor-pointer"
+          />
         </div>
       </Card>
     </div>

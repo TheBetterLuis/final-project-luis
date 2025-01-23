@@ -26,6 +26,7 @@ const FeedPage = () => {
         <div className="grid place-items-center py-2 font-roboto">
           {/*COMPONENT GOES HERE*/}
           <TicketView />
+          <TicketView />
         </div>
         <PageFooter />
       </div>
