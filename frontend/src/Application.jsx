@@ -10,6 +10,7 @@ import TicketView from "./components/TicketView";
 import Tarjeta from "./components/Tarjeta";
 import TestPage from "./pages/TestPage";
 import FeedPage from "./pages/FeedPage";
+import ProfilePage from "./pages/ProfilePage";
 
 /*
     colors: {
@@ -50,6 +51,8 @@ const Application = () => {
             {/*Pages */}
 
             <Route path="/feed" element={<FeedPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+
             <Route path="/*" element={<>not found</>} />
           </Routes>
         </div>
