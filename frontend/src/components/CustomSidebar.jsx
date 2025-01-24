@@ -1,7 +1,11 @@
-import { Drawer } from "flowbite-react";
-import Boton from "./Button";
+import { useLocation } from "react-router-dom";
+import { navRoutes } from "./navConfig";
 
 function CustomSidebar() {
+  const myLocation = useLocation();
+  const locationName = myLocation.pathname.slice(1);
+  const currentRoute = navRoutes[locationName] || navRoutes.default;
+
   return (
     <div
       aria-modal="true"
@@ -50,25 +54,34 @@ function CustomSidebar() {
           <button
             type="button"
             class="group relative flex items-stretch justify-center p-0.5 text-center font-medium transition-[color,background-color,border-color,text-decoration-color,fill,stroke,box-shadow] focus:z-10 focus:outline-none border border-transparent focus:ring-4 focus:ring-cyan-300 enabled:hover:bg-cyan-800 dark:bg-cyan-600 dark:focus:ring-cyan-800 dark:enabled:hover:bg-cyan-700 bg-azul2 text-gray-100 rounded px-10 py-2 drop-shadow-lg hover:-translate-y-1 hover:scale-110 duration-300"
+            onClick={() => {
+              window.location.href = `/#${currentRoute.drawer.buttons.first.link}`;
+            }}
           >
             <span class="flex items-stretch transition-all duration-200 rounded-md px-4 py-2 text-sm">
-              Click me
+              {currentRoute.drawer.buttons.first.name}
             </span>
           </button>
           <button
             type="button"
             class="group relative flex items-stretch justify-center p-0.5 text-center font-medium transition-[color,background-color,border-color,text-decoration-color,fill,stroke,box-shadow] focus:z-10 focus:outline-none border border-transparent focus:ring-4 focus:ring-cyan-300 enabled:hover:bg-cyan-800 dark:bg-cyan-600 dark:focus:ring-cyan-800 dark:enabled:hover:bg-cyan-700 bg-azul2 text-gray-100 rounded px-10 py-2 drop-shadow-lg hover:-translate-y-1 hover:scale-110 duration-300"
+            onClick={() => {
+              window.location.href = `/#${currentRoute.drawer.buttons.second.link}`;
+            }}
           >
             <span class="flex items-stretch transition-all duration-200 rounded-md px-4 py-2 text-sm">
-              Click me
+              {currentRoute.drawer.buttons.second.name}
             </span>
           </button>
           <button
             type="button"
             class="group relative flex items-stretch justify-center p-0.5 text-center font-medium transition-[color,background-color,border-color,text-decoration-color,fill,stroke,box-shadow] focus:z-10 focus:outline-none border border-transparent focus:ring-4 focus:ring-cyan-300 enabled:hover:bg-cyan-800 dark:bg-cyan-600 dark:focus:ring-cyan-800 dark:enabled:hover:bg-cyan-700 bg-azul2 text-gray-100 rounded px-10 py-2 drop-shadow-lg hover:-translate-y-1 hover:scale-110 duration-300"
+            onClick={() => {
+              window.location.href = `/#${currentRoute.drawer.buttons.third.link}`;
+            }}
           >
             <span class="flex items-stretch transition-all duration-200 rounded-md px-4 py-2 text-sm">
-              Click me
+              {currentRoute.drawer.buttons.third.name}
             </span>
           </button>
         </div>
