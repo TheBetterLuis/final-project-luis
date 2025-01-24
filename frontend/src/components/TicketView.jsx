@@ -19,7 +19,7 @@ const TicketView = () => {
   };
 
   return (
-    <div className="rounded-lg  bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996] mb-4">
+    <div className="rounded-lg   mb-4">
       <Card className="max-w-sm bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl">
         <div className="flex gap-3">
           <img
@@ -31,8 +31,7 @@ const TicketView = () => {
             Juan Hernandez
           </span>
         </div>
-
-        <Card className="max-w-sm bg-[#074572] bg-opacity-20 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-black drop-shadow-2xl shadow-2xl">
+        <Card className="max-w-sm bg-teal-500  bg-opacity-30 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-black drop-shadow-2xl shadow-2xl">
           <form className="flex max-w-md flex-col gap-4 ">
             <div>
               <div className="mb-2 block">

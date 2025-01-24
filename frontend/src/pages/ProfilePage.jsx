@@ -24,14 +24,18 @@ const ProfilePage = () => {
 
   return (
     <>
-      <div className={`${styles.background}`}>
+      <div className={`${styles.background_feed}`}>
         <div className="relative z-20">
           <NavBar />
         </div>
-
-        <div className="grid place-items-center py-2 font-roboto mt-20 ">
+        <div
+          className={`${styles.background} fixed top-0 left-0 w-screen h-1/4 z-1 `}
+        ></div>
+        <div className="grid place-items-center py-2 font-roboto mt-20">
           {/*COMPONENT GOES HERE*/}
-          <Tarjeta className="relative" />
+          <div className="relative z-20 grid place-items-center">
+            <Tarjeta className="relative " />
+          </div>
           <Button className=" md:block md:top-40 md:left-28 lg:left-32 xl:left-72  2xl:left-96 bg-azul4 absolute top-40 left-60 top-20 left-20 sm:left-40 z-10">
             Plan
           </Button>
