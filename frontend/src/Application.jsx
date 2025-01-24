@@ -12,6 +12,7 @@ import Tarjeta from "./components/Tarjeta";
 import TestPage from "./pages/TestPage";
 import FeedPage from "./pages/FeedPage";
 import ProfilePage from "./pages/ProfilePage";
+import LandingPage from "./pages/LandingPage";
 
 /*
     colors: {
@@ -37,6 +38,7 @@ const Application = () => {
           className={`${styles.background} grid place-items-center py-2 font-roboto`}
         >*/}
         <Routes>
+          {/*
           <Route path="/" element={<>Inicio</>} />
           <Route path="/login" element={<Login />} />
           <Route path="/test" element={<Test />} />
@@ -48,11 +50,19 @@ const Application = () => {
           <Route path="/ticketview" element={<TicketView />} />
           <Route path="/testpage" element={<TestPage />} />
           <Route path="/sidebar" element={<SideBar />} />
-
+*/}
           {/*Pages */}
 
+          <Route path="/" element={<LandingPage />} />
           <Route path="/feed" element={<FeedPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+
+          <Route path="/login" element={<FeedPage />} />
+          <Route path="/register" element={<ProfilePage />} />
+
+          <Route path="/crud" element={<FeedPage />} />
+          <Route path="/dashboard" element={<ProfilePage />} />
+          <Route path="/createTicket" element={<ProfilePage />} />
 
           <Route path="/*" element={<>not found</>} />
         </Routes>

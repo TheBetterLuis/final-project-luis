@@ -50,6 +50,19 @@ export function NavBar() {
         <Navbar.Toggle className={`${textStyles.color}`} />
       </div>
       <Navbar.Collapse>
+        {currentRoute.drawer.display && (
+          <Navbar.Link
+            className={`${textStyles.color}`}
+            onClick={() =>
+              document
+                .querySelector(".sidebar-toggle")
+                .classList.toggle("hidden")
+            }
+          >
+            {currentRoute.drawer.title}
+          </Navbar.Link>
+        )}
+
         <Navbar.Link
           href={`/#${currentRoute.first.link}`}
           className={`${textStyles.color}`}

@@ -6,6 +6,7 @@ export const navRoutes = {
     logo: { link: "/landing" },
     drawer: {
       display: true,
+      title: "Menu",
       buttons: {
         first: { name: "Cerrar sesion", link: "/logout" },
         second: { name: "Feed", link: "/feed" },
@@ -20,6 +21,7 @@ export const navRoutes = {
     logo: { link: "/login" },
     drawer: {
       display: true,
+      title: "Menu",
       buttons: {
         first: { name: "Cerrar sesion", link: "/logout" },
         second: { name: "Feed", link: "/feed" },
@@ -34,6 +36,7 @@ export const navRoutes = {
     logo: { link: "/register" },
     drawer: {
       display: true,
+      title: "Menu",
       buttons: {
         first: { name: "Cerrar sesion", link: "/logout" },
         second: { name: "Feed", link: "/feed" },
@@ -45,14 +48,15 @@ export const navRoutes = {
   feed: {
     first: { name: "Cerrar sesion", link: "/logout" },
     second: { name: "Perfil", link: "/profile" },
-    third: { name: "Reportar ticket", link: "/ticket" },
+    third: { name: "Reportar ticket", link: "/createticket" },
     logo: { link: "/feed" },
     drawer: {
       display: true,
+      title: "Menu",
       buttons: {
-        first: { name: "Cerrar sesion", link: "/logout" },
-        second: { name: "Feed", link: "/feed" },
-        third: { name: "Reportar ticket", link: "/ticket" },
+        first: { name: "Perfil", link: "/profile" },
+        second: { name: "Chat", link: "/chat" },
+        third: { name: "Ticket", link: "/createticket" },
       },
     },
   },
@@ -64,6 +68,7 @@ export const navRoutes = {
     logo: { link: "/profile" },
     drawer: {
       display: true,
+      title: "Menu",
       buttons: {
         first: { name: "Cerrar sesion", link: "/logout" },
         second: { name: "Feed", link: "/feed" },
@@ -78,6 +83,7 @@ export const navRoutes = {
     logo: { link: "/dashboard" },
     drawer: {
       display: true,
+      title: "Menu",
       buttons: {
         first: { name: "Cerrar sesion", link: "/logout" },
         second: { name: "Feed", link: "/feed" },
@@ -92,6 +98,7 @@ export const navRoutes = {
     logo: { link: "/crud" },
     drawer: {
       display: true,
+      title: "Menu",
       buttons: {
         first: { name: "Cerrar sesion", link: "/logout" },
         second: { name: "Feed", link: "/feed" },
@@ -106,6 +113,7 @@ export const navRoutes = {
     logo: { link: "/chat" },
     drawer: {
       display: true,
+      title: "Menu",
       buttons: {
         first: { name: "Cerrar sesion", link: "/logout" },
         second: { name: "Feed", link: "/feed" },
@@ -121,6 +129,7 @@ export const navRoutes = {
     logo: { link: "/register" },
     drawer: {
       display: true,
+      title: "Menu",
       buttons: {
         first: { name: "Cerrar sesion", link: "/logout" },
         second: { name: "Feed", link: "/feed" },
@@ -131,10 +140,11 @@ export const navRoutes = {
   default: {
     first: { name: "Registrate", link: "/register" },
     second: { name: "Inicia sesion", link: "/login" },
-    third: { name: "Landing", link: "/landing" },
+    third: { name: "Landing", link: "/" },
     logo: { link: "/landing" },
     drawer: {
-      display: true,
+      display: false,
+      title: "Menu",
       buttons: {
         first: { name: "Cerrar sesion", link: "/logout" },
         second: { name: "Feed", link: "/feed" },

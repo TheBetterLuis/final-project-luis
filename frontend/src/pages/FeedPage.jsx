@@ -1,6 +1,7 @@
 import { NavBar } from "../components/NavBar";
 import TicketView from "../components/TicketView";
 import PageFooter from "../components/Footer";
+import CustomSidebar from "../components/CustomSidebar";
 
 const FeedPage = () => {
   /*
@@ -30,6 +31,7 @@ const FeedPage = () => {
         </div>
         <PageFooter />
       </div>
+      <CustomSidebar></CustomSidebar>
     </>
   );
 };
