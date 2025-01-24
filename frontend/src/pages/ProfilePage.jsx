@@ -3,6 +3,7 @@ import { NavBar } from "../components/NavBar";
 import TicketView from "../components/TicketView";
 import PageFooter from "../components/Footer";
 import Tarjeta from "../components/Tarjeta";
+import CustomSidebar from "../components/CustomSidebar";
 
 const ProfilePage = () => {
   /*
@@ -42,6 +43,7 @@ const ProfilePage = () => {
         </div>
         <PageFooter />
       </div>
+      <CustomSidebar></CustomSidebar>
     </>
   );
 };

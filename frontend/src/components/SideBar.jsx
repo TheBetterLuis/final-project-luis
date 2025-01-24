@@ -19,7 +19,6 @@ function SideBar() {
     <Boton/>
     <Boton/>
   </div>
-
 </Drawer.Items>
 </Drawer>
     </>

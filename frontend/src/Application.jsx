@@ -5,6 +5,7 @@ import { DarkThemeToggle, Flowbite, Navbar } from "flowbite-react";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Ticket from "./components/Ticket";
+import SideBar from "./components/SideBar";
 import TicketList from "./components/TicketList";
 import TicketView from "./components/TicketView";
 import Tarjeta from "./components/Tarjeta";
@@ -46,6 +47,7 @@ const Application = () => {
           <Route path="/ticketlist" element={<TicketList />} />
           <Route path="/ticketview" element={<TicketView />} />
           <Route path="/testpage" element={<TestPage />} />
+          <Route path="/sidebar" element={<SideBar />} />
 
           {/*Pages */}
 

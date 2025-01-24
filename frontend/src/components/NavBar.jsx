@@ -34,6 +34,7 @@ export function NavBar() {
       second: { name: "Feed", link: "/feed" },
       third: { name: "Reportar ticket", link: "/ticket" },
       logo: { link: "/profile" },
+      drawer: { name: "drawer" },
     },
     dashboard: {
       first: { name: "Cerrar sesion", link: "/logout" },
@@ -86,7 +87,29 @@ export function NavBar() {
           alt="L&E Telecoms Logo"
         />
       </Navbar.Brand>
-      <Navbar.Toggle className={`${textStyles.color}`} />
+      <div className="flex">
+        <button
+          class="inline-flex items-center rounded-lg p-2 text-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden text-white dark:text-white hover:text-black md:hover:text-gray-400 md:dark:hover:text-gray-400"
+          onClick={() =>
+            document.querySelector(".sidebar-toggle").classList.toggle("hidden")
+          }
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="2em"
+            height="2em"
+          >
+            <path
+              fill="currentColor"
+              fillRule="evenodd"
+              d="M8 7a4 4 0 1 1 8 0a4 4 0 0 1-8 0m0 6a5 5 0 0 0-5 5a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3a5 5 0 0 0-5-5z"
+              clipRule="evenodd"
+            ></path>
+          </svg>
+        </button>
+        <Navbar.Toggle className={`${textStyles.color}`} />
+      </div>
       <Navbar.Collapse>
         <Navbar.Link
           href={`/#${currentRoute.first.link}`}
