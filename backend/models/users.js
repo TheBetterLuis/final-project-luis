@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-//install library for encryptio: npm i bcrypt
+//install library for encryption: npm i bcrypt
 const bcrypt = require("bcrypt");
 const { type } = require("os");
 
@@ -7,13 +7,18 @@ const UserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      require: [true, "name is required"],
+      required: [true, "Nombre es requerido"],
+      minLength: 3,
+    },
+    lastName: {
+      type: String,
+      required: [true, "Apellido es requerido"],
       minLength: 3,
     },
     email: {
       type: String,
       unique: true,
-      require: [true, "email is required"],
+      required: [true, "Correo es requerido"],
       trim: true,
     },
     password: {
@@ -22,8 +27,17 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      required: [true, "role is required (admin,user)"],
-      enum: ["admin", "user"],
+      required: [true, "Rol es requerido (free,premium,tech,admin)"],
+      enum: ["free", "premium", "tech", "admin"],
+    },
+    sessionAttemps: {
+      type: Number,
+      default: 0,
+    },
+    plan: {
+      type: String,
+      enum: ["free", "premium"],
+      default: "free",
     },
   },
   {
