@@ -1,1 +1,4 @@
-node_modules
+/savedImages
+/images
+/node_modules
+.env
