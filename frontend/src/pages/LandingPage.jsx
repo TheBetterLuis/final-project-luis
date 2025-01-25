@@ -16,23 +16,27 @@ const Landingpage = () => {
     <>
       <div className={`bg-gradient-to-tr from-azul4 via-[#52A2AB] to-azul1`}>
         <NavBar />
-        <section className={styles.cuerpo}>
-          <div className={styles.caja}>
-            <img
-              className={styles.imagen}
-              src="../../public/img/señora_compu-removebg-preview.png"
-              alt=""
-            />
-            <div className={styles.caja2}>
-              <h1 className={styles.h1}>
-                Cobertura total para un mundo conectado.
-              </h1>
-              <br />
-              <br />
-              <Boton />
-            </div>
+        <div className="flex h-screen w-full  overflow-y-scroll ">
+          <div className="flex justify-center items-center h-screen w-full font-roboto overflow-y-scroll ">
+            <section className={styles.cuerpo}>
+              <div className={styles.caja}>
+                <img
+                  className={styles.imagen}
+                  src="../../public/img/señora_compu-removebg-preview.png"
+                  alt=""
+                />
+                <div className={styles.caja2}>
+                  <h1 className={styles.h1}>
+                    Cobertura total para un mundo conectado.
+                  </h1>
+                  <br />
+                  <br />
+                  <Boton message={"Comienza Ya!"} />
+                </div>
+              </div>
+            </section>
           </div>
-        </section>
+        </div>
         <PageFooter />
       </div>
     </>

@@ -13,6 +13,11 @@ import TestPage from "./pages/TestPage";
 import FeedPage from "./pages/FeedPage";
 import ProfilePage from "./pages/ProfilePage";
 import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import CreateTicketPage from "./pages/CreateTicketPage";
+import DashboardPage from "./pages/DashboardPage";
+import CrudPage from "./pages/CrudPage";
 
 /*
     colors: {
@@ -47,7 +52,7 @@ const Application = () => {
           <Route path="/ticket" element={<Ticket />} />
           <Route path="/tarjeta" element={<Tarjeta />} />
           <Route path="/ticketlist" element={<TicketList />} />
-          <Route path="/ticketview" element={<TicketView />} />
+          <Route path="/ticketview" elemjnt={<TicketView />} />
           <Route path="/testpage" element={<TestPage />} />
           <Route path="/sidebar" element={<SideBar />} />
 */}
@@ -56,17 +61,14 @@ const Application = () => {
           <Route path="/" element={<LandingPage />} />
           <Route path="/feed" element={<FeedPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-
-          <Route path="/login" element={<FeedPage />} />
-          <Route path="/register" element={<ProfilePage />} />
-
-          <Route path="/crud" element={<FeedPage />} />
-          <Route path="/dashboard" element={<ProfilePage />} />
-          <Route path="/createTicket" element={<ProfilePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/createTicket" element={<CreateTicketPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/crud" element={<CrudPage />} />
 
           <Route path="/*" element={<>not found</>} />
         </Routes>
-
         {/*        <div className="grid place-items-center my-2">
           <DarkThemeToggle />
         </div>

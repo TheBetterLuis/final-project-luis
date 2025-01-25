@@ -1,7 +1,8 @@
 import { NavBar } from "../components/NavBar";
-import TicketView from "../components/TicketView";
 import PageFooter from "../components/Footer";
 import CustomSidebar from "../components/CustomSidebar";
+
+import TicketView from "../components/TicketView";
 
 const FeedPage = () => {
   /*
@@ -22,7 +23,7 @@ const FeedPage = () => {
 
   return (
     <>
-      <div className={`${styles.background}`}>
+      <div className={` flex flex-col min-h-screen ${styles.background}`}>
         <NavBar />
         <div className="grid place-items-center py-2 font-roboto">
           {/*COMPONENT GOES HERE*/}
