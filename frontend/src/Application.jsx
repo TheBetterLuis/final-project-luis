@@ -43,19 +43,6 @@ const Application = () => {
           className={`${styles.background} grid place-items-center py-2 font-roboto`}
         >*/}
         <Routes>
-          {/*
-          <Route path="/" element={<>Inicio</>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/test" element={<Test />} />
-          <Route path="/footer" element={<PageFooter />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/ticket" element={<Ticket />} />
-          <Route path="/tarjeta" element={<Tarjeta />} />
-          <Route path="/ticketlist" element={<TicketList />} />
-          <Route path="/ticketview" elemjnt={<TicketView />} />
-          <Route path="/testpage" element={<TestPage />} />
-          <Route path="/sidebar" element={<SideBar />} />
-*/}
           {/*Pages */}
 
           <Route path="/" element={<LandingPage />} />
