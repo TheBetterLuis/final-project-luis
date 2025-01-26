@@ -127,7 +127,6 @@ export const navRoutes = {
         second: { name: "Feed", link: "/feed" },
         third: { name: "Reportar ticket", link: "/createticket" },
       },
-      ticketticket,
     },
   },
   createticket: {

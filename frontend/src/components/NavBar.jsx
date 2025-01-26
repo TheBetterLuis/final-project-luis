@@ -24,7 +24,7 @@ export function NavBar() {
       <div className="flex">
         {currentRoute.drawer.display && (
           <button
-            class="inline-flex items-center rounded-lg p-2 text-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden text-white dark:text-white hover:text-black md:hover:text-gray-400 md:dark:hover:text-gray-400"
+            className="inline-flex items-center rounded-lg p-2 text-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden text-white dark:text-white hover:text-black md:hover:text-gray-400 md:dark:hover:text-gray-400"
             onClick={() =>
               document
                 .querySelector(".sidebar-toggle")
