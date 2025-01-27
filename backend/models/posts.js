@@ -5,12 +5,12 @@ const PostSchema = new mongoose.Schema(
     userID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
-      required: true,
+      required: [true, "ID de usuario es requerido"],
     },
     ticketID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "tickets",
-      required: true,
+      required: [true, "ID de ticket  es requerido"],
     },
     commentsID: [
       {

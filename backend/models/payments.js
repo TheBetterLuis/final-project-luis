@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const PaymentSchema = new mongoose.Schema(
   {
+    userID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: [true, "ID de usuario es requerido"],
+    },
     plan: {
       type: String,
       required: [true, "Plan es requerido"],

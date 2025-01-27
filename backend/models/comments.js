@@ -5,7 +5,7 @@ const CommentSchema = new mongoose.Schema(
     userID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
-      required: true,
+      required: [true, "ID de usuario es requerido"],
     },
     content: {
       type: String,
