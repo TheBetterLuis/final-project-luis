@@ -7,9 +7,10 @@ const getUsers = async (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, lastName, email, password, role } = req.body;
     const user = await userModel.create({
       name,
+      lastName,
       email,
       password: await userModel.encryptPassword(password),
       role,

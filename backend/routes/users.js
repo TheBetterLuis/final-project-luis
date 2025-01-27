@@ -7,7 +7,7 @@ const { auth } = require("../middleware/auth");
 
 //we add auth here to protect this route, before the controller
 //router.get("/", getUsers);
-router.get("/", auth(["admin", "user"]), getUsers);
+router.get("/", auth(["admin", "tech", "free"]), getUsers);
 
 //route to delete users by ID
 router.delete("/", deleteUser);

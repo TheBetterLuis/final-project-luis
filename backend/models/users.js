@@ -29,6 +29,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "Rol es requerido (free,premium,tech,admin)"],
       enum: ["free", "premium", "tech", "admin"],
+      default: "free",
     },
     sessionAttemps: {
       type: Number,
