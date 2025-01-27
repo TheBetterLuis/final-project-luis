@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const { getUsers, createUser, deleteUser } = require("../controllers/users");
+const {
+  getUsers,
+  createUser,
+  deleteUser,
+  updateUser,
+} = require("../controllers/users");
 
 const { auth } = require("../middleware/auth");
 
@@ -14,5 +19,8 @@ router.delete("/", deleteUser);
 
 //route to create user
 router.post("/", createUser);
+
+//route to update user
+router.patch("/:id", updateUser);
 
 module.exports = router;
