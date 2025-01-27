@@ -10,7 +10,7 @@ const TicketSchema = new mongoose.Schema(
     techID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
-      required: true,
+      default: null,
     },
     title: {
       type: String,
@@ -27,6 +27,7 @@ const TicketSchema = new mongoose.Schema(
     },
     image: {
       type: String,
+      default: null,
     },
     status: {
       type: String,
