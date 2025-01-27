@@ -5,6 +5,7 @@ const {
   getTickets,
   createTicket,
   deleteTicket,
+  updateTicket,
 } = require("../controllers/tickets");
 
 const { auth } = require("../middleware/auth");
@@ -18,5 +19,8 @@ router.delete("/", deleteTicket);
 
 //route to create user
 router.post("/", createTicket);
+
+//route to create user
+router.patch("/:id", updateTicket);
 
 module.exports = router;
