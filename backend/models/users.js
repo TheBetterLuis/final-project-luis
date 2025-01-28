@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 //install library for encryption: npm i bcrypt
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 const { type } = require("os");
 
 const UserSchema = new mongoose.Schema(
@@ -40,6 +41,10 @@ const UserSchema = new mongoose.Schema(
       enum: ["free", "premium"],
       default: "free",
     },
+    resetCode: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,
@@ -55,6 +60,14 @@ UserSchema.statics.encryptPassword = async (password) => {
 
 UserSchema.statics.comparePassword = async (password, hashPassword) => {
   return await bcrypt.compare(password, hashPassword);
+};
+
+UserSchema.statics.generateResetCodeHash = async function (code) {
+  const hash = crypto
+    .createHash("sha256")
+    .update(code.toString())
+    .digest("hex");
+  return hash;
 };
 
 module.exports = mongoose.model("users", UserSchema);

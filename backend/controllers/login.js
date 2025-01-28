@@ -19,18 +19,18 @@ const login = async (req, res) => {
       const updatedUser = await userFind.save();
 
       if (userFind.sessionAttempts <= 0) {
-        return res.status(404).json({
+        return res.status(401).json({
           message: `Cuenta bloqueada`,
         });
       }
 
-      return res.status(404).json({
+      return res.status(401).json({
         message: `Clave incorrecta / Intentos restantes: ${userFind.sessionAttempts}`,
       });
     }
 
     if (userFind.sessionAttempts <= 0) {
-      return res.status(404).json({
+      return res.status(401).json({
         message: `Cuenta bloqueada`,
       });
     }
