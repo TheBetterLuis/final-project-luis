@@ -26,9 +26,9 @@ const deleteUser = async (req, res) => {
     const { id } = req.body;
     const deletedUser = await userModel.findByIdAndDelete(id);
     if (!deletedUser) {
-      res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: "Usuario no encontrado" });
     }
-    res.status(200).json({ message: "User deleted successfully" });
+    res.status(200).json({ message: "Usuario eliminado exitosamente" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -42,16 +42,19 @@ const updateUser = async (req, res) => {
     const user = await userModel.findById(id);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
     // Update user fields (optional, update only if provided in the request body)
     if (req.body.name) user.name = req.body.name;
+    if (req.body.lastName) user.lastName = req.body.lastName;
 
     if (req.body.email) {
       const existingUser = await userModel.findOne({ email: req.body.email });
       if (existingUser && existingUser._id.toString() !== id) {
-        res.status(400).json({ message: "Email already exists" });
+        res
+          .status(400)
+          .json({ message: "El correo ingresado ya esta registrado" });
       }
       user.email = req.body.email;
     }
@@ -60,8 +63,9 @@ const updateUser = async (req, res) => {
       user.password = await userModel.encryptPassword(req.body.password);
 
     if (req.body.role) user.role = req.body.role;
-    // Add updates for other fields like role, password (if applicable)
-    // e.g.,
+    if (req.body.sessionAttempts)
+      user.sessionAttempts = req.body.sessionAttempts;
+    if (req.body.plan) user.plan = req.body.plan;
 
     // Save the updated user to the database
     const updatedUser = await user.save();

@@ -31,9 +31,9 @@ const UserSchema = new mongoose.Schema(
       enum: ["free", "premium", "tech", "admin"],
       default: "free",
     },
-    sessionAttemps: {
+    sessionAttempts: {
       type: Number,
-      default: 0,
+      default: 3,
     },
     plan: {
       type: String,

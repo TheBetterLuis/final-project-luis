@@ -9,13 +9,35 @@ const login = async (req, res) => {
     const userFind = await userModel.findOne({ email });
     //check if user exists
     if (!userFind) {
-      return res.status(404).json({ message: "user not found" });
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
     //compare password
     if (!(await userModel.comparePassword(password, userFind.password))) {
-      return res.status(404).json({ message: "invalid data" });
+      if (userFind.sessionAttempts > 0) {
+        userFind.sessionAttempts--;
+      }
+      const updatedUser = await userFind.save();
+
+      if (userFind.sessionAttempts <= 0) {
+        return res.status(404).json({
+          message: `Cuenta bloqueada`,
+        });
+      }
+
+      return res.status(404).json({
+        message: `Clave incorrecta / Intentos restantes: ${userFind.sessionAttempts}`,
+      });
     }
 
+    if (userFind.sessionAttempts <= 0) {
+      return res.status(404).json({
+        message: `Cuenta bloqueada`,
+      });
+    }
+
+    //if user logs in we reset sessionAttemtps to 3
+    userFind.sessionAttempts = 3;
+    const updatedUser = await userFind.save();
     //if login is successful we create a token with user data
     const token = jwt.sign(
       { id: userFind._id, name: userFind.name },
