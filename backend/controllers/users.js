@@ -36,7 +36,7 @@ const deleteUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const { id } = req.params; // Get user ID from URL params
+    const { id } = req.body;
 
     // Find the user by ID
     const user = await userModel.findById(id);
