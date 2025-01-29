@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
   getTickets,
+  getTicketsByUserID,
   createTicket,
   deleteTicket,
   updateTicket,
@@ -10,7 +11,9 @@ const {
 
 const { auth } = require("../middleware/auth");
 
-router.get("/", auth(["admin", "tech", "free"]), getTickets);
+router.get("/", getTicketsByUserID);
+
+router.get("/all", auth(["admin", "tech", "free"]), getTickets);
 
 //route to delete ticket by ID
 router.delete("/", deleteTicket);

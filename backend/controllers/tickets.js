@@ -5,6 +5,16 @@ const getTickets = async (req, res) => {
   res.status(200).json(tickets);
 };
 
+const getTicketsByUserID = async (req, res) => {
+  try {
+    const { userID } = req.body;
+    const tickets = await ticketModel.find({ userID: userID });
+    res.status(200).json(tickets);
+  } catch (e) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const createTicket = async (req, res) => {
   try {
     const { userID, techID, title, description, reportDate, image, status } =
@@ -63,4 +73,10 @@ const updateTicket = async (req, res) => {
   }
 };
 
-module.exports = { getTickets, createTicket, deleteTicket, updateTicket };
+module.exports = {
+  getTickets,
+  createTicket,
+  deleteTicket,
+  updateTicket,
+  getTicketsByUserID,
+};
