@@ -1,5 +1,5 @@
 const userModel = require("../models/users");
-const { generateSixDigitCode } = require("../util/helpers");
+const { generateSixDigitCode, sendEmail } = require("../util/helpers");
 
 const forgotPassword = async (req, res) => {
   try {
@@ -11,9 +11,13 @@ const forgotPassword = async (req, res) => {
       const code = generateSixDigitCode().toString();
       user.resetCode = await userModel.generateResetCodeHash(code);
       const updatedUser = await user.save();
-
+      sendEmail(
+        "L&E TELECOMS - Codigo De Verificacion",
+        `Usa este codigo para desbloquear tu cuenta ${code}`,
+        user.email
+      );
       return res.status(200).json({
-        message: `${user.email} aqui tienes tu codigo(continuara), ${code}`,
+        message: `${user.email} L&E TELECOMS - Codigo De Verificacion - ${code}`,
       });
     }
   } catch (error) {
