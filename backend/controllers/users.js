@@ -75,5 +75,9 @@ const updateUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-module.exports = { getUsers, createUser, deleteUser, updateUser };
+module.exports = {
+  getUsers,
+  createUser,
+  deleteUser,
+  updateUser,
+};
