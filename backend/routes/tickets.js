@@ -10,17 +10,15 @@ const {
 
 const { auth } = require("../middleware/auth");
 
-//we add auth here to protect this route, before the controller
-//router.get("/", getUsers);
 router.get("/", auth(["admin", "tech", "free"]), getTickets);
 
-//route to delete users by ID
+//route to delete ticket by ID
 router.delete("/", deleteTicket);
 
-//route to create user
+//route to create ticket
 router.post("/", createTicket);
 
-//route to create user
-router.patch("/:id", updateTicket);
+//route to update ticket
+router.patch("/", updateTicket);
 
 module.exports = router;

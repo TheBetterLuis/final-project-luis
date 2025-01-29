@@ -36,7 +36,7 @@ const deletePost = async (req, res) => {
 
 const updatePost = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.body;
 
     const post = await postModel.findById(id);
 

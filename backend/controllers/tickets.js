@@ -39,9 +39,8 @@ const deleteTicket = async (req, res) => {
 
 const updateTicket = async (req, res) => {
   try {
-    const { id } = req.params; // Get user ID from URL params
+    const { id } = req.body;
 
-    // Find the user by ID
     const ticket = await ticketModel.findById(id);
 
     if (!ticket) {
