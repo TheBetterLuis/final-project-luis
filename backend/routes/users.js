@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const {
+  getUserByUserID,
   getUsers,
   createUser,
   deleteUser,
@@ -9,6 +10,8 @@ const {
 } = require("../controllers/users");
 
 const { auth } = require("../middleware/auth");
+
+router.get("/single", getUserByUserID);
 
 //we add auth here to protect this route, before the controller
 //router.get("/", getUsers);

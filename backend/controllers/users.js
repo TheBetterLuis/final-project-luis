@@ -5,6 +5,16 @@ const getUsers = async (req, res) => {
   res.status(200).json(users);
 };
 
+const getUserByUserID = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const user = await userModel.find({ _id: id });
+    res.status(200).json(user);
+  } catch (e) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const createUser = async (req, res) => {
   try {
     const { name, lastName, email, password, role } = req.body;
@@ -77,6 +87,7 @@ const updateUser = async (req, res) => {
 };
 module.exports = {
   getUsers,
+  getUserByUserID,
   createUser,
   deleteUser,
   updateUser,

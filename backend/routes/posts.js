@@ -3,6 +3,9 @@ const router = express.Router();
 
 const {
   getPosts,
+  getPostsByUserID,
+  getPublicPostsByUserID,
+  getPrivatePostsByUserID,
   createPost,
   deletePost,
   updatePost,
@@ -11,6 +14,9 @@ const {
 const { auth } = require("../middleware/auth");
 
 router.get("/", auth(["admin", "tech", "free"]), getPosts);
+router.get("/user", getPostsByUserID);
+router.get("/user/public", getPublicPostsByUserID);
+router.get("/user/private", getPrivatePostsByUserID);
 
 router.delete("/", deletePost);
 

@@ -5,6 +5,36 @@ const getPosts = async (req, res) => {
   res.status(200).json(posts);
 };
 
+const getPostsByUserID = async (req, res) => {
+  try {
+    const { userID } = req.body;
+    const posts = await postModel.find({ userID: userID });
+    res.status(200).json(posts);
+  } catch (e) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getPublicPostsByUserID = async (req, res) => {
+  try {
+    const { userID } = req.body;
+    const posts = await postModel.find({ userID: userID, status: "public" });
+    res.status(200).json(posts);
+  } catch (e) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getPrivatePostsByUserID = async (req, res) => {
+  try {
+    const { userID } = req.body;
+    const posts = await postModel.find({ userID: userID, status: "private" });
+    res.status(200).json(posts);
+  } catch (e) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const createPost = async (req, res) => {
   try {
     const { userID, ticketID, commentsID, likes, status } = req.body;
@@ -58,4 +88,12 @@ const updatePost = async (req, res) => {
   }
 };
 
-module.exports = { getPosts, createPost, deletePost, updatePost };
+module.exports = {
+  getPosts,
+  getPostsByUserID,
+  getPublicPostsByUserID,
+  getPrivatePostsByUserID,
+  createPost,
+  deletePost,
+  updatePost,
+};
