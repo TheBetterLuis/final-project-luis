@@ -4,6 +4,10 @@ const router = express.Router();
 const {
   getTickets,
   getTicketsByUserID,
+  getTicketsByTechID,
+  getOpenTicketsByTechID,
+  getPendingTicketsByTechID,
+  getClosedTicketsByTechID,
   createTicket,
   deleteTicket,
   updateTicket,
@@ -11,7 +15,11 @@ const {
 
 const { auth } = require("../middleware/auth");
 
-router.get("/", getTicketsByUserID);
+router.get("/user", getTicketsByUserID);
+router.get("/tech", getTicketsByTechID);
+router.get("/tech/open", getOpenTicketsByTechID);
+router.get("/tech/pending", getPendingTicketsByTechID);
+router.get("/tech/closed", getClosedTicketsByTechID);
 
 router.get("/all", auth(["admin", "tech", "free"]), getTickets);
 

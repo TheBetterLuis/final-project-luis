@@ -15,6 +15,52 @@ const getTicketsByUserID = async (req, res) => {
   }
 };
 
+const getTicketsByTechID = async (req, res) => {
+  try {
+    const { techID } = req.body;
+    const tickets = await ticketModel.find({ techID: techID });
+    res.status(200).json(tickets);
+  } catch (e) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getOpenTicketsByTechID = async (req, res) => {
+  try {
+    const { techID } = req.body;
+    const tickets = await ticketModel.find({ techID: techID, status: "open" });
+    res.status(200).json(tickets);
+  } catch (e) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getPendingTicketsByTechID = async (req, res) => {
+  try {
+    const { techID } = req.body;
+    const tickets = await ticketModel.find({
+      techID: techID,
+      status: "pending",
+    });
+    res.status(200).json(tickets);
+  } catch (e) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getClosedTicketsByTechID = async (req, res) => {
+  try {
+    const { techID } = req.body;
+    const tickets = await ticketModel.find({
+      techID: techID,
+      status: "closed",
+    });
+    res.status(200).json(tickets);
+  } catch (e) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const createTicket = async (req, res) => {
   try {
     const { userID, techID, title, description, reportDate, image, status } =
@@ -79,4 +125,8 @@ module.exports = {
   deleteTicket,
   updateTicket,
   getTicketsByUserID,
+  getTicketsByTechID,
+  getOpenTicketsByTechID,
+  getPendingTicketsByTechID,
+  getClosedTicketsByTechID,
 };
