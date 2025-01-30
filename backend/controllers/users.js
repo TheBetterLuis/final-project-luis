@@ -15,6 +15,26 @@ const getUserByUserID = async (req, res) => {
   }
 };
 
+const getTechUsers = async (req, res) => {
+  try {
+    const users = await userModel.find({ role: "tech" });
+    res.status(200).json(users);
+  } catch (e) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getRegularUsers = async (req, res) => {
+  try {
+    const users = await userModel.find({
+      $or: [{ role: "free" }, { role: "premium" }],
+    });
+    res.status(200).json(users);
+  } catch (e) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const createUser = async (req, res) => {
   try {
     const { name, lastName, email, password, role } = req.body;
@@ -88,6 +108,8 @@ const updateUser = async (req, res) => {
 module.exports = {
   getUsers,
   getUserByUserID,
+  getTechUsers,
+  getRegularUsers,
   createUser,
   deleteUser,
   updateUser,
