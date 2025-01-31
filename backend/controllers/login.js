@@ -40,7 +40,13 @@ const login = async (req, res) => {
     const updatedUser = await userFind.save();
     //if login is successful we create a token with user data
     const token = jwt.sign(
-      { id: userFind._id, name: userFind.name },
+      {
+        id: userFind._id,
+        name: userFind.name,
+        lastName: userFind.lastName,
+        role: userFind.role,
+        plan: userFind.plan,
+      },
       process.env.SECRET_KEY,
       { expiresIn: "1h" }
     );

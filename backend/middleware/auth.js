@@ -15,6 +15,7 @@ function auth(roles = []) {
       if (!userFind) {
         return res.status(404).json({ message: "Usuario no encontrado" });
       }
+
       // console.log(userFind.role);
       if (!roles.includes(userFind.role)) {
         return res.status(401).json({ message: "Acceso no autorizado" });
