@@ -1,6 +1,7 @@
 import Boton from "../components/Button";
 import NavBar from "../components/NavBar";
 import PageFooter from "../components/Footer";
+import { Link } from "react-router-dom";
 
 const Landingpage = () => {
   const styles = {
@@ -31,7 +32,9 @@ const Landingpage = () => {
                   </h1>
                   <br />
                   <br />
-                  <Boton message={"Comienza Ya!"} />
+                  <Link to="/login">
+                    <Boton message={"Comienza Ya!"} />
+                  </Link>
                 </div>
               </div>
             </section>

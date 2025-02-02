@@ -1,16 +1,48 @@
 import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  /*
-    colors: {
-      azul1: "#9CFFE5",
-      azul2: "#6C9DFF",
-      azul3: "#4491A1",
-      azul4: "#074572",
-      azul5: "#0B2545",
-      azul6: "#00171F",
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await axios.post("http://localhost:3001/api/login", {
+        email,
+        password,
+      });
+
+      console.log("login successful:", response.data);
+      localStorage.setItem("tokenSesion", JSON.stringify(response.data.token));
+      navigate("/feed");
+    } catch (err) {
+      console.error("Login error:", err);
+      setError(
+        err.response?.data?.message ||
+          "Ha ocurrido un error durante el inicio de sesion."
+      );
+      if (err.response) {
+        console.log(err.response.data);
+        console.log(err.response.status);
+        console.log(err.response.headers);
+      } else if (err.request) {
+        console.log(err.request);
+      } else {
+        console.log("Error", err.message);
+      }
+    } finally {
+      setLoading(false);
     }
-    */
+  };
 
   return (
     <>
@@ -33,6 +65,8 @@ const Login = () => {
                 type="email"
                 placeholder="name@flowbite.com"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} //update email state
               />
             </div>
             <div>
@@ -43,10 +77,22 @@ const Login = () => {
                   value="CONTRASEÑA"
                 />
               </div>
-              <TextInput id="password1" type="password" required />
+              <TextInput
+                id="password1"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} //update email state
+              />
+              <h2 className="mt-2 text-center text-red-500 text-sm">{error}</h2>
             </div>
-            <Button className="bg-azul2 drop-shadow-md" type="submit">
-              <p>Iniciar Sesion</p>
+            <Button
+              className="bg-azul2 drop-shadow-md"
+              type="submit"
+              disabled={loading}
+              onClick={handleSubmit}
+            >
+              {loading ? "Cargando..." : "Iniciar sesion"}
             </Button>
           </form>
         </Card>
