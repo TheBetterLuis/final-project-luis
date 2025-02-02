@@ -38,6 +38,14 @@ const getRegularUsers = async (req, res) => {
 const createUser = async (req, res) => {
   try {
     const { name, lastName, email, password, role } = req.body;
+    const existingUser = await userModel.findOne({ email: req.body.email });
+
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ message: "El correo ingresado ya está registrado" });
+    }
+
     const user = await userModel.create({
       name,
       lastName,
