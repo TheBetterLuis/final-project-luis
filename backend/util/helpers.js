@@ -46,4 +46,4 @@ function isRole(token, role) {
   }
 }
 
-module.exports = { generateSixDigitCode, sendEmail, isRole };
+module.exports = { generateSixDigitCode, sendEmail };
