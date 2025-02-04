@@ -1,8 +1,14 @@
 import { Footer } from "flowbite-react";
 import { NavBar } from "../components/NavBar";
 import CustomSidebar from "../components/CustomSidebar";
+import { jwtDecode } from "jwt-decode";
 
 const TestPage = () => {
+  const token = localStorage.getItem("tokenSesion");
+  if (token) {
+    const decoded = jwtDecode(token);
+    console.log(decoded);
+  }
   function toggleSaibar() {
     document.querySelector(".saibar").classList.toggle("hidden");
   }

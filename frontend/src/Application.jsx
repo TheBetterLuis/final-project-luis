@@ -54,6 +54,8 @@ const Application = () => {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/crud" element={<CrudPage />} />
 
+          <Route path="/test" element={<TestPage />} />
+
           <Route path="/*" element={<>not found</>} />
         </Routes>
         {/*        <div className="grid place-items-center my-2">
