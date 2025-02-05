@@ -6,7 +6,7 @@ import PageFooter from "../components/Footer";
 import CustomSidebar from "../components/CustomSidebar";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const TestDashboard = () => {
   const styles = {
@@ -113,7 +113,7 @@ const TestDashboard = () => {
                           <Checkbox />
                         </Table.Cell>
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                          {ticket.title}
+                          <Link>{ticket.title}</Link>
                         </Table.Cell>
                       </Table.Row>
                     ))
@@ -140,7 +140,7 @@ const TestDashboard = () => {
                           <Checkbox />
                         </Table.Cell>
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                          {ticket.title}
+                          <Link>{ticket.title}</Link>
                         </Table.Cell>
                       </Table.Row>
                     ))
@@ -167,7 +167,7 @@ const TestDashboard = () => {
                           <Checkbox />
                         </Table.Cell>
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                          {ticket.title}
+                          <Link>{ticket.title}</Link>
                         </Table.Cell>
                       </Table.Row>
                     ))

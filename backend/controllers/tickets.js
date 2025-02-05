@@ -5,6 +5,16 @@ const getTickets = async (req, res) => {
   res.status(200).json(tickets);
 };
 
+const getTicketsByTicketID = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const tickets = await ticketModel.find({ _id: _id });
+    res.status(200).json(tickets);
+  } catch (e) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const getTicketsByUserID = async (req, res) => {
   try {
     const { userID } = req.body;
@@ -124,6 +134,7 @@ module.exports = {
   createTicket,
   deleteTicket,
   updateTicket,
+  getTicketsByTicketID,
   getTicketsByUserID,
   getTicketsByTechID,
   getOpenTicketsByTechID,

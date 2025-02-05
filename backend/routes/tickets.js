@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
   getTickets,
+  getTicketsByTicketID,
   getTicketsByUserID,
   getTicketsByTechID,
   getOpenTicketsByTechID,
@@ -22,6 +23,7 @@ router.post("/tech/pending", getPendingTicketsByTechID);
 router.post("/tech/closed", getClosedTicketsByTechID);
 
 router.get("/all", auth(["admin", "tech", "free"]), getTickets);
+router.get("/:_id", getTicketsByTicketID);
 
 //route to delete ticket by ID
 router.delete("/", deleteTicket);
