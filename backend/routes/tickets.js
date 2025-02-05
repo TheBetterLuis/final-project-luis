@@ -15,11 +15,11 @@ const {
 
 const { auth } = require("../middleware/auth");
 
-router.get("/user", getTicketsByUserID);
-router.get("/tech", getTicketsByTechID);
-router.get("/tech/open", getOpenTicketsByTechID);
-router.get("/tech/pending", getPendingTicketsByTechID);
-router.get("/tech/closed", getClosedTicketsByTechID);
+router.post("/user", getTicketsByUserID);
+router.post("/tech", getTicketsByTechID);
+router.post("/tech/open", getOpenTicketsByTechID);
+router.post("/tech/pending", getPendingTicketsByTechID);
+router.post("/tech/closed", getClosedTicketsByTechID);
 
 router.get("/all", auth(["admin", "tech", "free"]), getTickets);
 

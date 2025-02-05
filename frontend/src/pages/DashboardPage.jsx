@@ -34,6 +34,7 @@ const DashboardPage = () => {
                       {"Internet Lento"}
                     </Table.Cell>
                   </Table.Row>
+
                   <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
                     <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
                       <Checkbox />
