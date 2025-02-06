@@ -32,7 +32,7 @@ const Login = () => {
         }
 
         if (userRole === "tech") {
-          navigate("/testdash");
+          navigate("/dashboard");
         }
 
         if (userRole === "premium") {

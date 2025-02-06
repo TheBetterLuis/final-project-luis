@@ -4,12 +4,18 @@ const fs = require("fs");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const dir = path.join(__dirname, `../../images/`);
+    const dir = path.join(
+      __dirname,
+      `../../frontend/public/profilePictures/${req.params.id}`
+    );
+    //const dir = path.join(__dirname, `../../images/`);
     fs.mkdirSync(dir, { recursive: true });
     cb(null, dir);
   },
   filename: function (req, file, cb) {
-    cb(null, `${Date.now()}_${file.originalname.replace(/\s/g, "_")}`);
+    const imageExtension = path.extname(file.originalname);
+    cb(null, `${req.params.id}${imageExtension}`);
+    //    cb(null, `${Date.now()}_${file.originalname.replace(/\s/g, "_")}`);
   },
 });
 

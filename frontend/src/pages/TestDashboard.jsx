@@ -188,7 +188,8 @@ const TestDashboard = () => {
         <CustomSidebar
           name={userData.name}
           lastName={userData.lastName}
-          image={userData.profilePicture}
+          image={`../../public/profilePictures/${userData.id}/${userData.id}.jpg`}
+          //          image={"../../public/profilePictures/679856862765feb05fde61a9/679856862765feb05fde61a9.jpg"          }
         />
       </div>
     </>
