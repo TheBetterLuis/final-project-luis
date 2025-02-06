@@ -41,13 +41,13 @@ const LogoutPage = () => {
   return (
     <>
       <div className={`${styles.background}`}>
-        <NavBar />{" "}
+        <NavBar />
         <div className="flex h-screen w-full  overflow-y-scroll ">
           <div className="flex justify-center items-center h-screen w-full font-roboto overflow-y-scroll ">
             {/*COMPONENT GOES HERE*/}
             <div className="flex flex-col items-center">
               <span class="flex items-stretch transition-all duration-200 rounded-md px-4 py-2 text-md">
-                {response.message}
+                {response.message || "Sesión cerrada exitosamente"}
               </span>
               <Link to={"/login"}>
                 <button

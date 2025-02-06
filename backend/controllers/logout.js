@@ -22,7 +22,7 @@ const logout = async (req, res) => {
 
     res
       .header("authorization", token)
-      .json({ message: "Sesion cerrada exitosamente", token });
+      .json({ message: "Sesión cerrada exitosamente", token });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
