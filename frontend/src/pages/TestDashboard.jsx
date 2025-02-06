@@ -16,6 +16,7 @@ const TestDashboard = () => {
   };
 
   const navigate = useNavigate();
+  const [userData, setUserData] = useState([]);
   const [openTickets, setOpenTickets] = useState();
   const [pendingTickets, setPendingTickets] = useState();
   const [closedTickets, setClosedTickets] = useState();
@@ -30,6 +31,7 @@ const TestDashboard = () => {
         try {
           const decoded = jwtDecode(token);
           //  console.log(decoded);
+          setUserData(decoded);
           const techID = decoded.id;
           const userName = decoded.name;
           const userLastName = decoded.lastName;
@@ -183,7 +185,11 @@ const TestDashboard = () => {
           </div>
         </div>
         <PageFooter />
-        <CustomSidebar />
+        <CustomSidebar
+          name={userData.name}
+          lastName={userData.lastName}
+          image={userData.profilePicture}
+        />
       </div>
     </>
   );

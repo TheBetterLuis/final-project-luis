@@ -8,4 +8,3 @@ function Boton({ message }) {
 }
 
 export default Boton;
-

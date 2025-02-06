@@ -54,17 +54,16 @@ const Application = () => {
           <Route path="/logout" element={<LogoutPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/createTicket" element={<CreateTicketPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/crud" element={<CrudPage />} />
 
           <Route path="/test" element={<TestPage />} />
-          <Route path="/testdash" element={<TestDashboardPage />} />
+          <Route path="/dashboard" element={<TestDashboardPage />} />
 
           <Route path="/*" element={<>not found</>} />
         </Routes>
-        {/*        <div className="grid place-items-center my-2">
-          <DarkThemeToggle />
-        </div>
+        {/*      
+
+          <Route path="/dashboard" element={<DashboardPage />} />
  */}
       </Flowbite>
     </>
