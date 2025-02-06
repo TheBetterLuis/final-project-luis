@@ -14,6 +14,7 @@ import FeedPage from "./pages/FeedPage";
 import ProfilePage from "./pages/ProfilePage";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
+import LogoutPage from "./pages/LogoutPage";
 import RegisterPage from "./pages/RegisterPage";
 import CreateTicketPage from "./pages/CreateTicketPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -50,6 +51,7 @@ const Application = () => {
           <Route path="/feed" element={<FeedPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/logout" element={<LogoutPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/createTicket" element={<CreateTicketPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
