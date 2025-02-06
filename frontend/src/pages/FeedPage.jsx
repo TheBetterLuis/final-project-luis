@@ -2,12 +2,13 @@ import { NavBar } from "../components/NavBar";
 import PageFooter from "../components/Footer";
 import CustomSidebar from "../components/CustomSidebar";
 import TicketView from "../components/TicketView";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 const FeedPage = () => {
+  const [userData, setUserData] = useState({});
   /*
     colors: {
       azul1: "#9CFFE5",
@@ -33,6 +34,7 @@ const FeedPage = () => {
       }
 
       const decoded = jwtDecode(token);
+      setUserData(decoded);
       const techID = decoded.id;
       const userName = decoded.name;
       const userLastName = decoded.lastName;
@@ -61,7 +63,11 @@ const FeedPage = () => {
         </div>
         <PageFooter />
       </div>
-      <CustomSidebar></CustomSidebar>
+      <CustomSidebar
+        name={userData.name}
+        lastName={userData.lastName}
+        image={userData.profilePicture}
+      />
     </>
   );
 };
