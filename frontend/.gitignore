@@ -13,6 +13,7 @@ dist-ssr
 *.local
 
 #profile pictures
+/public/profilePictures/*
 
 # Editor directories and files
 .vscode/*
