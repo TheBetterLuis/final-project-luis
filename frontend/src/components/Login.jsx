@@ -1,7 +1,8 @@
 import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +10,43 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchInfo = async () => {
+      const token = localStorage.getItem("tokenSesion");
+      if (token) {
+        const decoded = jwtDecode(token);
+        const userRole = decoded.role;
+
+        const expiry = decoded.exp;
+        const currentTime = Date.now() / 1000;
+
+        if (expiry < currentTime) {
+          console.log("token has expired");
+          localStorage.removeItem("tokenSesion");
+          navigate("/login");
+        }
+
+        if (userRole === "admin") {
+          navigate("/crud");
+        }
+
+        if (userRole === "tech") {
+          navigate("/testdash");
+        }
+
+        if (userRole === "premium") {
+          navigate("/feed");
+        }
+
+        if (userRole === "free") {
+          navigate("/feed");
+        }
+      }
+    };
+
+    fetchInfo();
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +61,25 @@ const Login = () => {
 
       console.log("login successful:", response.data);
       localStorage.setItem("tokenSesion", JSON.stringify(response.data.token));
-      navigate("/feed");
+
+      const decoded = jwtDecode(response.data.token);
+      const userRole = decoded.role;
+
+      if (userRole === "admin") {
+        navigate("/crud");
+      }
+
+      if (userRole === "tech") {
+        navigate("/testdash");
+      }
+
+      if (userRole === "premium") {
+        navigate("/feed");
+      }
+
+      if (userRole === "free") {
+        navigate("/feed");
+      }
     } catch (err) {
       console.error("Login error:", err);
       setError(

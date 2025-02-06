@@ -34,39 +34,44 @@ const TestDashboard = () => {
           const userName = decoded.name;
           const userLastName = decoded.lastName;
           const userRole = decoded.role;
+
           const expiry = decoded.exp;
           const currentTime = Date.now() / 1000;
           if (expiry < currentTime) {
             console.log("token has expired");
             localStorage.removeItem("tokenSesion");
             navigate("/login");
-          } else {
-            const openResponse = await axios.post(
-              "http://localhost:3001/api/tickets/tech/open",
-              {
-                techID: techID,
-              }
-            );
-            setOpenTickets(openResponse.data);
-
-            const pendingResponse = await axios.post(
-              "http://localhost:3001/api/tickets/tech/pending",
-              {
-                techID: techID,
-              }
-            );
-            setPendingTickets(pendingResponse.data);
-
-            const closedResponse = await axios.post(
-              "http://localhost:3001/api/tickets/tech/closed",
-              {
-                techID: techID,
-              }
-            );
-            setClosedTickets(closedResponse.data);
-
-            setLoading(false);
           }
+
+          if (userRole !== "admin" && userRole !== "tech") {
+            navigate("/login");
+          }
+
+          const openResponse = await axios.post(
+            "http://localhost:3001/api/tickets/tech/open",
+            {
+              techID: techID,
+            }
+          );
+          setOpenTickets(openResponse.data);
+
+          const pendingResponse = await axios.post(
+            "http://localhost:3001/api/tickets/tech/pending",
+            {
+              techID: techID,
+            }
+          );
+          setPendingTickets(pendingResponse.data);
+
+          const closedResponse = await axios.post(
+            "http://localhost:3001/api/tickets/tech/closed",
+            {
+              techID: techID,
+            }
+          );
+          setClosedTickets(closedResponse.data);
+
+          setLoading(false);
         } catch (e) {
           console.error("invalid token");
           setError("Error fetching tickets.");
