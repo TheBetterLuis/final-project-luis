@@ -46,6 +46,7 @@ const login = async (req, res) => {
         lastName: userFind.lastName,
         role: userFind.role,
         plan: userFind.plan,
+        profilePicture: userFind.profilePicture,
       },
       process.env.SECRET_KEY,
       { expiresIn: "1h" }

@@ -59,10 +59,9 @@ const createProfilePicture = async (req, res) => {
       req.file.originalname
     )}`;
 
-    //const fullUrl = `${process.env.BASE_URL}/frontend/public/profilePictures/${id}/${req.file.filename}`;
     // saving the image in database
     const image = await imageModel.create({ image: fullUrl });
-    user.profilePicture = fullUrl;
+    user.profilePicture = profilePictureUrl;
     const updatedUser = await user.save();
 
     res.status(201).json({ user: updatedUser, image });
@@ -84,4 +83,28 @@ const createProfilePicture = async (req, res) => {
   }
 };
 
-module.exports = { getImages, createImage, createProfilePicture };
+const setDefaultProfilePicture = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find the user by ID
+    const user = await userModel.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+    user.profilePicture = "../../public/img/default-profile-icon.jpg";
+    const updatedUser = await user.save();
+
+    res.status(201).json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  getImages,
+  createImage,
+  createProfilePicture,
+  setDefaultProfilePicture,
+};

@@ -5,6 +5,7 @@ const {
   getImages,
   createImage,
   createProfilePicture,
+  setDefaultProfilePicture,
 } = require("../controllers/images");
 const { upload } = require("../middleware/multer");
 // route to obtain images
@@ -28,5 +29,7 @@ router.post(
   },
   createProfilePicture
 );
+
+router.post("/profile/default/:id", setDefaultProfilePicture);
 
 module.exports = router;

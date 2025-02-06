@@ -16,7 +16,7 @@ const TestDashboard = () => {
   };
 
   const navigate = useNavigate();
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState({});
   const [openTickets, setOpenTickets] = useState();
   const [pendingTickets, setPendingTickets] = useState();
   const [closedTickets, setClosedTickets] = useState();
@@ -36,7 +36,6 @@ const TestDashboard = () => {
           const userName = decoded.name;
           const userLastName = decoded.lastName;
           const userRole = decoded.role;
-
           const expiry = decoded.exp;
           const currentTime = Date.now() / 1000;
           if (expiry < currentTime) {
@@ -188,8 +187,7 @@ const TestDashboard = () => {
         <CustomSidebar
           name={userData.name}
           lastName={userData.lastName}
-          image={`../../public/profilePictures/${userData.id}/${userData.id}.jpg`}
-          //          image={"../../public/profilePictures/679856862765feb05fde61a9/679856862765feb05fde61a9.jpg"          }
+          image={userData.profilePicture}
         />
       </div>
     </>
