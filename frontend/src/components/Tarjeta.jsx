@@ -8,7 +8,16 @@ export function Tarjeta({ userData }) {
     role: "free",
   };
 
-  const actualUserData = userData || defaultUserData;
+  //  const actualUserData = userData || defaultUserData;
+
+  const actualUserData = {
+    profilePicture:
+      userData?.profilePicture || "../../public/img/default-profile-icon.jpg",
+    name: userData?.name || "User",
+    lastName: userData?.lastName || "Name",
+    role: userData?.role || "free",
+  };
+
   const roleColor =
     actualUserData.role === "free" ? "text-[#928F74]" : "text-[#aaa035]";
 
