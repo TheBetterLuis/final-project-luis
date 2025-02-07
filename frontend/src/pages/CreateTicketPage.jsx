@@ -26,12 +26,16 @@ const CreateTicketPage = () => {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -68,9 +72,27 @@ const CreateTicketPage = () => {
       });
 
       console.log("Ticket creado:", response.data);
-      //      navigate("/feed");
+
+      if (file) {
+        const formData = new FormData();
+        formData.append("image", file);
+        //upload the image
+        const imageResponse = await axios.post(
+          `http://localhost:3001/api/tickets/${response.data._id}/image`,
+          formData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+          }
+        );
+
+        console.log("Imagen subida:", imageResponse.data);
+      } else {
+        console.log("No se envio alguna imagen");
+      }
+
+      navigate("/feed");
     } catch (err) {
-      console.error("Error de registro:", err);
+      console.error("Error de al crear el ticket o subir la imagen", err);
       setError(
         err.response?.data?.message ||
           "Ha ocurrido un error durante la creacion del ticket"
@@ -162,7 +184,11 @@ const CreateTicketPage = () => {
                       />
                     </div>
 
-                    <FileInput id="adjuntar3" sizing="sm" />
+                    <FileInput
+                      id="adjuntar3"
+                      sizing="sm"
+                      onChange={handleFileChange}
+                    />
 
                     <h2 className="mt-2 text-center text-red-500 text-sm">
                       {error}
