@@ -14,6 +14,7 @@ dist-ssr
 
 #profile pictures
 /public/profilePictures/*
+/public/ticketImages/*
 
 # Editor directories and files
 .vscode/*
