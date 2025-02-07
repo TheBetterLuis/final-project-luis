@@ -53,7 +53,8 @@ const Application = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/logout" element={<LogoutPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/createTicket" element={<CreateTicketPage />} />
+          <Route path="/createticket" element={<CreateTicketPage />} />
+          <Route path="/ticket" element={<TicketView />} />
           <Route path="/crud" element={<CrudPage />} />
 
           <Route path="/test" element={<TestPage />} />

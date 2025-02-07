@@ -9,8 +9,6 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 
 const ProfilePage = () => {
-  const [userData, setUserData] = useState({});
-  const navigate = useNavigate();
   /*
     colors: {
       azul1: "#9CFFE5",
@@ -27,6 +25,8 @@ const ProfilePage = () => {
       "bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]",
   };
 
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchInfo = async () => {
       const token = localStorage.getItem("tokenSesion");
@@ -46,11 +46,6 @@ const ProfilePage = () => {
             localStorage.removeItem("tokenSesion");
             navigate("/login");
           }
-          /*
-          if (userRole !== "admin" && userRole !== "tech") {
-            navigate("/login");
-          }
-          */
         } catch (e) {
           console.error("invalid token");
         }

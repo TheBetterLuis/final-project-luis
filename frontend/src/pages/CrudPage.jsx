@@ -2,18 +2,21 @@ import CRUD from "../components/CRUD";
 import { NavBar } from "../components/NavBar";
 import PageFooter from "../components/Footer";
 import CustomSidebar from "../components/CustomSidebar";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+
 const CrudPage = () => {
-  const navigate = useNavigate();
   const styles = {
     background: "bg-gradient-to-tr from-azul4 via-[#52A2AB] to-azul1",
     background_feed:
       "bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]",
   };
+
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -23,9 +26,7 @@ const CrudPage = () => {
       }
 
       const decoded = jwtDecode(token);
-      const techID = decoded.id;
-      const userName = decoded.name;
-      const userLastName = decoded.lastName;
+      setUserData(decoded);
       const userRole = decoded.role;
 
       if (userRole !== "admin") {

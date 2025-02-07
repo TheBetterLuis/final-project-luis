@@ -3,12 +3,6 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-/*{
-	"name":"luis",
-	"lastName":"romero",
-	"email":"littleluisworldwide@gmail.com",
-	"password":"1234",
-  */
 const Register = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");

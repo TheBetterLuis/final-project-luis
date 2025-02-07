@@ -27,14 +27,17 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       const token = localStorage.getItem("tokenSesion");
+
+      if (!token) {
+        navigate("/login");
+      }
+
       if (token) {
         try {
           const decoded = jwtDecode(token);
           //  console.log(decoded);
           setUserData(decoded);
           const techID = decoded.id;
-          const userName = decoded.name;
-          const userLastName = decoded.lastName;
           const userRole = decoded.role;
           const expiry = decoded.exp;
           const currentTime = Date.now() / 1000;
@@ -78,8 +81,6 @@ const Dashboard = () => {
           setError("Error fetching tickets.");
           setLoading(false);
         }
-      } else {
-        navigate("/login");
       }
     };
 
