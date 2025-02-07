@@ -54,14 +54,6 @@ const CreateTicketPage = () => {
     };
     fetchInfo();
   }, [navigate]);
-  /*
-{
-"userID":"679856252765feb05fde619c",
-	"title":"ticket abierto",
-	"description":"ticket open"
-	
-}
-*/
 
   const handleSubmit = async (e) => {
     e.preventDefault();

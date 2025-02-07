@@ -12,9 +12,11 @@ const {
   createTicket,
   deleteTicket,
   updateTicket,
+  uploadTicketImage,
 } = require("../controllers/tickets");
 
 const { auth } = require("../middleware/auth");
+const { ticketImageUpload } = require("../middleware/ticketImageUpload");
 
 router.post("/user", getTicketsByUserID);
 router.post("/tech", getTicketsByTechID);
@@ -30,6 +32,8 @@ router.delete("/", deleteTicket);
 
 //route to create ticket
 router.post("/", createTicket);
+//route to upload ticket image
+router.post("/:id/image", ticketImageUpload.single("image"), uploadTicketImage);
 
 //route to update ticket
 router.patch("/", updateTicket);

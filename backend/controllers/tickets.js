@@ -1,4 +1,5 @@
 const ticketModel = require("../models/tickets");
+const path = require("path");
 
 const getTickets = async (req, res) => {
   const tickets = await ticketModel.find();
@@ -73,8 +74,9 @@ const getClosedTicketsByTechID = async (req, res) => {
 
 const createTicket = async (req, res) => {
   try {
-    const { userID, techID, title, description, reportDate, image, status } =
-      req.body;
+    const { userID, techID, title, description, reportDate, status } = req.body;
+    const image = req.file ? req.file.path : null;
+
     const ticket = await ticketModel.create({
       userID,
       techID,
@@ -90,6 +92,33 @@ const createTicket = async (req, res) => {
   }
 };
 
+const uploadTicketImage = async (req, res) => {
+  try {
+    const ticketID = req.params.id;
+    let image = req.file ? req.file.path : null;
+
+    if (image) {
+      image = path.join(
+        "../../frontend/public/",
+        "ticketImages",
+        ticketID,
+        `${ticketID}${path.extname(req.file.originalname)}`
+      );
+    }
+
+    const ticket = await ticketModel.findByIdAndUpdate(ticketID, {
+      image,
+    });
+
+    if (!ticket) {
+      return res.status(404).json({ message: "Ticket no encontrado" });
+    }
+
+    res.status(201).json(ticket);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 const deleteTicket = async (req, res) => {
   try {
     const { id } = req.body;
@@ -140,4 +169,5 @@ module.exports = {
   getOpenTicketsByTechID,
   getPendingTicketsByTechID,
   getClosedTicketsByTechID,
+  uploadTicketImage,
 };
