@@ -46,10 +46,11 @@ const ProfilePage = () => {
             localStorage.removeItem("tokenSesion");
             navigate("/login");
           }
-
+          /*
           if (userRole !== "admin" && userRole !== "tech") {
             navigate("/login");
           }
+          */
         } catch (e) {
           console.error("invalid token");
         }

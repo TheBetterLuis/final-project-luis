@@ -18,7 +18,7 @@ import LogoutPage from "./pages/LogoutPage";
 import RegisterPage from "./pages/RegisterPage";
 import CreateTicketPage from "./pages/CreateTicketPage";
 import DashboardPage from "./pages/DashboardPage";
-import TestDashboardPage from "./pages/TestDashboard";
+import Dashboard from "./pages/DashboardPage";
 import CrudPage from "./pages/CrudPage";
 
 /*
@@ -57,12 +57,13 @@ const Application = () => {
           <Route path="/crud" element={<CrudPage />} />
 
           <Route path="/test" element={<TestPage />} />
-          <Route path="/dashboard" element={<TestDashboardPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
 
           <Route path="/*" element={<>not found</>} />
         </Routes>
         {/*      
 
+          <Route path="/dashboard" element={<TestDashboardPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
  */}
       </Flowbite>
