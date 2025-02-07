@@ -97,7 +97,7 @@ const uploadTicketImage = async (req, res) => {
 
     if (image) {
       image = path.join(
-        "../../frontend/public/",
+        "../../public/",
         "ticketImages",
         ticketID,
         `${ticketID}${path.extname(req.file.originalname)}`

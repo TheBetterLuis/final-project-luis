@@ -42,6 +42,7 @@ const TestPage = () => {
               >
                 este button
               </button>
+
               <Footer container>
                 <Footer.Copyright href="#" by="Flowbite™" year={2022} />
                 <Footer.LinkGroup>
@@ -52,6 +53,10 @@ const TestPage = () => {
                 </Footer.LinkGroup>
               </Footer>
             </div>
+            <img
+              src="../../public/ticketImages/67a59bab46e99e56abc7d650/67a59bab46e99e56abc7d650.jpg"
+              alt="test"
+            />
           </div>
         </>
       );
