@@ -75,7 +75,6 @@ const getClosedTicketsByTechID = async (req, res) => {
 const createTicket = async (req, res) => {
   try {
     const { userID, techID, title, description, reportDate, status } = req.body;
-    const image = req.file ? req.file.path : null;
 
     const ticket = await ticketModel.create({
       userID,
@@ -83,7 +82,6 @@ const createTicket = async (req, res) => {
       title,
       description,
       reportDate,
-      image,
       status,
     });
     res.status(201).json(ticket);
@@ -106,9 +104,13 @@ const uploadTicketImage = async (req, res) => {
       );
     }
 
-    const ticket = await ticketModel.findByIdAndUpdate(ticketID, {
-      image,
-    });
+    const ticket = await ticketModel.findByIdAndUpdate(
+      ticketID,
+      {
+        image,
+      },
+      { new: true }
+    );
 
     if (!ticket) {
       return res.status(404).json({ message: "Ticket no encontrado" });
@@ -119,6 +121,7 @@ const uploadTicketImage = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 const deleteTicket = async (req, res) => {
   try {
     const { id } = req.body;
