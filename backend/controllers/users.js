@@ -10,7 +10,24 @@ const getUserByUserID = async (req, res) => {
     const { id } = req.body;
     const user = await userModel.find({ _id: id });
     res.status(200).json(user);
-  } catch (e) {
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getSafeUserByUserID = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const user = await userModel
+      .findById(id)
+      .select("name lastName profilePicture");
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -19,7 +36,7 @@ const getTechUsers = async (req, res) => {
   try {
     const users = await userModel.find({ role: "tech" });
     res.status(200).json(users);
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -30,7 +47,7 @@ const getRegularUsers = async (req, res) => {
       $or: [{ role: "free" }, { role: "premium" }],
     });
     res.status(200).json(users);
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -116,6 +133,7 @@ const updateUser = async (req, res) => {
 module.exports = {
   getUsers,
   getUserByUserID,
+  getSafeUserByUserID,
   getTechUsers,
   getRegularUsers,
   createUser,

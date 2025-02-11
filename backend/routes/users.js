@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
   getUserByUserID,
+  getSafeUserByUserID,
   getUsers,
   getTechUsers,
   getRegularUsers,
@@ -14,6 +15,7 @@ const {
 const { auth } = require("../middleware/auth");
 
 router.get("/single", getUserByUserID);
+router.get("/safe", getSafeUserByUserID);
 
 //we add auth here to protect this route, before the controller
 //router.get("/", getUsers);

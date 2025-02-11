@@ -11,7 +11,7 @@ const getTicketsByTicketID = async (req, res) => {
     const { _id } = req.params;
     const tickets = await ticketModel.find({ _id: _id });
     res.status(200).json(tickets);
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -21,7 +21,7 @@ const getTicketsByUserID = async (req, res) => {
     const { userID } = req.body;
     const tickets = await ticketModel.find({ userID: userID });
     res.status(200).json(tickets);
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -31,7 +31,7 @@ const getTicketsByTechID = async (req, res) => {
     const { techID } = req.body;
     const tickets = await ticketModel.find({ techID: techID });
     res.status(200).json(tickets);
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -41,7 +41,7 @@ const getOpenTicketsByTechID = async (req, res) => {
     const { techID } = req.body;
     const tickets = await ticketModel.find({ techID: techID, status: "open" });
     res.status(200).json(tickets);
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -54,7 +54,7 @@ const getPendingTicketsByTechID = async (req, res) => {
       status: "pending",
     });
     res.status(200).json(tickets);
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -67,7 +67,7 @@ const getClosedTicketsByTechID = async (req, res) => {
       status: "closed",
     });
     res.status(200).json(tickets);
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };

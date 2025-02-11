@@ -7,7 +7,7 @@ import Register from "./components/Register";
 import Ticket from "./components/Ticket";
 import SideBar from "./components/SideBar";
 import TicketList from "./components/TicketList";
-import TicketView from "./components/TicketView";
+import TicketViewPage from "./pages/TicketViewPage";
 import Tarjeta from "./components/Tarjeta";
 import TestPage from "./pages/TestPage";
 import FeedPage from "./pages/FeedPage";
@@ -54,7 +54,7 @@ const Application = () => {
           <Route path="/logout" element={<LogoutPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/createticket" element={<CreateTicketPage />} />
-          <Route path="/ticket" element={<TicketView />} />
+          <Route path="/ticket/:ticketID" element={<TicketViewPage />} />
           <Route path="/crud" element={<CrudPage />} />
 
           <Route path="/test" element={<TestPage />} />
