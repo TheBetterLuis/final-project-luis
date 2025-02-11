@@ -4,7 +4,10 @@ import { navRoutes } from "./navConfig";
 
 export function NavBar() {
   const myLocation = useLocation();
-  const locationName = myLocation.pathname.slice(1);
+  const locationName = myLocation.pathname.startsWith("/#")
+    ? myLocation.pathname.slice(2).split("/")[0]
+    : myLocation.pathname.split("/")[1]; // Adjust for hash routing
+  //const locationName = myLocation.pathname.slice(1);
   const currentRoute = navRoutes[locationName] || navRoutes.default;
 
   const textStyles = {

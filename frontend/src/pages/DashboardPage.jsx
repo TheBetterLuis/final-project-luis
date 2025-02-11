@@ -120,7 +120,9 @@ const Dashboard = () => {
                           <Checkbox />
                         </Table.Cell>
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                          <Link>{ticket.title}</Link>
+                          <Link to={`/ticket/${ticket._id}`}>
+                            {ticket.title}
+                          </Link>
                         </Table.Cell>
                       </Table.Row>
                     ))
