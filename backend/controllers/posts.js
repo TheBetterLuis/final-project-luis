@@ -88,6 +88,64 @@ const updatePost = async (req, res) => {
   }
 };
 
+const fetchAllPostsAndTickets = async (req, res) => {
+  try {
+    const posts = await postModel
+      .find()
+      .populate({
+        path: "ticketID",
+        populate: {
+          path: "userID",
+          model: "users",
+          select: "name lastName profilePicture",
+        },
+      })
+      .exec();
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const fetchPublicPostsAndTickets = async (req, res) => {
+  try {
+    const posts = await postModel
+      .find({ status: "public" })
+      .populate({
+        path: "ticketID",
+        populate: {
+          path: "userID",
+          model: "users",
+          select: "name lastName profilePicture",
+        },
+      })
+      .exec();
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const fetchPrivatePostsAndTickets = async (req, res) => {
+  try {
+    const posts = await postModel
+      .find({ status: "private" })
+      .populate({
+        path: "ticketID",
+        populate: {
+          path: "userID",
+          model: "users",
+          select: "name lastName profilePicture",
+        },
+      })
+      .exec();
+
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getPosts,
   getPostsByUserID,
@@ -96,4 +154,7 @@ module.exports = {
   createPost,
   deletePost,
   updatePost,
+  fetchAllPostsAndTickets,
+  fetchPublicPostsAndTickets,
+  fetchPrivatePostsAndTickets,
 };

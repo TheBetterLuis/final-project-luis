@@ -1,4 +1,5 @@
 const ticketModel = require("../models/tickets");
+const postModel = require("../models/posts");
 const path = require("path");
 
 const getTickets = async (req, res) => {
@@ -84,7 +85,13 @@ const createTicket = async (req, res) => {
       reportDate,
       status,
     });
-    res.status(201).json(ticket);
+
+    const post = await postModel.create({
+      userID,
+      ticketID: ticket._id,
+    });
+
+    res.status(201).json({ ticket, post });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

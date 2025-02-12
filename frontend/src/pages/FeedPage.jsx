@@ -27,6 +27,11 @@ const FeedPage = () => {
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
 
+  const [ticketsData, setTicketsData] = useState({});
+
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const fetchInfo = async () => {
       const token = localStorage.getItem("tokenSesion");
@@ -50,6 +55,44 @@ const FeedPage = () => {
         navigate("/login");
       }
     };
+
+    const fetchPosts = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/api/posts/tickets/public`
+        );
+        //console.log("Ticket recibido:", response.data);
+        setTicketData(response.data[0]);
+
+        const userResponse = await axios.post(
+          "http://localhost:3001/api/users/safe",
+          { id: response.data[0].userID }
+        );
+        // console.log("Info de usuario recibida", userResponse.data);
+        setTicketUserData(userResponse.data);
+
+        // navigate("/feed");
+      } catch (err) {
+        console.error("Error al cargar el ticket", err);
+        setError(
+          err.response?.data?.message ||
+            "Ha ocurrido un error durante la carga del ticket"
+        );
+        if (err.response) {
+          console.log(err.response.data);
+          console.log(err.response.status);
+          console.log(err.response.headers);
+        } else if (err.request) {
+          console.log(err.request);
+        } else {
+          console.log("Error", err.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchInfo();
   }, [navigate]);
 
