@@ -21,7 +21,17 @@ const getPosts = async (req, res) => {
 const getPostsByUserID = async (req, res) => {
   try {
     const { userID } = req.body;
-    const posts = await postModel.find({ userID: userID });
+
+    const posts = await postModel
+      .find({ userID })
+      .populate("ticketID")
+      .populate({
+        path: "userID",
+        model: "users",
+        select: "name lastName profilePicture",
+      })
+      .exec();
+
     res.status(200).json(posts);
   } catch (error) {
     res.status(500).json({ message: error.message });

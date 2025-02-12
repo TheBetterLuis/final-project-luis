@@ -15,10 +15,10 @@ const {
 } = require("../controllers/posts");
 
 const { auth } = require("../middleware/auth");
-
+//make sure it's post if you send a body
 router.get("/", auth(["admin", "tech", "free"]), getPosts);
 router.get("/:_id", getPostByTicketID);
-router.get("/user", getPostsByUserID);
+router.post("/user", getPostsByUserID);
 router.get("/user/public", getPublicPostsByUserID);
 router.get("/user/private", getPrivatePostsByUserID);
 router.get("/tickets/public", fetchPublicPostsAndTickets);
