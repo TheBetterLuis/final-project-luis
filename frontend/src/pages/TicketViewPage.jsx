@@ -30,7 +30,7 @@ const TicketViewPage = () => {
   const { ticketID } = useParams();
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
-  const [ticketData, setTicketData] = useState({});
+  const [postData, setPostData] = useState({});
   const [ticketUserData, setTicketUserData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -63,17 +63,10 @@ const TicketViewPage = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/tickets/${ticketID}`
+          `http://localhost:3001/api/posts/${ticketID}`
         );
         //console.log("Ticket recibido:", response.data);
-        setTicketData(response.data[0]);
-
-        const userResponse = await axios.post(
-          "http://localhost:3001/api/users/safe",
-          { id: response.data[0].userID }
-        );
-        // console.log("Info de usuario recibida", userResponse.data);
-        setTicketUserData(userResponse.data);
+        setPostData(response.data[0]);
 
         // navigate("/feed");
       } catch (err) {
@@ -111,12 +104,12 @@ const TicketViewPage = () => {
               <div className="flex gap-3">
                 <img
                   className="rounded-full border border-azul5 w-20 dark:border-white"
-                  src={ticketUserData.profilePicture}
-                  alt={`foto de perfil de ${ticketUserData.name}`}
+                  src={postData.userID.profilePicture}
+                  alt={`foto de perfil de ${postData.userID.name}`}
                 />
                 {ticketUserData && (
                   <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize">
-                    {`${ticketUserData.name} ${ticketUserData.lastName}`}
+                    {`${postData.userID.name} ${postData.userID.lastName}`}
                   </span>
                 )}
               </div>
@@ -125,7 +118,7 @@ const TicketViewPage = () => {
                   <div>
                     <div className="mb-2 block">
                       <span className="text-black flex items-center justify-center drop-shadow-md dark:text-white">
-                        {ticketData.title}
+                        {postData.title}
                       </span>
                     </div>
                   </div>

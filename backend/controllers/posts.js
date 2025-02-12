@@ -1,8 +1,21 @@
 const postModel = require("../models/posts");
 
 const getPosts = async (req, res) => {
-  const posts = await postModel.find();
-  res.status(200).json(posts);
+  try {
+    const posts = await postModel
+      .find()
+      .populate("ticketID")
+      .populate({
+        path: "userID",
+        model: "users",
+        select: "name lastName profilePicture",
+      })
+      .exec();
+
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 const getPostsByUserID = async (req, res) => {
@@ -10,7 +23,27 @@ const getPostsByUserID = async (req, res) => {
     const { userID } = req.body;
     const posts = await postModel.find({ userID: userID });
     res.status(200).json(posts);
-  } catch (e) {
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getPostByTicketID = async (req, res) => {
+  try {
+    const { _id } = req.params;
+
+    const post = await postModel
+      .find({ ticketID: _id })
+      .populate("ticketID")
+      .populate({
+        path: "userID",
+        model: "users",
+        select: "name lastName profilePicture",
+      })
+      .exec();
+
+    res.status(200).json(post);
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -20,7 +53,7 @@ const getPublicPostsByUserID = async (req, res) => {
     const { userID } = req.body;
     const posts = await postModel.find({ userID: userID, status: "public" });
     res.status(200).json(posts);
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -30,7 +63,7 @@ const getPrivatePostsByUserID = async (req, res) => {
     const { userID } = req.body;
     const posts = await postModel.find({ userID: userID, status: "private" });
     res.status(200).json(posts);
-  } catch (e) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
@@ -88,36 +121,15 @@ const updatePost = async (req, res) => {
   }
 };
 
-const fetchAllPostsAndTickets = async (req, res) => {
-  try {
-    const posts = await postModel
-      .find()
-      .populate({
-        path: "ticketID",
-        populate: {
-          path: "userID",
-          model: "users",
-          select: "name lastName profilePicture",
-        },
-      })
-      .exec();
-    res.status(200).json(posts);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 const fetchPublicPostsAndTickets = async (req, res) => {
   try {
     const posts = await postModel
       .find({ status: "public" })
+      .populate("ticketID")
       .populate({
-        path: "ticketID",
-        populate: {
-          path: "userID",
-          model: "users",
-          select: "name lastName profilePicture",
-        },
+        path: "userID",
+        model: "users",
+        select: "name lastName profilePicture",
       })
       .exec();
     res.status(200).json(posts);
@@ -130,13 +142,11 @@ const fetchPrivatePostsAndTickets = async (req, res) => {
   try {
     const posts = await postModel
       .find({ status: "private" })
+      .populate("ticketID")
       .populate({
-        path: "ticketID",
-        populate: {
-          path: "userID",
-          model: "users",
-          select: "name lastName profilePicture",
-        },
+        path: "userID",
+        model: "users",
+        select: "name lastName profilePicture",
       })
       .exec();
 
@@ -149,12 +159,12 @@ const fetchPrivatePostsAndTickets = async (req, res) => {
 module.exports = {
   getPosts,
   getPostsByUserID,
+  getPostByTicketID,
   getPublicPostsByUserID,
   getPrivatePostsByUserID,
   createPost,
   deletePost,
   updatePost,
-  fetchAllPostsAndTickets,
   fetchPublicPostsAndTickets,
   fetchPrivatePostsAndTickets,
 };
