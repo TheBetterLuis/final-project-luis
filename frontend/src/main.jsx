@@ -5,9 +5,11 @@ import "./index.css";
 import Application from "./Application.jsx";
 //import App from "./App.jsx";
 
+const base = " " || process.env.PUBLIC_URL;
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Router>
+    <Router basename={base}>
       <Application />
     </Router>
     {/* <App />*/}
