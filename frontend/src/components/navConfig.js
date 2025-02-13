@@ -18,10 +18,10 @@ export const navRoutes = {
   login: {
     first: { name: "Inicia sesion", link: "/login" },
     second: { name: "Registrate", link: "/register" },
-    third: { name: "Reportar ticket", link: "/createticket" },
+    third: { name: "Cambio de clave", link: "/change-password" },
     logo: { link: "/login" },
     drawer: {
-      display: true,
+      display: false,
       title: "Menu",
       image: { src: "../../public/img/default-profile-icon.jpg" },
       buttons: {

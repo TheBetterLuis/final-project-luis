@@ -2,20 +2,19 @@ const userModel = require("../models/users");
 
 const updatePassword = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { email, password } = req.body;
 
-    // Find the user by ID
-    const user = await userModel.findById(id);
+    const user = await userModel.findOne({ email });
 
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
-    if (!req.body.password) {
+    if (!password) {
       return res.status(400).json({ message: "Nueva clave es requerida" });
     }
 
-    user.password = await userModel.encryptPassword(req.body.password);
+    user.password = await userModel.encryptPassword(password);
 
     const updatedUser = await user.save();
 
