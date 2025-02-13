@@ -5,6 +5,7 @@ const {
   getPosts,
   getPostsByUserID,
   getPublicPostsByUserID,
+  getPublicPostsPaginated,
   getPrivatePostsByUserID,
   createPost,
   deletePost,
@@ -20,6 +21,7 @@ router.get("/", auth(["admin", "tech", "free"]), getPosts);
 router.get("/:_id", getPostByTicketID);
 router.post("/user", getPostsByUserID);
 router.get("/user/public", getPublicPostsByUserID);
+router.post("/paginate", getPublicPostsPaginated);
 router.get("/user/private", getPrivatePostsByUserID);
 router.get("/tickets/public", fetchPublicPostsAndTickets);
 router.get(
