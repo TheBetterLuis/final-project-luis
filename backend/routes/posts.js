@@ -13,6 +13,7 @@ const {
   fetchPublicPostsAndTickets,
   fetchPrivatePostsAndTickets,
   getPostByTicketID,
+  likePost,
 } = require("../controllers/posts");
 
 const { auth } = require("../middleware/auth");
@@ -33,6 +34,8 @@ router.get(
 router.delete("/", deletePost);
 
 router.post("/", createPost);
+
+router.post("/:postId/like", likePost);
 
 router.patch("/", updatePost);
 

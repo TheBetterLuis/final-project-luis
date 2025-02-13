@@ -194,6 +194,37 @@ const getPublicPostsPaginated = async (req, res) => {
   }
 };
 
+const likePost = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const { userID } = req.body;
+
+    const post = await postModel.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    // Check if the user has already liked the post
+    const hasLiked = post.likes.includes(userID);
+
+    if (hasLiked) {
+      // Unlike the post
+      post.likes.pull(userID);
+    } else {
+      // Like the post
+      post.likes.push(userID);
+    }
+
+    // Save the updated post
+    const updatedPost = await post.save();
+
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getPosts,
   getPostsByUserID,
@@ -206,4 +237,5 @@ module.exports = {
   updatePost,
   fetchPublicPostsAndTickets,
   fetchPrivatePostsAndTickets,
+  likePost,
 };
