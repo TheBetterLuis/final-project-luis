@@ -20,6 +20,7 @@ import CreateTicketPage from "./pages/CreateTicketPage";
 import DashboardPage from "./pages/DashboardPage";
 import Dashboard from "./pages/DashboardPage";
 import CrudPage from "./pages/CrudPage";
+import ChangePasswordPage from "./pages/ChangePasswordPage";
 
 /*
     colors: {
@@ -56,6 +57,7 @@ const Application = () => {
           <Route path="/createticket" element={<CreateTicketPage />} />
           <Route path="/ticket/:ticketID" element={<TicketViewPage />} />
           <Route path="/crud" element={<CrudPage />} />
+          <Route path="/change-password" element={<ChangePasswordPage />} />
 
           <Route path="/test" element={<TestPage />} />
           <Route path="/dashboard" element={<Dashboard />} />

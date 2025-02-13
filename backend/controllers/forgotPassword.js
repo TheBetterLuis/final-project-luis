@@ -17,7 +17,7 @@ const forgotPassword = async (req, res) => {
         user.email
       );
       return res.status(200).json({
-        message: `${user.email} L&E TELECOMS - Codigo De Verificacion - ${code}`,
+        message: `Codigo de 6 digitos ha sido enviado a su correo electronico`,
       });
     }
   } catch (error) {
