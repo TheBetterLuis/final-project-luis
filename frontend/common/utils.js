@@ -15,4 +15,20 @@ const formatDate = (isoDateString) => {
   return `${day}/${month}/${year}`;
 };
 
-export { isSomeoneLogged, formatDate };
+const toggleLike = (index) => {
+  const element = document.querySelector(`[post-id='${index}']`);
+
+  if (element.classList.contains("liked")) {
+    element.classList.remove("liked");
+    element.classList.add("not-liked");
+  }
+
+  if (element.classList.contains("not-liked")) {
+    element.classList.remove("not-liked");
+    element.classList.add("liked");
+  }
+
+  return index;
+};
+
+export { isSomeoneLogged, formatDate, toggleLike };
