@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import { Card, Button } from "flowbite-react";
+import { Card, Button, Modal } from "flowbite-react";
 import { FaHeart, FaCommentDots } from "react-icons/fa";
 
-import { formatDate, toggleLike } from "../../common/utils";
+import { formatDate } from "../../common/utils";
+
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 const FeedPage = () => {
   const styles = {
@@ -54,6 +56,9 @@ const FeedPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
+  const [openModal, setOpenModal] = useState([]);
+  const [statusLike, setStatusLike] = useState([]);
+
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -65,7 +70,7 @@ const FeedPage = () => {
       );
       setPostsData((prevPosts) => [...prevPosts, ...response.data.posts]);
       setTotalPages(response.data.totalPages);
-      //        console.log(postsData);
+
       setSuccess(true);
     } catch (err) {
       console.error("Error al cargar posts", err);
@@ -128,6 +133,30 @@ const FeedPage = () => {
     console.log("loaded more");
   };
 
+  const toggleLike = (index) => {
+    setStatusLike((prev) => {
+      const newState = [...prev];
+      newState[index] = !newState[index];
+      return newState;
+    });
+  };
+
+  const handleOpenModal = (index) => {
+    setOpenModal((prev) => {
+      const newState = [...prev];
+      newState[index] = true;
+      return newState;
+    });
+  };
+
+  const handleCloseModal = (index) => {
+    setOpenModal((prev) => {
+      const newState = [...prev];
+      newState[index] = false;
+      return newState;
+    });
+  };
+
   if (success) {
     returnPage = (
       <>
@@ -181,11 +210,13 @@ const FeedPage = () => {
                     <FaHeart
                       post-id={index}
                       size={26}
-                      className={`${
-                        postData.likes.includes(userData.id)
-                          ? "text-red-500 hover:text-black dark:text-red-500 dark:hover:text-white liked"
-                          : "text-black hover:text-red-500 dark:text-white dark:hover:text-red-500 not-liked"
-                      }  cursor-pointer`}
+                      className={` 
+
+${
+  statusLike[index]
+    ? "text-red-500 hover:text-black dark:text-red-500 dark:hover:text-white liked"
+    : "text-black hover:text-red-500 dark:text-white dark:hover:text-red-500 not-liked"
+}  cursor-pointer`}
                       onClick={() => {
                         toggleLike(index);
                         likePost(userData.id, postData._id);
@@ -194,9 +225,41 @@ const FeedPage = () => {
                     <FaCommentDots
                       size={26}
                       className="text-white hover:text-black dark:hover:text-gray-400 cursor-pointer"
+                      onClick={() => handleOpenModal(index)}
                     />
                   </div>
                 </Card>
+                {/*MODAL*/}
+                <Modal
+                  show={openModal[index]}
+                  size="md"
+                  onClose={() => handleCloseModal(index)}
+                  popup
+                >
+                  <Modal.Header />
+                  <Modal.Body>
+                    <div className="text-center">
+                      <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+                      <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                        {`modal ${index + 1}`}
+                      </h3>
+                      <div className="flex justify-center gap-4">
+                        <Button
+                          color="failure"
+                          onClick={() => handleCloseModal(index)}
+                        >
+                          {"Yes, I'm sure"}
+                        </Button>
+                        <Button
+                          color="gray"
+                          onClick={() => handleCloseModal(index)}
+                        >
+                          No, cancel
+                        </Button>
+                      </div>
+                    </div>
+                  </Modal.Body>
+                </Modal>
               </div>
             ))}
             {currentPage < totalPages ? (

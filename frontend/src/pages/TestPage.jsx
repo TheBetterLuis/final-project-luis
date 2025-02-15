@@ -9,7 +9,7 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 const TestPage = () => {
   const array = [0, 1, 2];
-  const [openModal, setOpenModal] = useState([false, false, false]);
+  const [openModal, setOpenModal] = useState([]);
   const handleOpenModal = (index) => {
     setOpenModal((prev) => {
       const newState = [...prev];
