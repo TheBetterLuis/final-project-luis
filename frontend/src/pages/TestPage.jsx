@@ -3,79 +3,70 @@ import { NavBar } from "../components/NavBar";
 import CustomSidebar from "../components/CustomSidebar";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { Button, Modal } from "flowbite-react";
+import { useState } from "react";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 const TestPage = () => {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("tokenSesion");
-  if (token) {
-    try {
-      const decoded = jwtDecode(token);
-      console.log(decoded);
-      const userID = decoded.id;
-      const userName = decoded.name;
-      const userLastName = decoded.lastName;
-      const userRole = decoded.role;
-      const userPlan = decoded.plan;
-      const expiry = decoded.exp;
-      const currentTime = Date.now() / 1000;
-      if (expiry < currentTime) {
-        console.log("token has expired");
-        localStorage.removeItem("tokenSesion");
-      }
+  const array = [0, 1, 2];
+  const [openModal, setOpenModal] = useState([false, false, false]);
+  const handleOpenModal = (index) => {
+    setOpenModal((prev) => {
+      const newState = [...prev];
+      newState[index] = true;
+      return newState;
+    });
+  };
 
-      return (
-        <>
-          <NavBar></NavBar>
-          <div className="relative">
-            <div>
-              <h1 class="text-[#333] dark:text-[#dddcdc] hover:text-[#878787] dark:hover:text-[#fff]">
-                {`ID:${userID},Name:${userName},Last Name:${userLastName},Role:${userRole},Plan:${userPlan}, token expiration:${expiry}`}
-              </h1>
-              <CustomSidebar></CustomSidebar>
-              <button
-                onClick={() =>
-                  document
-                    .querySelector(".sidebar-toggle")
-                    .classList.toggle("hidden")
-                }
-                className="absolute text-red-400 z-40"
-              >
-                este button
-              </button>
-
-              <Footer container>
-                <Footer.Copyright href="#" by="Flowbite™" year={2022} />
-                <Footer.LinkGroup>
-                  <Footer.Link href="#">About</Footer.Link>
-                  <Footer.Link href="#">Privacy Policy</Footer.Link>
-                  <Footer.Link href="#">Licensing</Footer.Link>
-                  <Footer.Link href="#">Contact</Footer.Link>
-                </Footer.LinkGroup>
-              </Footer>
-            </div>
-            <img
-              src="../../public/ticketImages/67a59bab46e99e56abc7d650/67a59bab46e99e56abc7d650.jpg"
-              alt="test"
-            />
-          </div>
-        </>
-      );
-    } catch (error) {
-      console.error("invalid token:", error);
-      localStorage.removeItem("tokenSesion");
-      return (
-        <>
-          <p>Invalid or expired token. Please login</p>
-        </>
-      );
-    }
-  } else {
-    //window.location.href = "http://localhost:5173/#/login";
-    return <p>Invalid or expired token. Please login</p>;
-  }
-  function toggleSaibar() {
-    document.querySelector(".saibar").classList.toggle("hidden");
-  }
+  const handleCloseModal = (index) => {
+    setOpenModal((prev) => {
+      const newState = [...prev];
+      newState[index] = false;
+      return newState;
+    });
+  };
+  return (
+    <>
+      <NavBar></NavBar>
+      <div className="bg-black">
+        {array.map((index) => (
+          <>
+            <Button onClick={() => handleOpenModal(index)}>Toggle modal</Button>
+            <Modal
+              show={openModal[index]}
+              size="md"
+              onClose={() => handleCloseModal(index)}
+              popup
+            >
+              <Modal.Header />
+              <Modal.Body>
+                <div className="text-center">
+                  <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+                  <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                    {`modal ${index}`}
+                  </h3>
+                  <div className="flex justify-center gap-4">
+                    <Button
+                      color="failure"
+                      onClick={() => handleCloseModal(index)}
+                    >
+                      {"Yes, I'm sure"}
+                    </Button>
+                    <Button
+                      color="gray"
+                      onClick={() => handleCloseModal(index)}
+                    >
+                      No, cancel
+                    </Button>
+                  </div>
+                </div>
+              </Modal.Body>
+            </Modal>
+          </>
+        ))}
+      </div>
+    </>
+  );
 };
 
 export default TestPage;
