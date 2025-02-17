@@ -10,8 +10,6 @@ import { FaHeart, FaCommentDots } from "react-icons/fa";
 
 import { formatDate } from "../../common/utils";
 
-import { HiOutlineExclamationCircle } from "react-icons/hi";
-
 const FeedPage = () => {
   const styles = {
     background: "bg-gradient-to-tr from-azul4 via-[#52A2AB] to-azul1",
@@ -307,17 +305,19 @@ ${
                               <h1 className="font-bold">{`${comment.userID.name} ${comment.userID.lastName}`}</h1>
                               <div className="flex justify-between mb-2">
                                 <h2>{comment.content}</h2>
-                                <h2
-                                  className="font-bold text-red-600 hover:text-gray-500 cursor-pointer"
-                                  onClick={() => {
-                                    handleDeleteComment(
-                                      comment._id,
-                                      commentIndex
-                                    );
-                                  }}
-                                >
-                                  Eliminar
-                                </h2>
+                                {!(userData._id === comment.userID) && (
+                                  <h2
+                                    className="font-bold text-red-600 hover:text-gray-500 cursor-pointer"
+                                    onClick={() => {
+                                      handleDeleteComment(
+                                        comment._id,
+                                        commentIndex
+                                      );
+                                    }}
+                                  >
+                                    Eliminar
+                                  </h2>
+                                )}
                               </div>
                             </div>
                           ))}
