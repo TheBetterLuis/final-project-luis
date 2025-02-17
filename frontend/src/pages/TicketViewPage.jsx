@@ -149,6 +149,17 @@ const TicketViewPage = () => {
                     size={26}
                     className="dark:text-white hover:text-red-500 dark:hover:text-red-500  cursor-pointer"
                   />
+                  {userData.id === postData.userID._id && (
+                    <Button
+                      className="bg-red-500 hover:bg-gray-400"
+                      onClick={() => {
+                        handleDeletePost(postData._id);
+                      }}
+                    >
+                      Eliminar Post
+                    </Button>
+                  )}
+
                   <FaCommentDots
                     size={26}
                     className="text-white hover:text-black dark:hover:text-gray-400 cursor-pointer"

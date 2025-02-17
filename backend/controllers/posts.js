@@ -1,4 +1,5 @@
 const postModel = require("../models/posts");
+const ticketModel = require("../models/tickets");
 
 const getPosts = async (req, res) => {
   try {
@@ -97,10 +98,24 @@ const createPost = async (req, res) => {
 const deletePost = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedPost = await postModel.findByIdAndDelete(id);
-    if (!deletedPost) {
-      res.status(404).json({ message: "Post not found" });
+
+    const post = await postModel.findById(id);
+
+    if (!post) {
+      res.status(404).json({ message: "Post no encontrado" });
     }
+
+    //const deletedPost = await postModel.findByIdAndDelete(id);
+
+    const ticketID = post.ticketID._id;
+    const deletedTicket = await ticketModel.findByIdAndDelete(ticketID);
+
+    if (!deletedTicket) {
+      res.status(404).json({ message: "Ticket no encontrado" });
+    }
+
+    await postModel.findByIdAndDelete(id);
+
     res.status(200).json({ message: "Post eliminado exitosamente" });
   } catch (error) {
     res.status(500).json({ message: error.message });
