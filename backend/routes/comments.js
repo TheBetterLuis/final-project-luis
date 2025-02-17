@@ -15,7 +15,7 @@ router.post("/post", getCommentsByPostID);
 
 //router.get("/", getUsers);
 
-router.delete("/", deleteCommentbyID);
+router.delete("/delete/:commentID", deleteCommentbyID);
 
 //route to update user
 //router.patch("/", updateUser);

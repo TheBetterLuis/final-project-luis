@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import { Card, Button, Modal } from "flowbite-react";
+import { Card, Button, Modal, TextInput } from "flowbite-react";
 import { FaHeart, FaCommentDots } from "react-icons/fa";
 
 import { formatDate } from "../../common/utils";
@@ -56,6 +56,8 @@ const FeedPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [modalData, setModalData] = useState(null);
+  const [newComment, setNewComment] = useState(null);
+  const [postIndex, setPostIndex] = useState(null);
 
   const [openModal, setOpenModal] = useState([]);
   const [statusLike, setStatusLike] = useState([]);
@@ -142,7 +144,9 @@ const FeedPage = () => {
     });
   };
 
-  const handleOpenModal = (index, postID) => {
+  const handleOpenModal = (index) => {
+    setModalData(postsData[index]);
+    setPostIndex(index);
     setOpenModal((prev) => {
       const newState = [...prev];
       newState[index] = true;
@@ -156,6 +160,59 @@ const FeedPage = () => {
       newState[index] = false;
       return newState;
     });
+
+    setPostIndex(null);
+  };
+
+  const handleDeleteComment = async (commentID, commentIndex) => {
+    // console.log(commentID);
+    const isConfirmed = window.confirm("Eliminar comentario?");
+
+    if (isConfirmed) {
+      setModalData((prev) => {
+        const updatedCommentsID = prev.commentsID.map((comment, index) => {
+          if (index === commentIndex) {
+            return { ...comment, hidden: true };
+          }
+          return comment;
+        });
+        return {
+          ...prev,
+          commentsID: updatedCommentsID,
+        };
+      });
+
+      try {
+        const response = await axios.delete(
+          `http://localhost:3001/api/comments/delete/${commentID}`
+        );
+      } catch (err) {
+        setError(err.response?.data?.message || "Error al eliminar comentario");
+      }
+    }
+  };
+
+  const handleNewComment = async (index, content) => {
+    // console.log(commentID);
+    const isConfirmed = window.confirm("Crear comentario?");
+    //console.log(userData.id, postsData[index]._id, content);
+
+    if (isConfirmed) {
+      try {
+        const response = await axios.post(
+          `http://localhost:3001/api/comments`,
+          {
+            postID: postsData[index]._id,
+            userID: userData.id,
+            content,
+          }
+        );
+      } catch (err) {
+        setError(err.response?.data?.message || "Error al crear comentario");
+      } finally {
+        setNewComment(" ");
+      }
+    }
   };
 
   if (success) {
@@ -240,22 +297,46 @@ ${
                   <Modal.Header />
                   <Modal.Body>
                     <div className="text-center">
-                      <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
                       <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                        {`modal ${index + 1}`}
+                        {`Comentarios`}
                       </h3>
-                      <div className="flex justify-center gap-4">
+                      {modalData && (
+                        <>
+                          {modalData.commentsID.map((comment, commentIndex) => (
+                            <div className="text-start" hidden={comment.hidden}>
+                              <h1 className="font-bold">{`${comment.userID.name} ${comment.userID.lastName}`}</h1>
+                              <div className="flex justify-between mb-2">
+                                <h2>{comment.content}</h2>
+                                <h2
+                                  className="font-bold text-red-600 hover:text-gray-500 cursor-pointer"
+                                  onClick={() => {
+                                    handleDeleteComment(
+                                      comment._id,
+                                      commentIndex
+                                    );
+                                  }}
+                                >
+                                  Eliminar
+                                </h2>
+                              </div>
+                            </div>
+                          ))}
+                        </>
+                      )}
+                      <div className="flex justify-between mt-12 px-4">
+                        <TextInput
+                          placeholder="Escribe aqui"
+                          value={newComment}
+                          onChange={(e) => setNewComment(e.target.value)}
+                        />
+
                         <Button
-                          color="failure"
-                          onClick={() => handleCloseModal(index)}
+                          onClick={() => {
+                            handleNewComment(postIndex, newComment);
+                          }}
+                          className="bg-azul2 drop-shadow-md"
                         >
-                          {"Yes, I'm sure"}
-                        </Button>
-                        <Button
-                          color="gray"
-                          onClick={() => handleCloseModal(index)}
-                        >
-                          No, cancel
+                          Comentar
                         </Button>
                       </div>
                     </div>

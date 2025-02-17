@@ -16,6 +16,7 @@ const CommentSchema = new mongoose.Schema(
       type: String,
       required: [true, "Comentario es requerido"],
     },
+    hidden: { type: Boolean, default: false },
   },
   {
     timestamps: true,

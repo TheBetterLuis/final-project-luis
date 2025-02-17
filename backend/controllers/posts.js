@@ -176,7 +176,14 @@ const getPublicPostsPaginated = async (req, res) => {
       .find({ status: "public" })
       .skip(skip)
       .limit(limit)
-      .populate("commentsID")
+      .populate({
+        path: "commentsID",
+        populate: {
+          path: "userID",
+          model: "users",
+          select: "name lastName profilePicture",
+        },
+      })
       .populate("ticketID")
       .populate({
         path: "userID",
