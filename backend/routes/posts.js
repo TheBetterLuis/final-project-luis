@@ -31,7 +31,7 @@ router.get(
   fetchPrivatePostsAndTickets
 );
 
-router.delete("/", deletePost);
+router.delete("/:id", deletePost);
 
 router.post("/", createPost);
 
