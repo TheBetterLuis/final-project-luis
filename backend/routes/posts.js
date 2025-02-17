@@ -9,6 +9,7 @@ const {
   getPrivatePostsByUserID,
   createPost,
   deletePost,
+  deleteAllPosts,
   updatePost,
   fetchPublicPostsAndTickets,
   fetchPrivatePostsAndTickets,
@@ -32,6 +33,7 @@ router.get(
 );
 
 router.delete("/:id", deletePost);
+router.delete("/delete/all", deleteAllPosts);
 
 router.post("/", createPost);
 

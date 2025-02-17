@@ -11,6 +11,7 @@ const {
   getClosedTicketsByTechID,
   createTicket,
   deleteTicket,
+  deleteAllTickets,
   updateTicket,
   uploadTicketImage,
 } = require("../controllers/tickets");
@@ -30,6 +31,7 @@ router.get("/:_id", getTicketsByTicketID);
 
 //route to delete ticket by ID
 router.delete("/", deleteTicket);
+router.delete("/delete/all", deleteAllTickets);
 
 //route to create ticket
 router.post("/", createTicket);

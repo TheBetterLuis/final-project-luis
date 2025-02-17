@@ -142,6 +142,33 @@ const deleteTicket = async (req, res) => {
   }
 };
 
+const deleteAllTickets = async (req, res) => {
+  try {
+    const tickets = await ticketModel.find();
+
+    if (tickets.length === 0) {
+      return res.status(404).json({ message: "No se encontraron tickets" });
+    }
+
+    const ticketIds = tickets.map((ticket) => ticket._id);
+
+    const deletedPosts = await postModel.deleteMany({
+      ticketID: { $in: ticketIds },
+    });
+
+    const deletedTickets = await ticketModel.deleteMany();
+
+    res.status(200).json({
+      message:
+        "Todos los tickets y los posts correspondientes han sido eliminados",
+      deletedTicketsCount: deletedTickets.deletedCount,
+      deletedPostsCount: deletedPosts.deletedCount,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const updateTicket = async (req, res) => {
   try {
     const { id } = req.body;
@@ -172,6 +199,7 @@ module.exports = {
   getTickets,
   createTicket,
   deleteTicket,
+  deleteAllTickets,
   updateTicket,
   getTicketsByTicketID,
   getTicketsByUserID,

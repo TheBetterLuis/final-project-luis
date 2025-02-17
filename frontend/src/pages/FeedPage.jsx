@@ -31,9 +31,9 @@ const FeedPage = () => {
               <Link to={"/feed"}>
                 <button
                   type="button"
-                  class="group relative flex items-stretch justify-center p-0.5 text-center font-medium transition-[color,background-color,border-color,text-decoration-color,fill,stroke,box-shadow] focus:z-10 focus:outline-none border border-transparent focus:ring-4 focus:ring-cyan-300 enabled:hover:bg-cyan-800 dark:bg-cyan-600 dark:focus:ring-cyan-800 dark:enabled:hover:bg-cyan-700 bg-azul2 text-gray-100 rounded w-36 h-12 drop-shadow-lg hover:-translate-y-1 hover:scale-110 duration-300"
+                  className="group relative flex items-stretch justify-center p-0.5 text-center font-medium transition-[color,background-color,border-color,text-decoration-color,fill,stroke,box-shadow] focus:z-10 focus:outline-none border border-transparent focus:ring-4 focus:ring-cyan-300 enabled:hover:bg-cyan-800 dark:bg-cyan-600 dark:focus:ring-cyan-800 dark:enabled:hover:bg-cyan-700 bg-azul2 text-gray-100 rounded w-36 h-12 drop-shadow-lg hover:-translate-y-1 hover:scale-110 duration-300"
                 >
-                  <span class="flex items-stretch transition-all duration-200 rounded-md px-4 py-2 text-sm">
+                  <span className="flex items-stretch transition-all duration-200 rounded-md px-4 py-2 text-sm">
                     Volver al Feed
                   </span>
                 </button>
@@ -257,13 +257,13 @@ const FeedPage = () => {
                           </span>
                         </div>
                       </div>
-                      <div class="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs h-32 overflow-y-auto">
+                      <div className="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs h-32 overflow-y-auto">
                         <p class="text-black dark:text-gray-400">
                           {postData.ticketID.description}
                         </p>
                       </div>
-                      <div class="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs w-20 text-center">
-                        <p class="text-black dark:text-gray-400">
+                      <div className="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs w-20 text-center">
+                        <p className="text-black dark:text-gray-400">
                           {formatDate(postData.ticketID.createdAt)}
                         </p>
                       </div>

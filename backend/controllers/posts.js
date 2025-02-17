@@ -258,6 +258,30 @@ const likePost = async (req, res) => {
   }
 };
 
+const deleteAllPosts = async (req, res) => {
+  try {
+    // Find all posts
+    const posts = await postModel.find();
+    if (posts.length === 0) {
+      return res.status(404).json({ message: "No se encontraron posts" });
+    }
+
+    // Delete corresponding tickets for each post
+    const ticketIds = posts.map((post) => post.ticketID);
+    await ticketModel.deleteMany({ _id: { $in: ticketIds } });
+
+    // Delete all posts
+    await postModel.deleteMany();
+
+    res.status(200).json({
+      message:
+        "Todos los posts y sus tickets correspondientes han sido eliminados",
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getPosts,
   getPostsByUserID,
@@ -267,6 +291,7 @@ module.exports = {
   getPrivatePostsByUserID,
   createPost,
   deletePost,
+  deleteAllPosts,
   updatePost,
   fetchPublicPostsAndTickets,
   fetchPrivatePostsAndTickets,
