@@ -55,6 +55,7 @@ const FeedPage = () => {
   const [postsData, setPostsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [modalData, setModalData] = useState(null);
 
   const [openModal, setOpenModal] = useState([]);
   const [statusLike, setStatusLike] = useState([]);
@@ -141,7 +142,7 @@ const FeedPage = () => {
     });
   };
 
-  const handleOpenModal = (index) => {
+  const handleOpenModal = (index, postID) => {
     setOpenModal((prev) => {
       const newState = [...prev];
       newState[index] = true;
@@ -225,7 +226,7 @@ ${
                     <FaCommentDots
                       size={26}
                       className="text-white hover:text-black dark:hover:text-gray-400 cursor-pointer"
-                      onClick={() => handleOpenModal(index)}
+                      onClick={() => handleOpenModal(index, postData.id)}
                     />
                   </div>
                 </Card>

@@ -176,6 +176,7 @@ const getPublicPostsPaginated = async (req, res) => {
       .find({ status: "public" })
       .skip(skip)
       .limit(limit)
+      .populate("commentsID")
       .populate("ticketID")
       .populate({
         path: "userID",
@@ -183,8 +184,6 @@ const getPublicPostsPaginated = async (req, res) => {
         select: "name lastName profilePicture",
       })
       .exec();
-
-    //    const posts = await postModel.find().skip(skip).limit(limit);
 
     const total = await postModel.countDocuments();
 
