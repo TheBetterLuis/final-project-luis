@@ -286,26 +286,26 @@ ${
                   </div>
                 </Card>
                 {/*MODAL*/}
-                <Modal
-                  show={openModal[index]}
-                  size="md"
-                  onClose={() => handleCloseModal(index)}
-                  popup
-                >
-                  <Modal.Header />
-                  <Modal.Body>
-                    <div className="text-center">
-                      <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                        {`Comentarios`}
-                      </h3>
-                      {modalData && (
+                {modalData && (
+                  <Modal
+                    show={openModal[index]}
+                    size="md"
+                    onClose={() => handleCloseModal(index)}
+                    popup
+                  >
+                    <Modal.Header />
+                    <Modal.Body>
+                      <div className="text-center">
+                        <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                          {`Comentarios`}
+                        </h3>
                         <>
                           {modalData.commentsID.map((comment, commentIndex) => (
                             <div className="text-start" hidden={comment.hidden}>
                               <h1 className="font-bold">{`${comment.userID.name} ${comment.userID.lastName}`}</h1>
                               <div className="flex justify-between mb-2">
                                 <h2>{comment.content}</h2>
-                                {!(userData._id === comment.userID) && (
+                                {userData.id === comment.userID._id && (
                                   <h2
                                     className="font-bold text-red-600 hover:text-gray-500 cursor-pointer"
                                     onClick={() => {
@@ -322,26 +322,26 @@ ${
                             </div>
                           ))}
                         </>
-                      )}
-                      <div className="flex justify-between mt-12 px-4">
-                        <TextInput
-                          placeholder="Escribe aqui"
-                          value={newComment}
-                          onChange={(e) => setNewComment(e.target.value)}
-                        />
+                        <div className="flex justify-between mt-12 px-4">
+                          <TextInput
+                            placeholder="Escribe aqui"
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                          />
 
-                        <Button
-                          onClick={() => {
-                            handleNewComment(postIndex, newComment);
-                          }}
-                          className="bg-azul2 drop-shadow-md"
-                        >
-                          Comentar
-                        </Button>
+                          <Button
+                            onClick={() => {
+                              handleNewComment(postIndex, newComment);
+                            }}
+                            className="bg-azul2 drop-shadow-md"
+                          >
+                            Comentar
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  </Modal.Body>
-                </Modal>
+                    </Modal.Body>
+                  </Modal>
+                )}
               </div>
             ))}
             {currentPage < totalPages ? (
