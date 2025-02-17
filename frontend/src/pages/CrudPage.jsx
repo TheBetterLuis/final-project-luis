@@ -64,7 +64,11 @@ const CrudPage = () => {
           </div>
         </div>
         <PageFooter />
-        <CustomSidebar />
+        <CustomSidebar
+          name={userData.name}
+          lastName={userData.lastName}
+          image={userData.profilePicture}
+        />
       </div>
     </>
   );

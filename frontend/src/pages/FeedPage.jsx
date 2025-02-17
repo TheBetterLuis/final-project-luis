@@ -208,7 +208,7 @@ const FeedPage = () => {
       } catch (err) {
         setError(err.response?.data?.message || "Error al crear comentario");
       } finally {
-        setNewComment(" ");
+        setNewComment("");
       }
     }
   };

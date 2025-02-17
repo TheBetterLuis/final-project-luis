@@ -78,7 +78,7 @@ const CreateTicketPage = () => {
         formData.append("image", file);
         //upload the image
         const imageResponse = await axios.post(
-          `http://localhost:3001/api/tickets/${response.data._id}/image`,
+          `http://localhost:3001/api/tickets/${response.data.ticket._id}/image`,
           formData,
           {
             headers: { "Content-Type": "multipart/form-data" },
