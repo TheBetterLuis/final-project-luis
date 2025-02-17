@@ -305,7 +305,8 @@ ${
                               <h1 className="font-bold">{`${comment.userID.name} ${comment.userID.lastName}`}</h1>
                               <div className="flex justify-between mb-2">
                                 <h2>{comment.content}</h2>
-                                {userData.id === comment.userID._id && (
+                                {(userData.id === comment.userID._id ||
+                                  userData.role === "admin") && (
                                   <h2
                                     className="font-bold text-red-600 hover:text-gray-500 cursor-pointer"
                                     onClick={() => {
