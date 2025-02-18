@@ -224,6 +224,26 @@ const FeedPage = () => {
         );
       } catch (err) {
         setError(err.response?.data?.message || "Error al eliminar post");
+      } finally {
+        window.location.reload();
+      }
+    }
+  };
+
+  const handleHidePost = async (postID) => {
+    // console.log(commentID);
+    const isConfirmed = window.confirm("Ocultar post?");
+
+    if (isConfirmed) {
+      try {
+        const response = await axios.patch(`http://localhost:3001/api/posts/`, {
+          id: postID,
+          status: "private",
+        });
+      } catch (err) {
+        setError(err.response?.data?.message || "Error al ocultar post");
+      } finally {
+        window.location.reload();
       }
     }
   };
@@ -294,14 +314,24 @@ ${
                       }}
                     />
                     {userData.id === postData.userID._id && (
-                      <Button
-                        className="bg-red-500 hover:bg-gray-400"
-                        onClick={() => {
-                          handleDeletePost(postData._id);
-                        }}
-                      >
-                        Eliminar Post
-                      </Button>
+                      <>
+                        <Button
+                          className="bg-red-500 hover:bg-red-600"
+                          onClick={() => {
+                            handleDeletePost(postData._id);
+                          }}
+                        >
+                          <p className="text-xs">Eliminar Post</p>
+                        </Button>
+                        <Button
+                          className="bg-gray-500 hover:bg-gray-600"
+                          onClick={() => {
+                            handleHidePost(postData._id);
+                          }}
+                        >
+                          <p className="text-xs">Ocultar Post</p>
+                        </Button>
+                      </>
                     )}
                     <FaCommentDots
                       size={26}
