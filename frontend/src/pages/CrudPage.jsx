@@ -101,7 +101,7 @@ const CrudPage = () => {
                 Tecnicos
               </button>
             </div>
-            <CRUD view={currentPage} data={pageData} />
+            <CRUD view={currentPage} data={pageData} fetchUsers={fetchUsers} />
           </div>
         </div>
         <PageFooter />

@@ -1,8 +1,8 @@
 import { Table, Button } from "flowbite-react";
 import axios from "axios";
 
-function CRUD({ hidden = false, view = "users", data = null }) {
-  const handleDelete = async (userID) => {
+function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
+  const handleDelete = async (userID, currentSection) => {
     console.log(userID);
     const isConfirmed = window.confirm("Eliminar usuario?");
     if (isConfirmed) {
@@ -13,6 +13,8 @@ function CRUD({ hidden = false, view = "users", data = null }) {
         console.log(response.data);
       } catch (err) {
         console.error("Error al eliminar usuario", err);
+      } finally {
+        fetchUsers(currentSection);
       }
     }
   };
@@ -90,7 +92,7 @@ function CRUD({ hidden = false, view = "users", data = null }) {
                       <Button
                         className="bg-red-500"
                         onClick={() => {
-                          handleDelete(user._id);
+                          handleDelete(user._id, "users");
                         }}
                       >
                         Eliminar
@@ -136,9 +138,30 @@ function CRUD({ hidden = false, view = "users", data = null }) {
                   <Table.Cell>{user.email}</Table.Cell>
                   <Table.Cell>
                     <Button.Group>
-                      <Button className="bg-azul2">Editar</Button>
-                      <Button className="bg-red-500">Eliminar</Button>
-                      <Button className="bg-yellow-400">Dar admin</Button>
+                      <Button
+                        className="bg-azul2"
+                        onClick={() => {
+                          handleEdit(user._id);
+                        }}
+                      >
+                        Editar
+                      </Button>
+                      <Button
+                        className="bg-red-500"
+                        onClick={() => {
+                          handleDelete(user._id, "tech");
+                        }}
+                      >
+                        Eliminar
+                      </Button>
+                      <Button
+                        className="bg-yellow-400"
+                        onClick={() => {
+                          handleMakeAdmin(user._id);
+                        }}
+                      >
+                        Dar admin
+                      </Button>
                     </Button.Group>
                   </Table.Cell>
                 </Table.Row>
