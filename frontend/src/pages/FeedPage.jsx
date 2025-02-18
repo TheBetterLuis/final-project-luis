@@ -159,7 +159,6 @@ const FeedPage = () => {
   };
 
   const handleDeleteComment = async (commentID, commentIndex) => {
-    // console.log(commentID);
     const isConfirmed = window.confirm("Eliminar comentario?");
 
     if (isConfirmed) {
@@ -187,9 +186,7 @@ const FeedPage = () => {
   };
 
   const handleNewComment = async (index, content) => {
-    // console.log(commentID);
     const isConfirmed = window.confirm("Crear comentario?");
-    //console.log(userData.id, postsData[index]._id, content);
 
     if (isConfirmed) {
       try {
@@ -210,7 +207,6 @@ const FeedPage = () => {
   };
 
   const handleDeletePost = async (postID) => {
-    // console.log(commentID);
     const isConfirmed = window.confirm("Eliminar post?");
 
     if (isConfirmed) {
@@ -227,7 +223,6 @@ const FeedPage = () => {
   };
 
   const handleHidePost = async (postID) => {
-    // console.log(commentID);
     const isConfirmed = window.confirm("Ocultar post?");
 
     if (isConfirmed) {
@@ -249,168 +244,181 @@ const FeedPage = () => {
       <>
         <div className={` flex flex-col min-h-screen ${styles.background}`}>
           <NavBar />
-          <div className="grid place-items-center py-2 font-roboto">
-            {/*COMPONENT GOES HERE*/}
-            {postsData.map((postData, index) => (
-              <div className="rounded-lg mb-4">
-                <Card className="max-w-sm md:w-96 bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl">
-                  <div className="flex gap-3">
-                    <img
-                      className="rounded-full border border-azul5 w-20 h-20 dark:border-white"
-                      src={postData.userID.profilePicture}
-                      alt={`foto de perfil de ${postData.userID.name} ${postData.userID.lastName}`}
-                    />
-                    <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize">
-                      {` ${postData.userID.name} ${postData.userID.lastName}`}
-                    </span>
-                  </div>
-                  <Card className="max-w-sm bg-teal-500  bg-opacity-30 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-black drop-shadow-2xl shadow-2xl">
-                    <form className="flex max-w-md flex-col gap-4 ">
-                      <div>
-                        <div className="mb-2 block">
-                          <Link to={`/ticket/${postData.ticketID._id}`}>
-                            <span className="text-black flex items-center justify-center drop-shadow-md dark:text-white">
-                              {postData.ticketID.title}
-                            </span>
-                          </Link>
-                        </div>
+          <div className="flex h-screen w-full  overflow-y-scroll ">
+            <div className="flex justify-center items-center h-screen w-full font-roboto overflow-y-scroll pt-[700px]">
+              {/*COMPONENT GOES HERE*/}
+
+              <div className="grid place-items-center py-2 font-roboto ">
+                {/*COMPONENT GOES HERE*/}
+                {postsData.map((postData, index) => (
+                  <div key={index} className={`rounded-lg mb-4 `}>
+                    <Card className="max-w-sm md:w-96 bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl">
+                      <div className="flex gap-3">
+                        <img
+                          className="rounded-full border border-azul5 w-20 h-20 dark:border-white"
+                          src={postData.userID.profilePicture}
+                          alt={`foto de perfil de ${postData.userID.name} ${postData.userID.lastName}`}
+                        />
+                        <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize">
+                          {` ${postData.userID.name} ${postData.userID.lastName}`}
+                        </span>
                       </div>
-                      <div className="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs h-32 overflow-y-auto">
-                        <p class="text-black dark:text-gray-400">
-                          {postData.ticketID.description}
-                        </p>
-                      </div>
-                      <div className="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs w-20 text-center">
-                        <p className="text-black dark:text-gray-400">
-                          {formatDate(postData.ticketID.createdAt)}
-                        </p>
-                      </div>
-                      {postData.ticketID.image && (
-                        <div className="flex justify-center">
-                          <img
-                            src={postData.ticketID.image}
-                            className="mb-4 w-auto"
-                          />
-                        </div>
-                      )}
-                    </form>
-                  </Card>
-                  <div className="flex justify-between">
-                    <FaHeart
-                      post-id={index}
-                      size={26}
-                      className={` 
+                      <Card className="max-w-sm bg-teal-500  bg-opacity-30 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-black drop-shadow-2xl shadow-2xl">
+                        <form className="flex max-w-md flex-col gap-4 ">
+                          <div>
+                            <div className="mb-2 block">
+                              <Link to={`/ticket/${postData.ticketID._id}`}>
+                                <span className="text-black flex items-center justify-center drop-shadow-md dark:text-white">
+                                  {postData.ticketID.title}
+                                </span>
+                              </Link>
+                            </div>
+                          </div>
+                          <div className="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs h-32 overflow-y-auto">
+                            <p class="text-black dark:text-gray-400">
+                              {postData.ticketID.description}
+                            </p>
+                          </div>
+                          <div className="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs w-20 text-center">
+                            <p className="text-black dark:text-gray-400">
+                              {formatDate(postData.ticketID.createdAt)}
+                            </p>
+                          </div>
+                          {postData.ticketID.image && (
+                            <div className="flex justify-center">
+                              <img
+                                src={postData.ticketID.image}
+                                className="mb-4 w-auto"
+                              />
+                            </div>
+                          )}
+                        </form>
+                      </Card>
+                      <div className="flex justify-between">
+                        <FaHeart
+                          post-id={index}
+                          size={26}
+                          className={` 
 
 ${
   statusLike[index]
     ? "text-red-500 hover:text-black dark:text-red-500 dark:hover:text-white liked"
     : "text-black hover:text-red-500 dark:text-white dark:hover:text-red-500 not-liked"
 }  cursor-pointer`}
-                      onClick={() => {
-                        toggleLike(index);
-                        likePost(userData.id, postData._id);
-                      }}
-                    />
-                    {userData.id === postData.userID._id && (
-                      <>
-                        <Button
-                          className="bg-red-500 hover:bg-red-600"
                           onClick={() => {
-                            handleDeletePost(postData._id);
+                            toggleLike(index);
+                            likePost(userData.id, postData._id);
                           }}
-                        >
-                          <p className="text-xs">Eliminar Post</p>
-                        </Button>
-                        <Button
-                          className="bg-gray-500 hover:bg-gray-600"
-                          onClick={() => {
-                            handleHidePost(postData._id);
-                          }}
-                        >
-                          <p className="text-xs">Ocultar Post</p>
-                        </Button>
-                      </>
-                    )}
-                    <FaCommentDots
-                      size={26}
-                      className="text-white hover:text-black dark:hover:text-gray-400 cursor-pointer"
-                      onClick={() => handleOpenModal(index, postData.id)}
-                    />
-                  </div>
-                </Card>
-                {/*MODAL*/}
-                {modalData && (
-                  <Modal
-                    show={openModal[index]}
-                    size="md"
-                    onClose={() => handleCloseModal(index)}
-                    popup
-                  >
-                    <Modal.Header />
-                    <Modal.Body>
-                      <div className="text-center">
-                        <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                          {`Comentarios`}
-                        </h3>
-                        <>
-                          {modalData.commentsID.map((comment, commentIndex) => (
-                            <div className="text-start" hidden={comment.hidden}>
-                              <h1 className="font-bold">{`${comment.userID.name} ${comment.userID.lastName}`}</h1>
-                              <div className="flex justify-between mb-2">
-                                <h2>{comment.content}</h2>
-                                {(userData.id === comment.userID._id ||
-                                  userData.role === "admin") && (
-                                  <h2
-                                    className="font-bold text-red-600 hover:text-gray-500 cursor-pointer"
-                                    onClick={() => {
-                                      handleDeleteComment(
-                                        comment._id,
-                                        commentIndex
-                                      );
-                                    }}
-                                  >
-                                    Eliminar
-                                  </h2>
-                                )}
-                              </div>
-                            </div>
-                          ))}
-                        </>
-                        <div className="flex justify-between mt-12 px-4">
-                          <TextInput
-                            placeholder="Escribe aqui"
-                            value={newComment}
-                            onChange={(e) => setNewComment(e.target.value)}
-                          />
-
-                          <Button
-                            onClick={() => {
-                              handleNewComment(postIndex, newComment);
-                            }}
-                            className="bg-azul2 drop-shadow-md"
-                          >
-                            Comentar
-                          </Button>
-                        </div>
+                        />
+                        {userData.id === postData.userID._id && (
+                          <>
+                            <Button
+                              className="bg-red-500 hover:bg-red-600"
+                              onClick={() => {
+                                handleDeletePost(postData._id);
+                              }}
+                            >
+                              <p className="text-xs">Eliminar Post</p>
+                            </Button>
+                            <Button
+                              className="bg-gray-500 hover:bg-gray-600"
+                              onClick={() => {
+                                handleHidePost(postData._id);
+                              }}
+                            >
+                              <p className="text-xs">Ocultar Post</p>
+                            </Button>
+                          </>
+                        )}
+                        <FaCommentDots
+                          size={26}
+                          className="text-white hover:text-black dark:hover:text-gray-400 cursor-pointer"
+                          onClick={() => handleOpenModal(index, postData.id)}
+                        />
                       </div>
-                    </Modal.Body>
-                  </Modal>
+                    </Card>
+                    {/*MODAL*/}
+                    {modalData && (
+                      <Modal
+                        show={openModal[index]}
+                        size="md"
+                        onClose={() => handleCloseModal(index)}
+                        popup
+                      >
+                        <Modal.Header />
+                        <Modal.Body>
+                          <div className="text-center">
+                            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                              {`Comentarios`}
+                            </h3>
+                            <>
+                              {modalData.commentsID.map(
+                                (comment, commentIndex) => (
+                                  <div
+                                    className="text-start"
+                                    hidden={comment.hidden}
+                                  >
+                                    <h1 className="font-bold">{`${comment.userID.name} ${comment.userID.lastName}`}</h1>
+                                    <div className="flex justify-between mb-2">
+                                      <h2>{comment.content}</h2>
+                                      {(userData.id === comment.userID._id ||
+                                        userData.role === "admin") && (
+                                        <h2
+                                          className="font-bold text-red-600 hover:text-gray-500 cursor-pointer"
+                                          onClick={() => {
+                                            handleDeleteComment(
+                                              comment._id,
+                                              commentIndex
+                                            );
+                                          }}
+                                        >
+                                          Eliminar
+                                        </h2>
+                                      )}
+                                    </div>
+                                  </div>
+                                )
+                              )}
+                            </>
+                            <div className="flex justify-between mt-12 px-4">
+                              <TextInput
+                                placeholder="Escribe aqui"
+                                value={newComment}
+                                onChange={(e) => setNewComment(e.target.value)}
+                              />
+
+                              <Button
+                                onClick={() => {
+                                  handleNewComment(postIndex, newComment);
+                                }}
+                                className="bg-azul2 drop-shadow-md"
+                              >
+                                Comentar
+                              </Button>
+                            </div>
+                          </div>
+                        </Modal.Body>
+                      </Modal>
+                    )}
+                  </div>
+                ))}
+                {currentPage < totalPages ? (
+                  <Button
+                    className="bg-azul2 drop-shadow-md "
+                    onClick={loadNextPage}
+                  >
+                    Cargar mas posts
+                  </Button>
+                ) : (
+                  <Button className="bg-gray-400 drop-shadow-md">
+                    No hay mas posts disponibles
+                  </Button>
                 )}
               </div>
-            ))}
-            {currentPage < totalPages ? (
-              <Button
-                className="bg-azul2 drop-shadow-md "
-                onClick={loadNextPage}
-              >
-                Cargar mas posts
-              </Button>
-            ) : (
-              <Button className="bg-gray-400 drop-shadow-md">
-                No hay mas posts disponibles
-              </Button>
-            )}
+              {/*COMPONENT GOES HERE*/}
+            </div>
           </div>
+
           <PageFooter />
         </div>
         <CustomSidebar
