@@ -17,6 +17,8 @@ const CrudPage = () => {
 
   const [userData, setUserData] = useState({});
   const [currentPage, setCurrentPage] = useState("users");
+  const [pageData, setPageData] = useState();
+  const [error, setError] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,6 +48,32 @@ const CrudPage = () => {
     fetchInfo();
   }, [navigate]);
 
+  const fetchUsers = async (usersToFetch) => {
+    let url = "";
+
+    if (usersToFetch === "users") {
+      url = "http://localhost:3001/api/users/regular";
+    }
+
+    if (usersToFetch === "tech") {
+      url = "http://localhost:3001/api/users/tech";
+    }
+
+    try {
+      const response = await axios.get(url);
+      setPageData(response.data);
+      console.log(response.data);
+    } catch (err) {
+      console.error("Error al cargar los usuarios", err);
+      setError(
+        err.response?.data?.message ||
+          "Ha ocurrido un error durante la carga de posts"
+      );
+    } finally {
+      setCurrentPage(usersToFetch);
+    }
+  };
+
   return (
     <>
       <div className={`${styles.background}`}>
@@ -57,7 +85,7 @@ const CrudPage = () => {
               <button
                 className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6"
                 onClick={() => {
-                  setCurrentPage("users");
+                  fetchUsers("users");
                 }}
               >
                 Usuarios
@@ -66,13 +94,13 @@ const CrudPage = () => {
                 className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6
                 "
                 onClick={() => {
-                  setCurrentPage("tech");
+                  fetchUsers("tech");
                 }}
               >
                 Tecnicos
               </button>
             </div>
-            <CRUD view={currentPage} />
+            <CRUD view={currentPage} data={pageData} />
           </div>
         </div>
         <PageFooter />

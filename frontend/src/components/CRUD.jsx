@@ -1,8 +1,16 @@
 import { Table, Button } from "flowbite-react";
-function CRUD({ hidden = false, view = "users" }) {
+function CRUD({ hidden = false, view = "users", data = null }) {
   return (
     <>
-      {view === "users" && (
+      {data === null && (
+        <>
+          <Button className="bg-gray-400 drop-shadow-md">
+            <h1 className="text-2xl">No hay informacion disponible</h1>
+          </Button>
+        </>
+      )}
+
+      {data !== null && view === "users" && (
         <div className="w-full h-screen overflow-x-auto" hidden={hidden}>
           <Table className="drop-shadow-md">
             <Table.Head>
@@ -62,7 +70,7 @@ function CRUD({ hidden = false, view = "users" }) {
         </div>
       )}
 
-      {view === "tech" && (
+      {data !== null && view === "tech" && (
         <div className="w-full h-screen overflow-x-auto" hidden={hidden}>
           <Table className="drop-shadow-md">
             <Table.Head>
