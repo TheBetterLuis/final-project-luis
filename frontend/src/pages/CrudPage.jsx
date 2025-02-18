@@ -46,6 +46,7 @@ const CrudPage = () => {
       }
     };
     fetchInfo();
+    fetchUsers("users");
   }, [navigate]);
 
   const fetchUsers = async (usersToFetch) => {

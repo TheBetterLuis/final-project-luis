@@ -24,7 +24,7 @@ router.get("/tech", getTechUsers);
 router.get("/regular", getRegularUsers);
 
 //route to delete users by ID
-router.delete("/", deleteUser);
+router.delete("/:id", deleteUser);
 
 //route to create user
 router.post("/", createUser);

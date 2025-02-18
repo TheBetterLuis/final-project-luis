@@ -1,5 +1,50 @@
 import { Table, Button } from "flowbite-react";
+import axios from "axios";
+
 function CRUD({ hidden = false, view = "users", data = null }) {
+  const handleDelete = async (userID) => {
+    console.log(userID);
+    const isConfirmed = window.confirm("Eliminar usuario?");
+    if (isConfirmed) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:3001/api/users/${userID}`
+        );
+        console.log(response.data);
+      } catch (err) {
+        console.error("Error al eliminar usuario", err);
+      }
+    }
+  };
+
+  const handleEdit = async (userID) => {
+    console.log("something should happen");
+    /*
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/api/users/${userID}`
+      );
+      console.log(response.data);
+    } catch (err) {
+      console.error("Error al eliminar usuario", err);
+    }
+*/
+  };
+
+  const handleMakeAdmin = async (userID) => {
+    console.log("something should happen");
+    /*
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/api/users/${userID}`
+      );
+      console.log(response.data);
+    } catch (err) {
+      console.error("Error al eliminar usuario", err);
+    }
+    */
+  };
+
   return (
     <>
       {data === null && (
@@ -26,45 +71,42 @@ function CRUD({ hidden = false, view = "users", data = null }) {
             </Table.Head>
 
             <Table.Body className="divide-y bg-white/19">
-              <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                  {"Jhon Doe"}
-                </Table.Cell>
-                <Table.Cell>JhonDoe@gmail.com</Table.Cell>
-                <Table.Cell>
-                  <Button.Group>
-                    <Button className="bg-azul2">Editar</Button>
-                    <Button className="bg-red-500">Eliminar</Button>
-                    <Button className="bg-yellow-400">Dar admin</Button>
-                  </Button.Group>
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                  {"Elon Musk"}
-                </Table.Cell>
-                <Table.Cell>ElonMusk@gmail.com</Table.Cell>
-                <Table.Cell>
-                  <Button.Group>
-                    <Button className="bg-azul2">Editar</Button>
-                    <Button className="bg-red-500">Eliminar</Button>
-                    <Button className="bg-yellow-400">Dar admin</Button>
-                  </Button.Group>
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                  {"Steve Jobs"}
-                </Table.Cell>
-                <Table.Cell>SteveJobs@gmail.com</Table.Cell>
-                <Table.Cell>
-                  <Button.Group>
-                    <Button className="bg-azul2">Editar</Button>
-                    <Button className="bg-red-500">Eliminar</Button>
-                    <Button className="bg-yellow-400">Dar admin</Button>
-                  </Button.Group>
-                </Table.Cell>
-              </Table.Row>
+              {data.map((user) => (
+                <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 capitalize">
+                    {`${user.name} ${user.lastName}`}
+                  </Table.Cell>
+                  <Table.Cell>{user.email}</Table.Cell>
+                  <Table.Cell>
+                    <Button.Group>
+                      <Button
+                        className="bg-azul2"
+                        onClick={() => {
+                          handleEdit(user._id);
+                        }}
+                      >
+                        Editar
+                      </Button>
+                      <Button
+                        className="bg-red-500"
+                        onClick={() => {
+                          handleDelete(user._id);
+                        }}
+                      >
+                        Eliminar
+                      </Button>
+                      <Button
+                        className="bg-yellow-400"
+                        onClick={() => {
+                          handleMakeAdmin(user._id);
+                        }}
+                      >
+                        Dar admin
+                      </Button>
+                    </Button.Group>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
             </Table.Body>
           </Table>
         </div>
@@ -86,45 +128,21 @@ function CRUD({ hidden = false, view = "users", data = null }) {
             </Table.Head>
 
             <Table.Body className="divide-y bg-white/19">
-              <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                  {"Jhon Doe"}
-                </Table.Cell>
-                <Table.Cell>techgod@gmail.com</Table.Cell>
-                <Table.Cell>
-                  <Button.Group>
-                    <Button className="bg-azul2">Editar</Button>
-                    <Button className="bg-red-500">Eliminar</Button>
-                    <Button className="bg-yellow-400">Dar admin</Button>
-                  </Button.Group>
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                  {"Elon Musk"}
-                </Table.Cell>
-                <Table.Cell>ElonMusk@gmail.com</Table.Cell>
-                <Table.Cell>
-                  <Button.Group>
-                    <Button className="bg-azul2">Editar</Button>
-                    <Button className="bg-red-500">Eliminar</Button>
-                    <Button className="bg-yellow-400">Dar admin</Button>
-                  </Button.Group>
-                </Table.Cell>
-              </Table.Row>
-              <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                  {"Steve Jobs"}
-                </Table.Cell>
-                <Table.Cell>SteveJobs@gmail.com</Table.Cell>
-                <Table.Cell>
-                  <Button.Group>
-                    <Button className="bg-azul2">Editar</Button>
-                    <Button className="bg-red-500">Eliminar</Button>
-                    <Button className="bg-yellow-400">Dar admin</Button>
-                  </Button.Group>
-                </Table.Cell>
-              </Table.Row>
+              {data.map((user) => (
+                <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 capitalize">
+                    {`${user.name} ${user.lastName}`}
+                  </Table.Cell>
+                  <Table.Cell>{user.email}</Table.Cell>
+                  <Table.Cell>
+                    <Button.Group>
+                      <Button className="bg-azul2">Editar</Button>
+                      <Button className="bg-red-500">Eliminar</Button>
+                      <Button className="bg-yellow-400">Dar admin</Button>
+                    </Button.Group>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
             </Table.Body>
           </Table>
         </div>
