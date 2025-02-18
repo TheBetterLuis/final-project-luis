@@ -16,6 +16,7 @@ const CrudPage = () => {
   };
 
   const [userData, setUserData] = useState({});
+  const [currentPage, setCurrentPage] = useState("users");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,14 +54,25 @@ const CrudPage = () => {
         <div className="flex h-screen w-full  overflow-y-scroll mt-16 mb-24">
           <div className="flex flex-col w-full h-screen justify-evenly items-center">
             <div className="flex flex-row justify-center items-center space-x-4 sm:space-x-80">
-              <button className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6">
+              <button
+                className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6"
+                onClick={() => {
+                  setCurrentPage("users");
+                }}
+              >
                 Usuarios
               </button>
-              <button className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6">
+              <button
+                className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6
+                "
+                onClick={() => {
+                  setCurrentPage("tech");
+                }}
+              >
                 Tecnicos
               </button>
             </div>
-            <CRUD />
+            <CRUD view={currentPage} />
           </div>
         </div>
         <PageFooter />
