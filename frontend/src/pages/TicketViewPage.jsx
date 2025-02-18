@@ -175,7 +175,8 @@ const TicketViewPage = () => {
 
   if (
     success &&
-    (userData.id === postData.userID._id ||
+    (postData.status === "public" ||
+      userData.id === postData.userID._id ||
       userData.role === "admin" ||
       userData.role === "tech")
   ) {
@@ -201,9 +202,11 @@ const TicketViewPage = () => {
                   <form className="flex max-w-md flex-col gap-4 ">
                     <div>
                       <div className="mb-2 block">
-                        <span className="text-black flex items-center justify-center drop-shadow-md dark:text-white">
-                          {postData.ticketID.title}
-                        </span>
+                        <Link to={`/ticket/${postData.ticketID._id}`}>
+                          <span className="text-black flex items-center justify-center drop-shadow-md dark:text-white">
+                            {postData.ticketID.title}
+                          </span>
+                        </Link>
                       </div>
                     </div>
                     <div className="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs h-32 overflow-y-auto">

@@ -109,10 +109,6 @@ const FeedPage = () => {
 
       const decoded = jwtDecode(token);
       setUserData(decoded);
-      const techID = decoded.id;
-      const userName = decoded.name;
-      const userLastName = decoded.lastName;
-      const userRole = decoded.role;
 
       const expiry = decoded.exp;
       const currentTime = Date.now() / 1000;
@@ -272,9 +268,11 @@ const FeedPage = () => {
                     <form className="flex max-w-md flex-col gap-4 ">
                       <div>
                         <div className="mb-2 block">
-                          <span className="text-black flex items-center justify-center drop-shadow-md dark:text-white">
-                            {postData.ticketID.title}
-                          </span>
+                          <Link to={`/ticket/${postData.ticketID._id}`}>
+                            <span className="text-black flex items-center justify-center drop-shadow-md dark:text-white">
+                              {postData.ticketID.title}
+                            </span>
+                          </Link>
                         </div>
                       </div>
                       <div className="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs h-32 overflow-y-auto">
