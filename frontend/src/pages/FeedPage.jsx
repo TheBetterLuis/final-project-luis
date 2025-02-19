@@ -6,10 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import { Card, Button, Modal, TextInput } from "flowbite-react";
-import { FaHeart, FaCommentDots } from "react-icons/fa";
-
-import { formatDate } from "../../common/utils";
+import { Button } from "flowbite-react";
 
 const FeedPage = () => {
   const styles = {
@@ -54,12 +51,6 @@ const FeedPage = () => {
   const [postsData, setPostsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [modalData, setModalData] = useState(null);
-  const [newComment, setNewComment] = useState(null);
-  const [postIndex, setPostIndex] = useState(null);
-
-  const [openModal, setOpenModal] = useState([]);
-  const [statusLike, setStatusLike] = useState([]);
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -80,22 +71,6 @@ const FeedPage = () => {
         err.response?.data?.message ||
           "Ha ocurrido un error durante la carga de posts"
       );
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const likePost = async (userID, postID) => {
-    setLoading(true);
-    try {
-      const response = await axios.post(
-        `http://localhost:3001/api/posts/${postID}/like`,
-        {
-          userID,
-        }
-      );
-    } catch (err) {
-      setError(err.response?.data?.message || "Error al dar like al  post");
     } finally {
       setLoading(false);
     }
@@ -131,115 +106,6 @@ const FeedPage = () => {
     console.log("loaded more");
   };
 
-  const toggleLike = (index) => {
-    setStatusLike((prev) => {
-      const newState = [...prev];
-      newState[index] = !newState[index];
-      return newState;
-    });
-  };
-
-  const handleOpenModal = (index) => {
-    setModalData(postsData[index]);
-    setPostIndex(index);
-    setOpenModal((prev) => {
-      const newState = [...prev];
-      newState[index] = true;
-      return newState;
-    });
-  };
-
-  const handleCloseModal = (index) => {
-    setOpenModal((prev) => {
-      const newState = [...prev];
-      newState[index] = false;
-      return newState;
-    });
-
-    setPostIndex(null);
-  };
-
-  const handleDeleteComment = async (commentID, commentIndex) => {
-    const isConfirmed = window.confirm("Eliminar comentario?");
-
-    if (isConfirmed) {
-      setModalData((prev) => {
-        const updatedCommentsID = prev.commentsID.map((comment, index) => {
-          if (index === commentIndex) {
-            return { ...comment, hidden: true };
-          }
-          return comment;
-        });
-        return {
-          ...prev,
-          commentsID: updatedCommentsID,
-        };
-      });
-
-      try {
-        const response = await axios.delete(
-          `http://localhost:3001/api/comments/delete/${commentID}`
-        );
-      } catch (err) {
-        setError(err.response?.data?.message || "Error al eliminar comentario");
-      }
-    }
-  };
-
-  const handleNewComment = async (index, content) => {
-    const isConfirmed = window.confirm("Crear comentario?");
-
-    if (isConfirmed) {
-      try {
-        const response = await axios.post(
-          `http://localhost:3001/api/comments`,
-          {
-            postID: postsData[index]._id,
-            userID: userData.id,
-            content,
-          }
-        );
-      } catch (err) {
-        setError(err.response?.data?.message || "Error al crear comentario");
-      } finally {
-        setNewComment("");
-      }
-    }
-  };
-
-  const handleDeletePost = async (postID) => {
-    const isConfirmed = window.confirm("Eliminar post?");
-
-    if (isConfirmed) {
-      try {
-        const response = await axios.delete(
-          `http://localhost:3001/api/posts/${postID}`
-        );
-      } catch (err) {
-        setError(err.response?.data?.message || "Error al eliminar post");
-      } finally {
-        window.location.reload();
-      }
-    }
-  };
-
-  const handleHidePost = async (postID) => {
-    const isConfirmed = window.confirm("Ocultar post?");
-
-    if (isConfirmed) {
-      try {
-        const response = await axios.patch(`http://localhost:3001/api/posts/`, {
-          id: postID,
-          status: "private",
-        });
-      } catch (err) {
-        setError(err.response?.data?.message || "Error al ocultar post");
-      } finally {
-        window.location.reload();
-      }
-    }
-  };
-
   if (success) {
     returnPage = (
       <>
@@ -255,167 +121,8 @@ const FeedPage = () => {
                 {postsData.map((postData, index) => (
                   <>
                     <Post data={postData} userData={userData} />
-                    {/*HEREEEEEEEEEEEEE*/}
-                    {false && (
-                      <div key={index} className={`rounded-lg mb-4 `}>
-                        <Card className="max-w-sm md:w-96 bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl">
-                          <div className="flex gap-3">
-                            <img
-                              className="rounded-full border border-azul5 w-20 h-20 dark:border-white"
-                              src={postData.userID.profilePicture}
-                              alt={`foto de perfil de ${postData.userID.name} ${postData.userID.lastName}`}
-                            />
-                            <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize">
-                              {` ${postData.userID.name} ${postData.userID.lastName}`}
-                            </span>
-                          </div>
-                          <Card className="max-w-sm bg-teal-500  bg-opacity-30 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-black drop-shadow-2xl shadow-2xl">
-                            <form className="flex max-w-md flex-col gap-4 ">
-                              <div>
-                                <div className="mb-2 block">
-                                  <Link to={`/ticket/${postData.ticketID._id}`}>
-                                    <span className="text-black flex items-center justify-center drop-shadow-md dark:text-white">
-                                      {postData.ticketID.title}
-                                    </span>
-                                  </Link>
-                                </div>
-                              </div>
-                              <div className="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs h-32 overflow-y-auto">
-                                <p class="text-black dark:text-gray-400">
-                                  {postData.ticketID.description}
-                                </p>
-                              </div>
-                              <div className="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs w-20 text-center">
-                                <p className="text-black dark:text-gray-400">
-                                  {formatDate(postData.ticketID.createdAt)}
-                                </p>
-                              </div>
-                              {postData.ticketID.image && (
-                                <div className="flex justify-center">
-                                  <img
-                                    src={postData.ticketID.image}
-                                    className="mb-4 w-auto"
-                                  />
-                                </div>
-                              )}
-                            </form>
-                          </Card>
-                          <div className="flex justify-between">
-                            <FaHeart
-                              post-id={index}
-                              size={26}
-                              className={` 
-
-${
-  statusLike[index]
-    ? "text-red-500 hover:text-black dark:text-red-500 dark:hover:text-white liked"
-    : "text-black hover:text-red-500 dark:text-white dark:hover:text-red-500 not-liked"
-}  cursor-pointer`}
-                              onClick={() => {
-                                toggleLike(index);
-                                likePost(userData.id, postData._id);
-                              }}
-                            />
-                            {userData.id === postData.userID._id && (
-                              <>
-                                <Button
-                                  className="bg-red-500 hover:bg-red-600"
-                                  onClick={() => {
-                                    handleDeletePost(postData._id);
-                                  }}
-                                >
-                                  <p className="text-xs">Eliminar Post</p>
-                                </Button>
-                                <Button
-                                  className="bg-gray-500 hover:bg-gray-600"
-                                  onClick={() => {
-                                    handleHidePost(postData._id);
-                                  }}
-                                >
-                                  <p className="text-xs">Ocultar Post</p>
-                                </Button>
-                              </>
-                            )}
-                            <FaCommentDots
-                              size={26}
-                              className="text-white hover:text-black dark:hover:text-gray-400 cursor-pointer"
-                              onClick={() =>
-                                handleOpenModal(index, postData.id)
-                              }
-                            />
-                          </div>
-                        </Card>
-                        {/*MODAL*/}
-                        {modalData && (
-                          <Modal
-                            show={openModal[index]}
-                            size="md"
-                            onClose={() => handleCloseModal(index)}
-                            popup
-                          >
-                            <Modal.Header />
-                            <Modal.Body>
-                              <div className="text-center">
-                                <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                  {`Comentarios`}
-                                </h3>
-                                <>
-                                  {modalData.commentsID.map(
-                                    (comment, commentIndex) => (
-                                      <div
-                                        className="text-start"
-                                        hidden={comment.hidden}
-                                      >
-                                        <h1 className="font-bold">{`${comment.userID.name} ${comment.userID.lastName}`}</h1>
-                                        <div className="flex justify-between mb-2">
-                                          <h2>{comment.content}</h2>
-                                          {(userData.id ===
-                                            comment.userID._id ||
-                                            userData.role === "admin") && (
-                                            <h2
-                                              className="font-bold text-red-600 hover:text-gray-500 cursor-pointer"
-                                              onClick={() => {
-                                                handleDeleteComment(
-                                                  comment._id,
-                                                  commentIndex
-                                                );
-                                              }}
-                                            >
-                                              Eliminar
-                                            </h2>
-                                          )}
-                                        </div>
-                                      </div>
-                                    )
-                                  )}
-                                </>
-                                <div className="flex justify-between mt-12 px-4">
-                                  <TextInput
-                                    placeholder="Escribe aqui"
-                                    value={newComment}
-                                    onChange={(e) =>
-                                      setNewComment(e.target.value)
-                                    }
-                                  />
-
-                                  <Button
-                                    onClick={() => {
-                                      handleNewComment(postIndex, newComment);
-                                    }}
-                                    className="bg-azul2 drop-shadow-md"
-                                  >
-                                    Comentar
-                                  </Button>
-                                </div>
-                              </div>
-                            </Modal.Body>
-                          </Modal>
-                        )}
-                      </div>
-                    )}
                   </>
                 ))}
-                {/*HEREEEEEEEEEEEEE*/}
                 {currentPage < totalPages ? (
                   <Button
                     className="bg-azul2 drop-shadow-md "

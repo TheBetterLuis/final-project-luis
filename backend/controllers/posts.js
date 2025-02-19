@@ -25,6 +25,14 @@ const getPostsByUserID = async (req, res) => {
 
     const posts = await postModel
       .find({ userID })
+      .populate({
+        path: "commentsID",
+        populate: {
+          path: "userID",
+          model: "users",
+          select: "name lastName profilePicture",
+        },
+      })
       .populate("ticketID")
       .populate({
         path: "userID",

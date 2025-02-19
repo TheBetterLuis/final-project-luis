@@ -1,7 +1,6 @@
-import { Card, Button, Modal, TextInput } from "flowbite-react";
+import { Card, Button } from "flowbite-react";
 import axios from "axios";
-import { useState } from "react";
-import EditUserModal from "./EditUserModal";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Comments from "./Comments";
 
@@ -10,11 +9,17 @@ import { FaHeart, FaCommentDots } from "react-icons/fa";
 import { formatDate } from "../../common/utils";
 
 function Post({ data = null, userData = null }) {
-  const [commentsData, setCommentsData] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
-
   const [isVisible, setIsVisible] = useState(false);
   const [messageComments, setMessageComments] = useState("");
+  const [liked, setLiked] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      if (data.likes.includes(userData.id)) {
+        setLiked(true);
+      }
+    }
+  }, [data]);
 
   const prepareComments = async () => {
     setIsVisible(true);
@@ -78,6 +83,19 @@ function Post({ data = null, userData = null }) {
     }
   };
 
+  const handleLike = async (postID) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3001/api/posts/${postID}/like`,
+        { userID: userData.id }
+      );
+    } catch (err) {
+      setError(err.response?.data?.message || "Error al agregar/quitar like");
+    } finally {
+      setLiked(!liked);
+    }
+  };
+
   return (
     <>
       {data === null && userData === null && (
@@ -90,8 +108,6 @@ function Post({ data = null, userData = null }) {
 
       {data !== null && userData !== null && (
         <>
-          {/*    <div className="flex h-screen w-full  overflow-y-scroll ">*/}
-          {/*            <div className="flex justify-center items-center h-screen w-full font-roboto overflow-y-scroll ">*/}
           <div className="rounded-lg mb-6">
             <Card className="max-w-sm md:w-96  bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl">
               <div className="flex gap-3">
@@ -131,7 +147,14 @@ function Post({ data = null, userData = null }) {
               <div className="flex justify-between">
                 <FaHeart
                   size={26}
-                  className="dark:text-white hover:text-red-500 dark:hover:text-red-500  cursor-pointer"
+                  className={`${
+                    liked
+                      ? "text-red-500 hover:text-black"
+                      : "text-black hover:text-red-500"
+                  } cursor-pointer`}
+                  onClick={() => {
+                    handleLike(data._id);
+                  }}
                 />
                 {userData.id === data.userID._id && (
                   <>
@@ -166,8 +189,6 @@ function Post({ data = null, userData = null }) {
               </div>
             </Card>
           </div>
-          {/*            </div>*/}
-          {/*            </div>*/}
           <Comments
             data={data}
             visible={isVisible}
