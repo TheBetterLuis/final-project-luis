@@ -8,7 +8,7 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx}",
     flowbite.content(),
   ],
-  darkMode: "class",
+  darkMode: "false",
   theme: {
     fontFamily: {
       roboto: ["Roboto", "serif"],

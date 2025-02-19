@@ -1,9 +1,13 @@
-import { Table, Button, Modal } from "flowbite-react";
+import { Table, Button, Modal, TextInput, Label } from "flowbite-react";
 import axios from "axios";
 import { useState } from "react";
 
 function EditUserModal({ data = null, openModal, setOpenModal }) {
   const [modalData, setModalData] = useState({});
+  const [name, setName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
   const handleEdit = async (userID) => {
     console.log("something should happen");
@@ -48,20 +52,23 @@ function EditUserModal({ data = null, openModal, setOpenModal }) {
           onClose={() => setOpenModal(false)}
           popup
         >
-          <Modal.Header />
+          <Modal.Header className="bg-blue-300" />
           <Modal.Body>
             <div className="text-center">
               <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                Are you sure you want to delete this product?
+                {data.name}
               </h3>
-              <div className="flex justify-center gap-4">
-                <Button color="failure" onClick={() => setOpenModal(false)}>
-                  {"Yes, I'm sure"}
-                </Button>
-                <Button color="gray" onClick={() => setOpenModal(false)}>
-                  No, cancel
-                </Button>
-              </div>
+              <Label
+                className="text-white drop-shadow-md"
+                htmlFor="nombre2"
+                value="NOMBRE"
+              />
+
+              <TextInput
+                placeholder={data.name}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </div>
           </Modal.Body>
         </Modal>

@@ -4,8 +4,8 @@ import { useState } from "react";
 import EditUserModal from "./EditUserModal";
 
 function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
-  const [modalData, setModalData] = useState({});
-  const [openModal, setOpenModal] = useState("");
+  const [modalData, setModalData] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleDelete = async (userID, currentSection) => {
     // console.log(userID);
@@ -25,8 +25,8 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
   };
 
   const handleEdit = async (userID) => {
-    console.log("something should happen");
     /*
+    console.log("something should happen");
     try {
       const response = await axios.delete(
         `http://localhost:3001/api/users/${userID}`
@@ -123,7 +123,7 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                         className="bg-azul2"
                         onClick={() => {
                           handleEdit(user._id);
-                          setOpenModal(true);
+                          prepareModal(user);
                         }}
                       >
                         Editar
