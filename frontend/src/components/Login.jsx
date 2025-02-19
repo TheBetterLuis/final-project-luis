@@ -59,7 +59,7 @@ const Login = () => {
         password,
       });
 
-      console.log("login successful:", response.data);
+      //console.log("login successful:", response.data);
       localStorage.setItem("tokenSesion", JSON.stringify(response.data.token));
 
       const decoded = jwtDecode(response.data.token);

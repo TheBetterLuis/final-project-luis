@@ -1,26 +1,71 @@
-import { Table, Button, Modal, TextInput, Label } from "flowbite-react";
+import { Table, Button, Modal, TextInput, Label, Select } from "flowbite-react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function EditUserModal({ data = null, openModal, setOpenModal }) {
-  const [modalData, setModalData] = useState({});
-  const [name, setName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+function EditUserModal({
+  data = null,
+  openModal,
+  handleCloseModal,
+  handleMessage,
+  message,
+}) {
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleEdit = async (userID) => {
-    console.log("something should happen");
-    /*
-    try {
-      const response = await axios.delete(
-        `http://localhost:3001/api/users/${userID}`
-      );
-      console.log(response.data);
-    } catch (err) {
-      console.error("Error al eliminar usuario", err);
+  useEffect(() => {
+    if (data) {
+      setName(data.name);
+      setLastName(data.lastName);
+      setEmail(data.email);
+      setRole(data.role);
     }
-*/
+  }, [data]);
+
+  const handleEdit = async (e) => {
+    e.preventDefault();
+
+    const requestData = { id: data._id };
+
+    if (name !== "") {
+      requestData.name = name;
+    }
+
+    if (lastName !== "") {
+      requestData.lastName = lastName;
+    }
+
+    if (email !== "") {
+      requestData.email = email;
+    }
+
+    if (password !== "") {
+      requestData.password = password;
+    }
+
+    if (role !== "") {
+      requestData.role = role;
+    }
+
+    //console.log(requestData);
+
+    try {
+      const response = await axios.patch(
+        "http://localhost:3001/api/users",
+        requestData
+      );
+
+      handleMessage(response.data.message);
+      // console.log(response.data.message);
+    } catch (err) {
+      console.error("Error al editar usuario", err);
+    }
+  };
+
+  const handleChange = (event) => {
+    setRole(event.target.value);
   };
 
   return (
@@ -30,7 +75,7 @@ function EditUserModal({ data = null, openModal, setOpenModal }) {
           <Modal
             show={openModal}
             size="md"
-            onClose={() => setOpenModal(false)}
+            onClose={() => handleCloseModal()}
             popup
           >
             <Modal.Header />
@@ -49,26 +94,80 @@ function EditUserModal({ data = null, openModal, setOpenModal }) {
         <Modal
           show={openModal}
           size="md"
-          onClose={() => setOpenModal(false)}
+          onClose={() => handleCloseModal()}
           popup
         >
-          <Modal.Header className="bg-blue-300" />
+          <Modal.Header />
           <Modal.Body>
-            <div className="text-center">
-              <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                {data.name}
-              </h3>
+            <h1 className="text-gray-400 text-center text-xl pb-2 uppercase">
+              Editar Usuario
+            </h1>
+            <div className="text-start">
               <Label
-                className="text-white drop-shadow-md"
-                htmlFor="nombre2"
+                className="text-black text-md drop-shadow-md"
                 value="NOMBRE"
               />
-
               <TextInput
-                placeholder={data.name}
+                placeholder={name}
                 value={name}
+                type="text"
                 onChange={(e) => setName(e.target.value)}
+                className="mb-4"
               />
+
+              <Label
+                className="text-black text-md drop-shadow-md"
+                value="APELLIDO"
+              />
+              <TextInput
+                placeholder={lastName}
+                value={lastName}
+                type="text"
+                onChange={(e) => setLastName(e.target.value)}
+                className="mb-4"
+              />
+
+              <Label
+                className="text-black text-md drop-shadow-md"
+                value="EMAIL"
+              />
+              <TextInput
+                placeholder={email}
+                value={email}
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                className="mb-4"
+              />
+
+              <Label
+                className="text-black text-md drop-shadow-md"
+                value="CONTRASEÑA"
+              />
+              <TextInput
+                placeholder={``}
+                value={password}
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                className="mb-4"
+              />
+              <Select className="mb-4" value={role} onChange={handleChange}>
+                <option value="free">FREE</option>
+                <option value="premium">PREMIUM</option>
+                <option value="tech">TECH</option>
+                <option value="admin">ADMIN</option>
+              </Select>
+              <h1 className="text-gray-400 text-xl text-center pb-2">
+                {typeof message === "string"
+                  ? message
+                  : JSON.stringify(message)}
+              </h1>
+              <Button
+                className="bg-azul2 w-full"
+                type="submit"
+                onClick={handleEdit}
+              >
+                Guardar Informacion
+              </Button>
             </div>
           </Modal.Body>
         </Modal>

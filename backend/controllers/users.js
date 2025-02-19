@@ -125,7 +125,9 @@ const updateUser = async (req, res) => {
     // Save the updated user to the database
     const updatedUser = await user.save();
 
-    res.status(200).json(updatedUser);
+    res
+      .status(200)
+      .json({ message: "Usuario Actualizado Exitosamente", updatedUser });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

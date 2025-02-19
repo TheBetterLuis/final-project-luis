@@ -6,6 +6,7 @@ import EditUserModal from "./EditUserModal";
 function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
   const [modalData, setModalData] = useState(null);
   const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState("");
 
   const handleDelete = async (userID, currentSection) => {
     // console.log(userID);
@@ -24,20 +25,6 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
     }
   };
 
-  const handleEdit = async (userID) => {
-    /*
-    console.log("something should happen");
-    try {
-      const response = await axios.delete(
-        `http://localhost:3001/api/users/${userID}`
-      );
-      console.log(response.data);
-    } catch (err) {
-      console.error("Error al eliminar usuario", err);
-    }
-*/
-  };
-
   const handleMakeAdmin = async (userID, currentSection) => {
     const isConfirmed = window.confirm("cambiar rol de usuario a admin?");
     if (isConfirmed) {
@@ -45,44 +32,27 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
         const response = await axios.post(
           `http://localhost:3001/api/users/make/admin/${userID}`
         );
-        console.log(response.data);
       } catch (err) {
         console.error("Error al cambiar rol de usuario", err);
       } finally {
         fetchUsers(currentSection);
       }
     }
-
-    /*
-    try {
-      const response = await axios.delete(
-        `http://localhost:3001/api/users/${userID}`
-      );
-      console.log(response.data);
-    } catch (err) {
-      console.error("Error al eliminar usuario", err);
-    }
-    */
   };
 
   const prepareModal = async (user) => {
     setModalData(user);
     setOpenModal(true);
-    // const isConfirmed = window.confirm("cambiar rol de usuario a admin?");
-    /*
-    if (isConfirmed) {
-      try {
-        const response = await axios.post(
-          `http://localhost:3001/api/users/make/admin/${userID}`
-        );
-        console.log(response.data);
-      } catch (err) {
-        console.error("Error al cambiar rol de usuario", err);
-      } finally {
-        fetchUsers(currentSection);
-      }
-    }
-*/
+  };
+
+  const handleCloseModal = async () => {
+    setModalData(null);
+    setMessage("");
+    setOpenModal(false);
+  };
+
+  const handleMessage = async (message) => {
+    setMessage(message);
   };
 
   return (
@@ -122,7 +92,6 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                       <Button
                         className="bg-azul2"
                         onClick={() => {
-                          handleEdit(user._id);
                           prepareModal(user);
                         }}
                       >
@@ -155,6 +124,9 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
             data={modalData}
             setOpenModal={setOpenModal}
             openModal={openModal}
+            handleCloseModal={handleCloseModal}
+            handleMessage={handleMessage}
+            message={message}
           />
         </div>
       )}
@@ -186,7 +158,6 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                       <Button
                         className="bg-azul2"
                         onClick={() => {
-                          handleEdit(user._id);
                           prepareModal(user);
                         }}
                       >
@@ -219,6 +190,8 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
             data={modalData}
             setOpenModal={setOpenModal}
             openModal={openModal}
+            handleCloseModal={handleCloseModal}
+            handleMessage={handleMessage}
           />
         </div>
       )}
