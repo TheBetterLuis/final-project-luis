@@ -1,9 +1,14 @@
-import { Table, Button } from "flowbite-react";
+import { Table, Button, Modal } from "flowbite-react";
 import axios from "axios";
+import { useState } from "react";
+import EditUserModal from "./EditUserModal";
 
 function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
+  const [modalData, setModalData] = useState({});
+  const [openModal, setOpenModal] = useState("");
+
   const handleDelete = async (userID, currentSection) => {
-    console.log(userID);
+    // console.log(userID);
     const isConfirmed = window.confirm("Eliminar usuario?");
     if (isConfirmed) {
       try {
@@ -33,8 +38,21 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
 */
   };
 
-  const handleMakeAdmin = async (userID) => {
-    console.log("something should happen");
+  const handleMakeAdmin = async (userID, currentSection) => {
+    const isConfirmed = window.confirm("cambiar rol de usuario a admin?");
+    if (isConfirmed) {
+      try {
+        const response = await axios.post(
+          `http://localhost:3001/api/users/make/admin/${userID}`
+        );
+        console.log(response.data);
+      } catch (err) {
+        console.error("Error al cambiar rol de usuario", err);
+      } finally {
+        fetchUsers(currentSection);
+      }
+    }
+
     /*
     try {
       const response = await axios.delete(
@@ -45,6 +63,26 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
       console.error("Error al eliminar usuario", err);
     }
     */
+  };
+
+  const prepareModal = async (user) => {
+    setModalData(user);
+    setOpenModal(true);
+    // const isConfirmed = window.confirm("cambiar rol de usuario a admin?");
+    /*
+    if (isConfirmed) {
+      try {
+        const response = await axios.post(
+          `http://localhost:3001/api/users/make/admin/${userID}`
+        );
+        console.log(response.data);
+      } catch (err) {
+        console.error("Error al cambiar rol de usuario", err);
+      } finally {
+        fetchUsers(currentSection);
+      }
+    }
+*/
   };
 
   return (
@@ -85,6 +123,7 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                         className="bg-azul2"
                         onClick={() => {
                           handleEdit(user._id);
+                          setOpenModal(true);
                         }}
                       >
                         Editar
@@ -100,7 +139,7 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                       <Button
                         className="bg-yellow-400"
                         onClick={() => {
-                          handleMakeAdmin(user._id);
+                          handleMakeAdmin(user._id, "users");
                         }}
                       >
                         Dar admin
@@ -111,6 +150,12 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
               ))}
             </Table.Body>
           </Table>
+
+          <EditUserModal
+            data={modalData}
+            setOpenModal={setOpenModal}
+            openModal={openModal}
+          />
         </div>
       )}
 
@@ -142,6 +187,7 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                         className="bg-azul2"
                         onClick={() => {
                           handleEdit(user._id);
+                          prepareModal(user);
                         }}
                       >
                         Editar
@@ -157,7 +203,7 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                       <Button
                         className="bg-yellow-400"
                         onClick={() => {
-                          handleMakeAdmin(user._id);
+                          handleMakeAdmin(user._id, "tech");
                         }}
                       >
                         Dar admin
@@ -168,6 +214,12 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
               ))}
             </Table.Body>
           </Table>
+
+          <EditUserModal
+            data={modalData}
+            setOpenModal={setOpenModal}
+            openModal={openModal}
+          />
         </div>
       )}
     </>

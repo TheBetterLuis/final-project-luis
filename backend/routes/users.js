@@ -10,12 +10,14 @@ const {
   createUser,
   deleteUser,
   updateUser,
+  makeRole,
 } = require("../controllers/users");
 
 const { auth } = require("../middleware/auth");
 
 router.post("/single", getUserByUserID);
 router.post("/safe", getSafeUserByUserID);
+router.post("/make/:newRole/:id", makeRole);
 
 //we add auth here to protect this route, before the controller
 //router.get("/", getUsers);

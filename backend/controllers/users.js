@@ -130,6 +130,34 @@ const updateUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+const makeRole = async (req, res) => {
+  try {
+    const { newRole, id } = req.params;
+
+    const user = await userModel.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    if (!newRole) {
+      return res.status(400).json({ message: "Rol no enviado" });
+    }
+
+    user.role = newRole;
+
+    const updatedUser = await user.save();
+
+    res.status(200).json({
+      message: `Rol de usuario actualizado a ${newRole}`,
+      updatedUser,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getUsers,
   getUserByUserID,
@@ -139,4 +167,5 @@ module.exports = {
   createUser,
   deleteUser,
   updateUser,
+  makeRole,
 };
