@@ -42,19 +42,9 @@ const getPostsByUserID = async (req, res) => {
 const getPostByTicketID = async (req, res) => {
   try {
     const { _id } = req.params;
-    /*
+
     const post = await postModel
       .find({ ticketID: _id })
-      .populate("ticketID")
-      .populate({
-        path: "userID",
-        model: "users",
-        select: "name lastName profilePicture",
-      })
-      .exec();
-      */
-    const post = await postModel
-      .find()
       .populate({
         path: "commentsID",
         populate: {

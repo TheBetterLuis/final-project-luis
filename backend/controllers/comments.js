@@ -19,7 +19,9 @@ const createComment = async (req, res) => {
     post.commentsID.push(newComment._id);
     await post.save();
 
-    res.status(201).json({ newComment, post });
+    res
+      .status(201)
+      .json({ newComment, post, message: "Comentario creado con exito" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
