@@ -156,7 +156,8 @@ function Post({ data = null, userData = null }) {
                     handleLike(data._id);
                   }}
                 />
-                {userData.id === data.userID._id && (
+                {(userData.id === data.userID._id ||
+                  userData.role === "admin") && (
                   <>
                     <Button
                       className="bg-red-500 hover:bg-red-600"
