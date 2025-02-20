@@ -1,6 +1,6 @@
-import { Card, Button, Modal, TextInput } from "flowbite-react";
+import { Button, Modal, TextInput, Select } from "flowbite-react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EditUserModal from "./EditUserModal";
 import { Link } from "react-router-dom";
 import { FaHeart, FaCommentDots } from "react-icons/fa";
@@ -13,7 +13,44 @@ function StatusModal({
   visible = false,
   handleCloseStatusModal,
   messageStatus,
+  handleMessageStatus,
 }) {
+  const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    if (data) {
+      setStatus(data.status);
+    }
+  }, [data]);
+
+  const handleEditStatus = async (e) => {
+    e.preventDefault();
+
+    const requestData = { id: data._id };
+
+    if (status === "open" || status === "pending" || status === "closed") {
+      requestData.status = status;
+    }
+
+    //console.log(requestData);
+
+    try {
+      const response = await axios.patch(
+        "http://localhost:3001/api/tickets/",
+        requestData
+      );
+
+      handleMessageStatus(response.data.message);
+      // console.log(response.data.message);
+    } catch (err) {
+      console.error("Error al editar usuario", err);
+    }
+  };
+
+  const handleChange = (event) => {
+    setStatus(event.target.value);
+  };
+
   return (
     <>
       {data === null && userData === null && (
@@ -27,7 +64,7 @@ function StatusModal({
           <Modal.Body>
             <div className="text-center">
               <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                {`Comentarios`}
+                {`Ticket Status`}
               </h3>
 
               <h1 className="text-gray-400 text-2xl">
@@ -49,8 +86,14 @@ function StatusModal({
           <Modal.Body>
             <div className="text-center">
               <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                {`Comentarios`}
+                {`Ticket Status`}
               </h3>
+
+              <Select className="mb-4" value={status} onChange={handleChange}>
+                <option value="open">ABIERTO</option>
+                <option value="pending">REVISION</option>
+                <option value="closed">RESUELTO</option>
+              </Select>
 
               <h1 className="text-gray-400 text-xl text-center mt-6 pb-4">
                 {typeof messageStatus === "string"
@@ -58,15 +101,13 @@ function StatusModal({
                   : JSON.stringify(messageStatus)}
               </h1>
 
-              <div className="flex justify-between  px-4">
-                <TextInput placeholder="Escribe aqui" />
-                <Button
-                  onClick={() => handleCloseStatusModal()}
-                  className="bg-azul2 drop-shadow-md"
-                >
-                  Comentar
-                </Button>
-              </div>
+              <Button
+                className="bg-azul2 w-full"
+                type="submit"
+                onClick={handleEditStatus}
+              >
+                Guardar Informacion
+              </Button>
             </div>
           </Modal.Body>
         </Modal>

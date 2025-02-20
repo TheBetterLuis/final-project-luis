@@ -189,7 +189,9 @@ const updateTicket = async (req, res) => {
 
     const updatedTicket = await ticket.save();
 
-    res.status(200).json(updatedTicket);
+    res
+      .status(200)
+      .json({ updatedTicket, message: "Ticket actualizado con exito" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

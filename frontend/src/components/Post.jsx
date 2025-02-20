@@ -34,16 +34,21 @@ function Post({ data = null, userData = null }) {
     setMessageComments("");
   };
 
+  const handleMessageComments = async (message) => {
+    setMessageComments(message);
+  };
+
   const prepareStatus = async () => {
     setIsStatusVisible(true);
   };
 
   const handleCloseStatusModal = async () => {
     setIsStatusVisible(false);
+    setMessageStatus("");
   };
 
-  const handleMessageComments = async (message) => {
-    setMessageComments(message);
+  const handleMessageStatus = async (message) => {
+    setMessageStatus(message);
   };
 
   const handleDeletePost = async (postID) => {
@@ -220,8 +225,11 @@ function Post({ data = null, userData = null }) {
             handleMessageComments={handleMessageComments}
           />
           <StatusModal
+            data={data.ticketID}
+            userData={userData}
             visible={isStatusVisible}
             messageStatus={messageStatus}
+            handleMessageStatus={handleMessageStatus}
             handleCloseStatusModal={handleCloseStatusModal}
           />
         </>
