@@ -74,6 +74,21 @@ const Login = () => {
       }
 
       if (userRole === "premium") {
+        const premiumDataResponse = await axios.post(
+          `http://localhost:3001/api/invoice/validateuser/${decoded.id}`
+        );
+
+        const newResponse = await axios.post(
+          "http://localhost:3001/api/login",
+          {
+            email,
+            password,
+          }
+        );
+        localStorage.setItem(
+          "tokenSesion",
+          JSON.stringify(newResponse.data.token)
+        );
         navigate("/feed");
       }
 
