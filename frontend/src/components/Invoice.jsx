@@ -1,10 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 const Invoice = ({ data = null }) => {
+  const navigate = useNavigate();
+
+  const handlePrint = () => {
+    const printElement = document.querySelector(".theInvoice");
+    printElement.classList.add("print-mode");
+    window.print();
+    printElement.classList.remove("print-mode");
+  };
   if (data === null) {
     return (
-      <div className="factura bg-azul6 shadow-md rounded p-6 max-w-md mx-auto mt-6">
+      <div className=" theInvoice factura bg-azul6 shadow-md rounded p-6 max-w-md mx-auto mt-6">
         <div className="flex justify-center mb-4">
           <img
             src={`../../public/img/logo2.png`}
@@ -12,7 +19,10 @@ const Invoice = ({ data = null }) => {
             className="mb-4 w-46"
           />
         </div>
-        <h2 className="text-2xl font-bold mb-4 text-white">
+        <h2
+          className="text-2xl font-bold mb-4 text-white hover:cursor-pointer"
+          onClick={handlePrint}
+        >
           Problema de facturacion{" "}
         </h2>
         <div className="factura-content">
@@ -40,12 +50,9 @@ const Invoice = ({ data = null }) => {
       </div>
     );
   }
-  const handlePrint = () => {
-    window.print();
-  };
 
   return (
-    <div className="factura bg-azul6 shadow-md rounded p-6 max-w-md mx-auto mt-6">
+    <div className="theInvoice factura bg-azul6 shadow-md rounded p-6 max-w-md mx-auto mt-6">
       <div className="flex justify-center mb-4">
         <img
           src={`../../public/img/logo2.png`}

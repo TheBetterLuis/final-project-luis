@@ -138,15 +138,11 @@ const CreateInvoicePage = () => {
           className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
         >
           {/*Page Component goes here*/}
-          {invoiceData !== null && (
-            <div>
-              <h1>{invoiceData.message}</h1>
-            </div>
-          )}
+          {invoiceData === null && <Invoice />}
 
-          {invoiceData !== null && <Invoice />}
-
-          <Invoice />
+          <div id="invoice-section">
+            {invoiceData !== null && <Invoice data={invoiceData.invoice} />}
+          </div>
 
           {/*Page Component goes here*/}
         </div>
