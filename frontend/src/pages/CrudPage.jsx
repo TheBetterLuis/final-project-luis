@@ -80,7 +80,7 @@ const CrudPage = () => {
       <div className={`${styles.background}`}>
         <NavBar />
 
-        <div className="flex h-screen w-full  overflow-y-scroll mt-16 mb-24">
+        <div className="flex h-screen w-full  mt-16 mb-24">
           <div className="flex flex-col w-full h-screen justify-evenly items-center">
             <div className="flex flex-row justify-center items-center space-x-4 sm:space-x-80">
               <button

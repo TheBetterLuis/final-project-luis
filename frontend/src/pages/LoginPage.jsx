@@ -14,15 +14,14 @@ const LoginPage = () => {
     <>
       <div className={`${styles.background}`}>
         <NavBar />
-        <div className="flex h-screen w-full  overflow-y-scroll ">
-          <div className="flex justify-center items-center h-screen w-full font-roboto overflow-y-scroll ">
-            {/*COMPONENT GOES HERE*/}
-            <Login />
-
-            {/*COMPONENT GOES HERE*/}
-          </div>
+        <div
+          id="wrapper"
+          className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
+        >
+          {/*Page Component goes here*/}
+          <Login />
+          {/*Page Component goes here*/}
         </div>
-
         <PageFooter />
       </div>
       <CustomSidebar></CustomSidebar>

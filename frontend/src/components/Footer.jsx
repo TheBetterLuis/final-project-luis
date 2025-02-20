@@ -7,7 +7,10 @@ const PageFooter = () => {
   };
 
   return (
-    <Footer className="bg-azul6 " container>
+    <Footer
+      className="bg-azul6 fixed bottom-0 left-0 w-full z-50 rounded-none"
+      container
+    >
       <img
         src="../../public/img/logo2.png"
         className="mr-3 h-6 sm:h-9"

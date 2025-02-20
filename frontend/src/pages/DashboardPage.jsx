@@ -98,7 +98,7 @@ const Dashboard = () => {
     <>
       <div className={`${styles.background}`}>
         <NavBar />
-        <div className="flex h-screen w-full bg-gradient-to-tr from-azul4 via-azul3 to-azul1 overflow-y-scroll">
+        <div className="flex h-screen w-full bg-gradient-to-tr from-azul4 via-azul3 to-azul1 ">
           <div className="hidden sm:block sm:w-1/6 sm:h-full"></div>
           <div className="flex flex-col  sm:flex-row items-center justify-around w-full h-full max-sm:mt-60 mb-24">
             <div className="flex flex-col items-center justify-around">

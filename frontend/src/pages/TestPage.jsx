@@ -1,47 +1,25 @@
-import { Footer } from "flowbite-react";
 import { NavBar } from "../components/NavBar";
+import PageFooter from "../components/Footer";
 import Post from "../components/Post";
-import Comments from "../components/Comments";
 import CustomSidebar from "../components/CustomSidebar";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, Modal } from "flowbite-react";
 import { useState, useEffect } from "react";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { Button } from "flowbite-react";
 
 const TestPage = () => {
-  //const array = [0, 1, 2];
-  //const [openModal, setOpenModal] = useState([]);
-  const [isVisible, setIsVisible] = useState(false);
-  /*
-  const handleOpenModal = (index) => {
-    setOpenModal((prev) => {
-      const newState = [...prev];
-      newState[index] = true;
-      return newState;
-    });
-  };
-
-  const handleCloseModal = (index) => {
-    setOpenModal((prev) => {
-      const newState = [...prev];
-      newState[index] = false;
-      return newState;
-    });
-  };
-  */
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
+  const [postsData, setPostsData] = useState([]);
 
   const styles = {
     background: "bg-gradient-to-tr from-azul4 via-[#52A2AB] to-azul1",
     background_feed:
       "bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]",
   };
-
-  const [userData, setUserData] = useState({});
-  const navigate = useNavigate();
-
-  const [postData, setPostData] = useState({});
 
   const fetchInfo = async () => {
     const token = localStorage.getItem("tokenSesion");
@@ -62,15 +40,16 @@ const TestPage = () => {
     }
   };
 
-  const fetchPost = async () => {
+  const fetchPosts = async (page = 1) => {
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         //67b413709dc0223f4e00024f
         //67b4035e9dc0223f4e00004a
-        `http://localhost:3001/api/posts/67b4137c9dc0223f4e000257`
+        `http://localhost:3001/api/posts/paginate?page=${page}`
       );
       console.log("Post recibido:", response.data);
-      setPostData(response.data[0]);
+      setPostsData((prevPosts) => [...prevPosts, ...response.data.posts]);
+      setTotalPages(response.data.totalPages);
     } catch (err) {
       console.error("Error al cargar el ticket", err);
     }
@@ -78,75 +57,53 @@ const TestPage = () => {
 
   useEffect(() => {
     fetchInfo();
-    fetchPost();
-  }, []);
+    fetchPosts(1);
+  }, [navigate]);
 
-  const handleCloseComments = async () => {
-    setIsVisible(false);
+  const loadNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+    fetchPosts(currentPage + 1);
+    console.log("loaded more");
   };
 
   return (
     <>
       <div className={`${styles.background}`}>
         <NavBar></NavBar>
-        {/*      <div className="bg-black">
-        {array.map((index) => (
-          <>
-            <Button onClick={() => handleOpenModal(index)}>Toggle modal</Button>
-            <Modal
-              show={openModal[index]}
-              size="md"
-              onClose={() => handleCloseModal(index)}
-              popup
-            >
-              <Modal.Header />
-              <Modal.Body>
-                <div className="text-center">
-                  <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
-                  <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                    {`modal ${index}`}
-                  </h3>
-                  <div className="flex justify-center gap-4">
-                    <Button
-                      color="failure"
-                      onClick={() => handleCloseModal(index)}
-                    >
-                      {"Yes, I'm sure"}
-                    </Button>
-                    <Button
-                      color="gray"
-                      onClick={() => handleCloseModal(index)}
-                    >
-                      No, cancel
-                    </Button>
-                  </div>
-                </div>
-              </Modal.Body>
-            </Modal>
-
-          </>
-        ))}
-      </div>
-*/}
-        {/*       <Post data={null} userData={null} />*/}
-        <Post data={postData} userData={userData} />
-        {/*
-        <Button
-          onClick={() => {
-            setIsVisible(true);
-          }}
+        <div
+          id="wrapper"
+          className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
         >
-          abrir
-        </Button>
-*/}
-        {/*          <Comments
-          data={postData}
-          visible={isVisible}
-          userData={userData}
-          handleCloseComments={handleCloseComments}
-        />
-*/}
+          {/*Page Component goes here*/}
+
+          {postsData !== null && userData !== null && (
+            <>
+              {postsData.map((postData) => (
+                <>
+                  <Post data={postData} userData={userData} />
+                </>
+              ))}
+            </>
+          )}
+          {currentPage < totalPages ? (
+            <Button className="bg-azul2 drop-shadow-md " onClick={loadNextPage}>
+              Cargar mas posts
+            </Button>
+          ) : (
+            <Button className="bg-gray-400 drop-shadow-md">
+              No hay mas posts disponibles
+            </Button>
+          )}
+
+          {/*Page Component goes here*/}
+        </div>
+        <PageFooter />
       </div>
+      <CustomSidebar
+        name={userData.name}
+        lastName={userData.lastName}
+        image={userData.profilePicture}
+      />
     </>
   );
 };

@@ -141,7 +141,9 @@ function Post({ data = null, userData = null }) {
                       {formatDate(data.ticketID.createdAt)}
                     </p>
                   </div>
-                  <img src={data.ticketID.image} alt=" " className="mb-4" />
+                  {data.ticketID.image !== null && (
+                    <img src={data.ticketID.image} alt=" " className="mb-4" />
+                  )}
                 </form>
               </Card>
               <div className="flex justify-between">

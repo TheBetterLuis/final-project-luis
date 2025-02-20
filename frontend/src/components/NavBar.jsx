@@ -16,7 +16,7 @@ export function NavBar() {
   };
 
   return (
-    <Navbar className="bg-azul6 ">
+    <Navbar className="bg-azul6 fixed top-0 left-0 w-full z-50">
       <Navbar.Brand href={`/#${currentRoute.logo.link}`}>
         <img
           src="../../public/img/logo1.png"

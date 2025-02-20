@@ -19,25 +19,29 @@ const FeedPage = () => {
     <>
       <div className={`${styles.background}`}>
         <NavBar />
-        <div className="flex h-screen w-full  overflow-y-scroll ">
-          <div className="flex justify-center items-center h-screen w-full font-roboto overflow-y-scroll ">
-            {/*COMPONENT GOES HERE*/}
-            <div className="flex flex-col items-center">
-              <span class="flex items-stretch transition-all duration-200 rounded-md px-4 py-2 text-md">
-                Error al cargar posts
-              </span>
-              <Link to={"/feed"}>
-                <button
-                  type="button"
-                  className="group relative flex items-stretch justify-center p-0.5 text-center font-medium transition-[color,background-color,border-color,text-decoration-color,fill,stroke,box-shadow] focus:z-10 focus:outline-none border border-transparent focus:ring-4 focus:ring-cyan-300 enabled:hover:bg-cyan-800 dark:bg-cyan-600 dark:focus:ring-cyan-800 dark:enabled:hover:bg-cyan-700 bg-azul2 text-gray-100 rounded w-36 h-12 drop-shadow-lg hover:-translate-y-1 hover:scale-110 duration-300"
-                >
-                  <span className="flex items-stretch transition-all duration-200 rounded-md px-4 py-2 text-sm">
-                    Volver al Feed
-                  </span>
-                </button>
-              </Link>
-            </div>
+        <div
+          id="wrapper"
+          className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
+        >
+          {/*Page Component goes here*/}
+
+          <div className="flex flex-col items-center ">
+            <span class="flex items-stretch transition-all duration-200 rounded-md px-4 py-2 text-md">
+              Error al cargar posts
+            </span>
+            <Link to={"/feed"}>
+              <button
+                type="button"
+                className="group relative flex items-stretch justify-center p-0.5 text-center font-medium transition-[color,background-color,border-color,text-decoration-color,fill,stroke,box-shadow] focus:z-10 focus:outline-none border border-transparent focus:ring-4 focus:ring-cyan-300 enabled:hover:bg-cyan-800 dark:bg-cyan-600 dark:focus:ring-cyan-800 dark:enabled:hover:bg-cyan-700 bg-azul2 text-gray-100 rounded w-36 h-12 drop-shadow-lg hover:-translate-y-1 hover:scale-110 duration-300"
+              >
+                <span className="flex items-stretch transition-all duration-200 rounded-md px-4 py-2 text-sm">
+                  Volver al Feed
+                </span>
+              </button>
+            </Link>
           </div>
+
+          {/*Page Component goes here*/}
         </div>
         <PageFooter />
       </div>
@@ -109,37 +113,38 @@ const FeedPage = () => {
   if (success) {
     returnPage = (
       <>
-        <div className={` flex flex-col min-h-screen ${styles.background}`}>
-          <NavBar />
-          <div className="flex h-screen w-full  overflow-y-scroll ">
-            <div className="flex justify-center items-center h-screen w-full font-roboto overflow-y-scroll pt-[700px]">
-              {/*COMPONENT GOES HERE*/}
+        <div className={`${styles.background}`}>
+          <NavBar></NavBar>
+          <div
+            id="wrapper"
+            className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
+          >
+            {/*Page Component goes here*/}
 
-              <div className="grid place-items-center py-2 font-roboto ">
-                {/*COMPONENT GOES HERE*/}
-                <div className="mb-20"></div>
-                {postsData.map((postData, index) => (
+            {postsData !== null && userData !== null && (
+              <>
+                {postsData.map((postData) => (
                   <>
                     <Post data={postData} userData={userData} />
                   </>
                 ))}
-                {currentPage < totalPages ? (
-                  <Button
-                    className="bg-azul2 drop-shadow-md "
-                    onClick={loadNextPage}
-                  >
-                    Cargar mas posts
-                  </Button>
-                ) : (
-                  <Button className="bg-gray-400 drop-shadow-md">
-                    No hay mas posts disponibles
-                  </Button>
-                )}
-              </div>
-              {/*COMPONENT GOES HERE*/}
-            </div>
-          </div>
+              </>
+            )}
+            {currentPage < totalPages ? (
+              <Button
+                className="bg-azul2 drop-shadow-md "
+                onClick={loadNextPage}
+              >
+                Cargar mas posts
+              </Button>
+            ) : (
+              <Button className="bg-gray-400 drop-shadow-md">
+                No hay mas posts disponibles
+              </Button>
+            )}
 
+            {/*Page Component goes here*/}
+          </div>
           <PageFooter />
         </div>
         <CustomSidebar
