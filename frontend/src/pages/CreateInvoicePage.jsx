@@ -132,7 +132,7 @@ const CreateInvoicePage = () => {
   return (
     <>
       <div className={`${styles.background}`}>
-        <NavBar />
+        {/*        <NavBar />*/}
         <div
           id="wrapper"
           className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
@@ -144,19 +144,13 @@ const CreateInvoicePage = () => {
             </div>
           )}
 
-          {invoiceData !== null && <Invoice data={invoiceData.invoice} />}
+          {invoiceData !== null && <Invoice />}
 
-          <Button
-            onClick={() => {
-              navigate("/logout");
-            }}
-          >
-            Finalizar
-          </Button>
+          <Invoice />
 
           {/*Page Component goes here*/}
         </div>
-        <PageFooter />
+        {/*        <PageFooter />*/}
       </div>
       <CustomSidebar></CustomSidebar>
     </>
