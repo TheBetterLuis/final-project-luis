@@ -150,6 +150,10 @@ function EditUserModal({
                 onChange={(e) => setPassword(e.target.value)}
                 className="mb-4"
               />
+              <Label
+                className="text-black text-md drop-shadow-md"
+                value="ROL"
+              />
               <Select className="mb-4" value={role} onChange={handleChange}>
                 <option value="free">FREE</option>
                 <option value="premium">PREMIUM</option>

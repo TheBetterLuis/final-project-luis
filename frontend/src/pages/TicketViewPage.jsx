@@ -111,13 +111,13 @@ const TicketViewPage = () => {
       <>
         <div className={` flex flex-col min-h-screen ${styles.background}`}>
           <NavBar />
-
-          <div className="flex h-screen w-full  overflow-y-scroll ">
-            <div className="flex justify-center items-center h-screen w-full font-roboto overflow-y-scroll ">
-              {/*COMPONENT GOES HERE*/}
-
-              <Post data={postData} userData={userData} />
-            </div>
+          <div
+            id="wrapper"
+            className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
+          >
+            {/*Page Component goes here*/}
+            <Post data={postData} userData={userData} />
+            {/*Page Component goes here*/}
           </div>
           <PageFooter />
         </div>

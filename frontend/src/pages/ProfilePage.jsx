@@ -100,24 +100,29 @@ const ProfilePage = () => {
   return (
     <>
       <div className={`${styles.background_feed}`}>
-        <div className="relative z-20">
-          <NavBar />
-        </div>
         <div
-          className={`${styles.background} fixed top-0 left-0 w-screen h-1/4 z-1 `}
-        ></div>
-        <div className="grid place-items-center py-2 font-roboto mt-20">
-          {/*COMPONENT GOES HERE*/}
-          <div className="relative z-20 grid place-items-center">
-            <Tarjeta className="relative " userData={userData} />
+          id="wrapper"
+          className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
+        >
+          <div className="relative z-40">
+            <NavBar />
           </div>
-          <Button className=" md:block md:top-40 md:left-28 lg:left-32 xl:left-72  2xl:left-96 bg-azul4 absolute top-40 left-60 top-20 left-20 sm:left-40 z-10">
-            Plan
-          </Button>
-          <Button className="md:block md:top-40 md:right-16 lg:right-32 xl:right-52 2xl:right-96 bg-azul4 absolute top-40 right-[300px] top-20 right-20 sm:right-40 z-10">
-            Configuracion
-          </Button>
-          {pageContent}
+          <div
+            className={`${styles.background} fixed top-0 left-0 w-screen h-1/4 z-1 `}
+          ></div>
+          <div className="grid place-items-center py-2 font-roboto mt-20">
+            {/*COMPONENT GOES HERE*/}
+            <div className="relative z-10 grid place-items-center">
+              <Tarjeta className="relative " userData={userData} />
+            </div>
+            <Button className=" md:block md:top-40 md:left-28 lg:left-32 xl:left-72  2xl:left-96 bg-azul4 absolute top-40 left-60 top-20 left-20 sm:left-40 z-10">
+              Plan
+            </Button>
+            <Button className="md:block md:top-40 md:right-16 lg:right-32 xl:right-52 2xl:right-96 bg-azul4 absolute top-40 right-[300px] top-20 right-20 sm:right-40 z-10">
+              Configuracion
+            </Button>
+            {pageContent}
+          </div>
         </div>
         <PageFooter />
       </div>

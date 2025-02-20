@@ -3,6 +3,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Comments from "./Comments";
+import StatusModal from "./StatusModal";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 import { FaHeart, FaCommentDots } from "react-icons/fa";
 
@@ -10,7 +12,9 @@ import { formatDate } from "../../common/utils";
 
 function Post({ data = null, userData = null }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isStatusVisible, setIsStatusVisible] = useState(false);
   const [messageComments, setMessageComments] = useState("");
+  const [messageStatus, setMessageStatus] = useState("");
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
@@ -28,6 +32,14 @@ function Post({ data = null, userData = null }) {
   const handleCloseComments = async () => {
     setIsVisible(false);
     setMessageComments("");
+  };
+
+  const prepareStatus = async () => {
+    setIsStatusVisible(true);
+  };
+
+  const handleCloseStatusModal = async () => {
+    setIsStatusVisible(false);
   };
 
   const handleMessageComments = async (message) => {
@@ -109,13 +121,20 @@ function Post({ data = null, userData = null }) {
       {data !== null && userData !== null && (
         <>
           <div className="rounded-lg mb-6">
-            <Card className="max-w-sm md:w-96  bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl">
+            <Card className="max-w-sm md:w-96  bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl relative">
               <div className="flex gap-3">
                 <img
                   className="rounded-full border border-azul5 w-20 h-20 dark:border-white"
                   src={data.userID.profilePicture}
                   alt={`foto de perfil de ${data.userID.name} ${data.userID.lastName}`}
                 />
+                {(userData.role === "tech" || userData.role === "admin") && (
+                  <GiHamburgerMenu
+                    className="absolute top-7 right-7 text-4xl text-black hover:text-gray-600 cursor-pointer"
+                    onClick={() => prepareStatus()}
+                  />
+                )}
+
                 <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize">
                   {` ${data.userID.name} ${data.userID.lastName}`}
                 </span>
@@ -199,6 +218,11 @@ function Post({ data = null, userData = null }) {
             handleCloseComments={handleCloseComments}
             messageComments={messageComments}
             handleMessageComments={handleMessageComments}
+          />
+          <StatusModal
+            visible={isStatusVisible}
+            messageStatus={messageStatus}
+            handleCloseStatusModal={handleCloseStatusModal}
           />
         </>
       )}

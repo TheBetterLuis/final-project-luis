@@ -205,6 +205,8 @@ const getPublicPostsPaginated = async (req, res) => {
 
     const posts = await postModel
       .find({ status: "public" })
+      //remove if not working, to sort from new to old
+      .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
       .populate({

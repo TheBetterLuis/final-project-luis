@@ -79,38 +79,50 @@ const CrudPage = () => {
     <>
       <div className={`${styles.background}`}>
         <NavBar />
+        <div
+          id="wrapper"
+          className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
+        >
+          {/*Page Component goes here*/}
 
-        <div className="flex h-screen w-full  mt-16 mb-24">
-          <div className="flex flex-col w-full h-screen justify-evenly items-center">
-            <div className="flex flex-row justify-center items-center space-x-4 sm:space-x-80">
-              <button
-                className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6"
-                onClick={() => {
-                  fetchUsers("users");
-                }}
-              >
-                Usuarios
-              </button>
-              <button
-                className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6
+          <div className="flex h-screen w-full  mt-16 mb-24">
+            <div className="flex flex-col w-full h-screen justify-evenly items-center">
+              <div className="flex flex-row justify-center items-center space-x-4 sm:space-x-80">
+                <button
+                  className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6"
+                  onClick={() => {
+                    fetchUsers("users");
+                  }}
+                >
+                  Usuarios
+                </button>
+                <button
+                  className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6
                 "
-                onClick={() => {
-                  fetchUsers("tech");
-                }}
-              >
-                Tecnicos
-              </button>
+                  onClick={() => {
+                    fetchUsers("tech");
+                  }}
+                >
+                  Tecnicos
+                </button>
+              </div>
+              <CRUD
+                view={currentPage}
+                data={pageData}
+                fetchUsers={fetchUsers}
+              />
             </div>
-            <CRUD view={currentPage} data={pageData} fetchUsers={fetchUsers} />
           </div>
+
+          {/*Page Component goes here*/}
         </div>
         <PageFooter />
-        <CustomSidebar
-          name={userData.name}
-          lastName={userData.lastName}
-          image={userData.profilePicture}
-        />
       </div>
+      <CustomSidebar
+        name={userData.name}
+        lastName={userData.lastName}
+        image={userData.profilePicture}
+      />
     </>
   );
 };

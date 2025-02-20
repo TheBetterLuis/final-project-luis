@@ -115,98 +115,99 @@ const CreateTicketPage = () => {
     <>
       <div className={`${styles.background}`}>
         <NavBar />
-        <div className="flex justify-center items-center h-screen w-full font-roboto">
-          <div className="flex justify-center items-center h-screen w-full font-roboto overflow-y-scroll ">
-            {/*COMPONENT GOES HERE*/}
-            <div className="py-2">
-              <h1 className="drop-shadow-md text-center text-white text-xl pb-4">
-                Ticket
-              </h1>
-              <Card className="max-w-sm bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl">
-                <form className="flex max-w-md flex-col gap-4 ">
-                  <div>
-                    <div className="mb-2 block">
-                      <Label
-                        className="text-white drop-shadow-md"
-                        htmlFor="titulo3"
-                        value="TITULO"
-                      />
-                    </div>
-                    <TextInput
-                      id="titulo3"
-                      type="text"
-                      placeholder="titulo"
-                      required
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
+        <div
+          id="wrapper"
+          className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
+        >
+          {/*Page Component goes here*/}
+          <div className="py-2">
+            <h1 className="drop-shadow-md text-center text-white text-xl pb-4">
+              Crear Ticket
+            </h1>
+            <Card className="max-w-sm bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl">
+              <form className="flex max-w-md flex-col gap-4 ">
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      className="text-white drop-shadow-md"
+                      htmlFor="titulo3"
+                      value="TITULO"
                     />
                   </div>
-                  <div>
-                    <div className="mb-2 block">
-                      <Label
-                        className="text-white drop-shadow-md"
-                        htmlFor="descripcion3"
-                        value="DESCRIPCION"
-                      />
-                    </div>
-                    <Textarea
-                      className="text-xs"
-                      id="descripcion3"
-                      placeholder="describe de que se trata este ticket"
-                      required
-                      rows={4}
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
+                  <TextInput
+                    id="titulo3"
+                    type="text"
+                    placeholder="titulo"
+                    required
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      className="text-white drop-shadow-md"
+                      htmlFor="descripcion3"
+                      value="DESCRIPCION"
+                    />
+                  </div>
+                  <Textarea
+                    className="text-xs"
+                    id="descripcion3"
+                    placeholder="describe de que se trata este ticket"
+                    required
+                    rows={4}
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      className="text-white drop-shadow-md"
+                      htmlFor="fecha3"
+                      value="FECHA"
+                    />
+
+                    <Datepicker
+                      id="fecha3"
+                      minDate={new Date()}
+                      disabled={true}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div className="mb-2 block">
+                    <Label
+                      className="text-white drop-shadow-md"
+                      htmlFor="adjuntar3"
+                      value="ADJUNTAR ARCHIVO"
                     />
                   </div>
 
-                  <div>
-                    <div className="mb-2 block">
-                      <Label
-                        className="text-white drop-shadow-md"
-                        htmlFor="fecha3"
-                        value="FECHA"
-                      />
+                  <FileInput
+                    id="adjuntar3"
+                    sizing="sm"
+                    onChange={handleFileChange}
+                  />
 
-                      <Datepicker
-                        id="fecha3"
-                        minDate={new Date()}
-                        disabled={true}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="mb-2 block">
-                      <Label
-                        className="text-white drop-shadow-md"
-                        htmlFor="adjuntar3"
-                        value="ADJUNTAR ARCHIVO"
-                      />
-                    </div>
-
-                    <FileInput
-                      id="adjuntar3"
-                      sizing="sm"
-                      onChange={handleFileChange}
-                    />
-
-                    <h2 className="mt-2 text-center text-red-500 text-sm">
-                      {error}
-                    </h2>
-                  </div>
-                  <Button
-                    className="bg-azul2 drop-shadow-md"
-                    type="submit"
-                    disabled={loading}
-                    onClick={handleSubmit}
-                  >
-                    <p>Guardar Ticket</p>
-                  </Button>
-                </form>
-              </Card>
-            </div>
-            {/*COMPONENT GOES HERE*/}
+                  <h2 className="mt-2 text-center text-red-500 text-sm">
+                    {error}
+                  </h2>
+                </div>
+                <Button
+                  className="bg-azul2 drop-shadow-md"
+                  type="submit"
+                  disabled={loading}
+                  onClick={handleSubmit}
+                >
+                  <p>Guardar Ticket</p>
+                </Button>
+              </form>
+            </Card>
           </div>
+          {/*Page Component goes here*/}
         </div>
         <PageFooter />
       </div>

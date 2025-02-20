@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Checkbox } from "flowbite-react";
 import { Table } from "flowbite-react";
 import { NavBar } from "../components/NavBar";
 import PageFooter from "../components/Footer";
@@ -117,9 +116,6 @@ const Dashboard = () => {
                     openTickets.map((ticket) => (
                       <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                          <Checkbox />
-                        </Table.Cell>
-                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
                           <Link to={`/ticket/${ticket._id}`}>
                             {ticket.title}
                           </Link>
@@ -146,10 +142,9 @@ const Dashboard = () => {
                     pendingTickets.map((ticket) => (
                       <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                          <Checkbox />
-                        </Table.Cell>
-                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                          <Link>{ticket.title}</Link>
+                          <Link to={`/ticket/${ticket._id}`}>
+                            {ticket.title}
+                          </Link>
                         </Table.Cell>
                       </Table.Row>
                     ))
@@ -173,10 +168,9 @@ const Dashboard = () => {
                     closedTickets.map((ticket) => (
                       <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                          <Checkbox />
-                        </Table.Cell>
-                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                          <Link>{ticket.title}</Link>
+                          <Link to={`/ticket/${ticket._id}`}>
+                            {ticket.title}
+                          </Link>
                         </Table.Cell>
                       </Table.Row>
                     ))
