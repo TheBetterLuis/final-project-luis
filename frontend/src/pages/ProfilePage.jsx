@@ -43,6 +43,24 @@ const ProfilePage = () => {
     }
   };
 
+  const handleCreatePaymentSession = async (userID) => {
+    try {
+      const createSessionResponse = await axios.post(
+        `http://localhost:3001/api/payments/create-checkout-session`
+      );
+
+      const session = createSessionResponse.data;
+      window.location.href = session.url;
+    } catch (err) {
+      console.error("Error al crear sesion de pago", err);
+      setError(
+        err.response?.data?.message ||
+          "Ha ocurrido un error durante la creacion de sesion de pago"
+      );
+    } finally {
+    }
+  };
+
   useEffect(() => {
     const fetchInfo = async () => {
       const token = localStorage.getItem("tokenSesion");
@@ -116,7 +134,12 @@ const ProfilePage = () => {
               <Tarjeta className="relative " userData={userData} />
             </div>
             {userData && userData.role === "free" && (
-              <Button className=" md:block md:top-40 md:left-28 lg:left-32 xl:left-72  2xl:left-96 bg-azul4 absolute top-40 left-60 top-20 left-20 sm:left-40 z-10">
+              <Button
+                className=" md:block md:top-40 md:left-28 lg:left-32 xl:left-72  2xl:left-96 bg-azul4 absolute top-40 left-60 top-20 left-20 sm:left-40 z-10"
+                onClick={() => {
+                  handleCreatePaymentSession();
+                }}
+              >
                 Plan
               </Button>
             )}

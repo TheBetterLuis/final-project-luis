@@ -11,7 +11,7 @@ const createSession = async (req, res) => {
             description: "Servicio Premium de atencion al cliente",
           },
           currency: "usd",
-          unit_amount: 2000,
+          unit_amount: 500,
         },
         quantity: 1,
       },
