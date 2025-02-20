@@ -68,9 +68,39 @@ const deleteInvoice = async (req, res) => {
   }
 };
 
+const checkInvoiceDate = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const invoice = await invoiceModel.findById(id);
+    if (!invoice) {
+      return res.status(404).json({ message: "Factura no encontrada" });
+    }
+
+    const paymentDate = invoice.paymentDate;
+    const currentDate = new Date();
+    const daysPassed = Math.floor(
+      (currentDate - paymentDate) / (1000 * 60 * 60 * 24)
+    );
+
+    if (daysPassed >= 31) {
+      return res.status(200).json({
+        message: `Más de 31 días han pasado desde la fecha de pago. Han pasado ${daysPassed} dias.`,
+      });
+    } else {
+      return res.status(200).json({
+        message: `Menos de 31 días han pasado desde la fecha de pago. Han pasado ${daysPassed} dias.`,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getInvoices,
   getInvoicesByUserID,
   createInvoice,
   deleteInvoice,
+  checkInvoiceDate,
 };

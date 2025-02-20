@@ -49,6 +49,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "../../public/img/default-profile-icon.jpg",
     },
+    latestInvoice: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "invoice",
+      default: null,
+    },
   },
   {
     timestamps: true,
