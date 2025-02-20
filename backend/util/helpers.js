@@ -1,5 +1,7 @@
 const nodemailer = require("nodemailer");
-const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
+
+const tokenStore = new Map();
 
 function generateSixDigitCode() {
   const min = 100000; // Minimum 6-digit number
@@ -36,14 +38,24 @@ async function sendEmail(subject, text, to) {
   }
 }
 
-function isRole(token, role) {
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    return decoded.role === role;
-  } catch (e) {
-    console.error("JWT verification failed:", error);
-    return false;
-  }
-}
+const generateToken = () => {
+  const token = crypto.randomBytes(32).toString("hex");
+  tokenStore.set(token, true); // Store the token
+  return token;
+};
 
-module.exports = { generateSixDigitCode, sendEmail };
+const validateToken = (token) => {
+  return tokenStore.has(token); // Check if the token exists in the store
+};
+
+const removeToken = (token) => {
+  return tokenStore.delete(token);
+};
+
+module.exports = {
+  generateSixDigitCode,
+  sendEmail,
+  generateToken,
+  validateToken,
+  removeToken,
+};

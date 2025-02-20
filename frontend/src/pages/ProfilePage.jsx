@@ -43,13 +43,13 @@ const ProfilePage = () => {
     }
   };
 
-  const handleCreatePaymentSession = async (userID) => {
+  const handleCreatePaymentSession = async () => {
     try {
       const createSessionResponse = await axios.post(
         `http://localhost:3001/api/payments/create-checkout-session`
       );
 
-      const session = createSessionResponse.data;
+      const session = createSessionResponse.data.session;
       window.location.href = session.url;
     } catch (err) {
       console.error("Error al crear sesion de pago", err);

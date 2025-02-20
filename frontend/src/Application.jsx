@@ -12,6 +12,7 @@ import CreateTicketPage from "./pages/CreateTicketPage";
 import Dashboard from "./pages/DashboardPage";
 import CrudPage from "./pages/CrudPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
+import CreateInvoicePage from "./pages/CreateInvoicePage";
 
 const Application = () => {
   return (
@@ -29,6 +30,8 @@ const Application = () => {
           <Route path="/ticket/:ticketID" element={<TicketViewPage />} />
           <Route path="/crud" element={<CrudPage />} />
           <Route path="/change-password" element={<ChangePasswordPage />} />
+
+          <Route path="/create-invoice" element={<CreateInvoicePage />} />
 
           <Route path="/test" element={<TestPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
