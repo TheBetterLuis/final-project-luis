@@ -8,9 +8,11 @@ const {
   getInvoicesByUserID,
   checkInvoiceDate,
   checkInvoiceDateAndUpdateRole,
+  validateLatestInvoiceByUserID,
 } = require("../controllers/invoice");
 
 router.post("/create", createInvoice);
+router.post("/validateuser/:userID", validateLatestInvoiceByUserID);
 router.post("/checkdate/:id", checkInvoiceDate);
 router.post("/checkandupdate/:id", checkInvoiceDateAndUpdateRole);
 router.delete("/delete/:id", deleteInvoice);
