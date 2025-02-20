@@ -115,9 +115,11 @@ const ProfilePage = () => {
             <div className="relative z-10 grid place-items-center">
               <Tarjeta className="relative " userData={userData} />
             </div>
-            <Button className=" md:block md:top-40 md:left-28 lg:left-32 xl:left-72  2xl:left-96 bg-azul4 absolute top-40 left-60 top-20 left-20 sm:left-40 z-10">
-              Plan
-            </Button>
+            {userData && userData.role === "free" && (
+              <Button className=" md:block md:top-40 md:left-28 lg:left-32 xl:left-72  2xl:left-96 bg-azul4 absolute top-40 left-60 top-20 left-20 sm:left-40 z-10">
+                Plan
+              </Button>
+            )}
             <Button className="md:block md:top-40 md:right-16 lg:right-32 xl:right-52 2xl:right-96 bg-azul4 absolute top-40 right-[300px] top-20 right-20 sm:right-40 z-10">
               Configuracion
             </Button>
