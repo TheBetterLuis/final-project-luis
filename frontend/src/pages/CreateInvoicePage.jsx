@@ -2,6 +2,7 @@ import { NavBar } from "../components/NavBar";
 import { Button } from "flowbite-react";
 import PageFooter from "../components/Footer";
 import CustomSidebar from "../components/CustomSidebar";
+import Invoice from "../components/Invoice";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -142,6 +143,8 @@ const CreateInvoicePage = () => {
               <h1>{invoiceData.message}</h1>
             </div>
           )}
+
+          {invoiceData !== null && <Invoice data={invoiceData.invoice} />}
 
           <Button
             onClick={() => {
