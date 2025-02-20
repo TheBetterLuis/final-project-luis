@@ -49,7 +49,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "../../public/img/default-profile-icon.jpg",
     },
-    latestInvoice: {
+    latestInvoiceID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "invoice",
       default: null,
