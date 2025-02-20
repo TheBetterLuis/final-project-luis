@@ -33,7 +33,7 @@ const CreateInvoicePage = () => {
 
         if (response.data.isValid) {
           setIsValid(true);
-          fetchInfo();
+          fetchInfo(token);
           //          console.log(response.data.message);
         }
       } catch (error) {
@@ -51,7 +51,7 @@ const CreateInvoicePage = () => {
       console.log("no token,redireccion");
     }
 
-    const fetchInfo = async () => {
+    const fetchInfo = async (invoiceToken) => {
       const token = localStorage.getItem("tokenSesion");
       if (token) {
         const decoded = jwtDecode(token);
@@ -81,7 +81,7 @@ const CreateInvoicePage = () => {
         }
 
         if (userRole === "free") {
-          handleInvoiceCreation(decoded);
+          handleInvoiceCreation(decoded, invoiceToken);
           //          navigate("/feed");
         }
       }
@@ -90,7 +90,7 @@ const CreateInvoicePage = () => {
     //fetchInfo();
   }, [location.search]);
 
-  const handleInvoiceCreation = async (userInfo) => {
+  const handleInvoiceCreation = async (userInfo, invoiceToken) => {
     try {
       const response = await axios.post(
         "http://localhost:3001/api/invoice/create",
@@ -102,6 +102,25 @@ const CreateInvoicePage = () => {
       setInvoiceData(response.data);
     } catch (err) {
       console.error("error en la creacion de factura", err);
+      setError(
+        err.response?.data?.message ||
+          "Ha ocurrido un error durante la creacion de factura"
+      );
+    } finally {
+      handleTokenDeletion(invoiceToken);
+    }
+  };
+  const handleTokenDeletion = async (invoiceToken) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/api/token/remove",
+        {
+          token: invoiceToken,
+        }
+      );
+      console.log(response.data.message);
+    } catch (err) {
+      console.log("error en la eliminacion de token", err);
       setError(
         err.response?.data?.message ||
           "Ha ocurrido un error durante la creacion de factura"
