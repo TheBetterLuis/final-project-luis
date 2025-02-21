@@ -127,6 +127,7 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
             handleCloseModal={handleCloseModal}
             handleMessage={handleMessage}
             message={message}
+            showRoleSelection={true}
           />
         </div>
       )}
@@ -192,6 +193,7 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
             openModal={openModal}
             handleCloseModal={handleCloseModal}
             handleMessage={handleMessage}
+            showRoleSelection={true}
           />
         </div>
       )}

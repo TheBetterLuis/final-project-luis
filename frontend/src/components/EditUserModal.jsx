@@ -8,6 +8,7 @@ function EditUserModal({
   handleCloseModal,
   handleMessage,
   message,
+  showRoleSelection = null,
 }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -150,16 +151,21 @@ function EditUserModal({
                 onChange={(e) => setPassword(e.target.value)}
                 className="mb-4"
               />
-              <Label
-                className="text-black text-md drop-shadow-md"
-                value="ROL"
-              />
-              <Select className="mb-4" value={role} onChange={handleChange}>
-                <option value="free">FREE</option>
-                <option value="premium">PREMIUM</option>
-                <option value="tech">TECH</option>
-                <option value="admin">ADMIN</option>
-              </Select>
+              {showRoleSelection && (
+                <>
+                  <Label
+                    className="text-black text-md drop-shadow-md"
+                    value="ROL"
+                  />
+                  <Select className="mb-4" value={role} onChange={handleChange}>
+                    <option value="free">FREE</option>
+                    <option value="premium">PREMIUM</option>
+                    <option value="tech">TECH</option>
+                    <option value="admin">ADMIN</option>
+                  </Select>
+                </>
+              )}
+
               <h1 className="text-gray-400 text-xl text-center pb-2">
                 {typeof message === "string"
                   ? message
