@@ -79,7 +79,8 @@ const createTicket = async (req, res) => {
 
     const ticket = await ticketModel.create({
       userID,
-      techID,
+      //some logic for random techID selection has to be implemented
+      techID: "679856352765feb05fde619e",
       title,
       description,
       reportDate,

@@ -13,6 +13,7 @@ import Dashboard from "./pages/DashboardPage";
 import CrudPage from "./pages/CrudPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import CreateInvoicePage from "./pages/CreateInvoicePage";
+import Chat from "./pages/Chat";
 
 const Application = () => {
   return (
@@ -35,6 +36,7 @@ const Application = () => {
 
           <Route path="/test" element={<TestPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/Chat" element={<Chat />} />
 
           <Route path="/*" element={<>not found</>} />
         </Routes>
