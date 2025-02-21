@@ -184,6 +184,8 @@ const ProfilePage = () => {
         openModal={openModal}
         handleCloseModal={handleCloseModal}
         handleMessage={handleMessage}
+        message={message}
+        logout={true}
       />
     </>
   );

@@ -1,6 +1,7 @@
 import { Table, Button, Modal, TextInput, Label, Select } from "flowbite-react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function EditUserModal({
   data = null,
@@ -9,12 +10,14 @@ function EditUserModal({
   handleMessage,
   message,
   showRoleSelection = null,
+  logout = null,
 }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (data) {
@@ -28,7 +31,15 @@ function EditUserModal({
   const handleEdit = async (e) => {
     e.preventDefault();
 
-    const requestData = { id: data._id };
+    // const requestData = { id: data._id };
+
+    const requestData = {};
+
+    if (data.id) {
+      requestData.id = data.id;
+    } else if (data._id) {
+      requestData.id = data._id;
+    }
 
     if (name !== "") {
       requestData.name = name;
@@ -62,6 +73,10 @@ function EditUserModal({
       // console.log(response.data.message);
     } catch (err) {
       console.error("Error al editar usuario", err);
+    } finally {
+      if (logout) {
+        navigate("/logout");
+      }
     }
   };
 
