@@ -9,6 +9,9 @@ const {
   getOpenTicketsByTechID,
   getPendingTicketsByTechID,
   getClosedTicketsByTechID,
+  getPaginatedOpenTicketsByTechID,
+  getPaginatedPendingTicketsByTechID,
+  getPaginatedClosedTicketsByTechID,
   createTicket,
   deleteTicket,
   deleteAllTickets,
@@ -24,6 +27,10 @@ router.post("/tech", getTicketsByTechID);
 router.post("/tech/open", getOpenTicketsByTechID);
 router.post("/tech/pending", getPendingTicketsByTechID);
 router.post("/tech/closed", getClosedTicketsByTechID);
+//paginated
+router.post("/tech/open/paginate", getPaginatedOpenTicketsByTechID);
+router.post("/tech/pending/paginate", getPaginatedPendingTicketsByTechID);
+router.post("/tech/closed/paginate", getPaginatedClosedTicketsByTechID);
 
 //router.get("/all", auth(["admin", "tech", "free"]), getTickets);
 router.get("/all", getTickets);

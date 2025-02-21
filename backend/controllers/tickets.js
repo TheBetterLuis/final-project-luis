@@ -74,6 +74,110 @@ const getClosedTicketsByTechID = async (req, res) => {
   }
 };
 
+//paginate
+
+const getPaginatedOpenTicketsByTechID = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    const { techID } = req.body;
+    const tickets = await ticketModel
+      .find({ techID: techID, status: "open" })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await ticketModel.countDocuments({ techID, status: "open" });
+
+    const totalPages = Math.ceil(total / limit);
+
+    const nextPage = page < totalPages ? page + 1 : null;
+    const previousPage = page > 1 ? page - 1 : null;
+
+    res.status(200).json({
+      tickets,
+      total,
+      totalPages,
+      currentPage: page,
+      nextPage,
+      previousPage,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getPaginatedPendingTicketsByTechID = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    const { techID } = req.body;
+    const tickets = await ticketModel
+      .find({ techID: techID, status: "pending" })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await ticketModel.countDocuments({
+      techID,
+      status: "pending",
+    });
+
+    const totalPages = Math.ceil(total / limit);
+
+    const nextPage = page < totalPages ? page + 1 : null;
+    const previousPage = page > 1 ? page - 1 : null;
+
+    res.status(200).json({
+      tickets,
+      total,
+      totalPages,
+      currentPage: page,
+      nextPage,
+      previousPage,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getPaginatedClosedTicketsByTechID = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    const { techID } = req.body;
+    const tickets = await ticketModel
+      .find({ techID: techID, status: "closed" })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await ticketModel.countDocuments({
+      techID,
+      status: "closed",
+    });
+
+    const totalPages = Math.ceil(total / limit);
+
+    const nextPage = page < totalPages ? page + 1 : null;
+    const previousPage = page > 1 ? page - 1 : null;
+
+    res.status(200).json({
+      tickets,
+      total,
+      totalPages,
+      currentPage: page,
+      nextPage,
+      previousPage,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const createTicket = async (req, res) => {
   try {
     const { userID, techID, title, description, reportDate, status } = req.body;
@@ -218,5 +322,8 @@ module.exports = {
   getOpenTicketsByTechID,
   getPendingTicketsByTechID,
   getClosedTicketsByTechID,
+  getPaginatedOpenTicketsByTechID,
+  getPaginatedPendingTicketsByTechID,
+  getPaginatedClosedTicketsByTechID,
   uploadTicketImage,
 };
