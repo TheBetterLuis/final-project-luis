@@ -8,6 +8,7 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Post from "../components/Post";
+import EditUserModal from "../components/EditUserModal";
 
 const ProfilePage = () => {
   const styles = {
@@ -22,6 +23,25 @@ const ProfilePage = () => {
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const [modalData, setModalData] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const prepareModal = async (user) => {
+    setModalData(user);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = async () => {
+    setModalData(null);
+    setMessage("");
+    setOpenModal(false);
+  };
+
+  const handleMessage = async (message) => {
+    setMessage(message);
+  };
 
   const fetchPosts = async (userID) => {
     try {
@@ -143,15 +163,28 @@ const ProfilePage = () => {
                 Plan
               </Button>
             )}
-            <Button className="md:block md:top-40 md:right-16 lg:right-32 xl:right-52 2xl:right-96 bg-azul4 absolute top-40 right-[300px] top-20 right-20 sm:right-40 z-10">
+            <Button
+              className="md:block md:top-40 md:right-16 lg:right-32 xl:right-52 2xl:right-96 bg-azul4 absolute top-40 right-[300px] top-20 right-20 sm:right-40 z-10"
+              onClick={() => {
+                prepareModal(userData);
+              }}
+            >
               Configuracion
             </Button>
+
             {pageContent}
           </div>
         </div>
         <PageFooter />
       </div>
       <CustomSidebar></CustomSidebar>
+      <EditUserModal
+        data={modalData}
+        setOpenModal={setOpenModal}
+        openModal={openModal}
+        handleCloseModal={handleCloseModal}
+        handleMessage={handleMessage}
+      />
     </>
   );
 };

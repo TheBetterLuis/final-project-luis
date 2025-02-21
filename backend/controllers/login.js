@@ -44,6 +44,7 @@ const login = async (req, res) => {
         id: userFind._id,
         name: userFind.name,
         lastName: userFind.lastName,
+        email: userFind.email,
         role: userFind.role,
         plan: userFind.plan,
         profilePicture: userFind.profilePicture,
