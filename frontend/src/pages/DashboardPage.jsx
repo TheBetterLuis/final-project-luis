@@ -51,28 +51,33 @@ const Dashboard = () => {
           }
 
           const openResponse = await axios.post(
-            "http://localhost:3001/api/tickets/tech/open",
+            //"http://localhost:3001/api/tickets/tech/open",
+            `http://localhost:3001/api/tickets/tech/open/paginate?page=1`,
             {
               techID: techID,
             }
           );
-          setOpenTickets(openResponse.data);
+          setOpenTickets(openResponse.data.tickets);
 
           const pendingResponse = await axios.post(
-            "http://localhost:3001/api/tickets/tech/pending",
+            //"http://localhost:3001/api/tickets/tech/pending",
+            `http://localhost:3001/api/tickets/tech/pending/paginate?page=1`,
             {
               techID: techID,
             }
           );
-          setPendingTickets(pendingResponse.data);
+          //setPendingTickets(pendingResponse.data);
+          setPendingTickets(pendingResponse.data.tickets);
 
           const closedResponse = await axios.post(
-            "http://localhost:3001/api/tickets/tech/closed",
+            //  "http://localhost:3001/api/tickets/tech/closed",
+            `http://localhost:3001/api/tickets/tech/closed/paginate?page=1`,
             {
               techID: techID,
             }
           );
-          setClosedTickets(closedResponse.data);
+          //setClosedTickets(closedResponse.data);
+          setClosedTickets(closedResponse.data.tickets);
 
           setLoading(false);
         } catch (e) {
