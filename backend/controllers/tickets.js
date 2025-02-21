@@ -1,5 +1,6 @@
 const ticketModel = require("../models/tickets");
 const postModel = require("../models/posts");
+const userModel = require("../models/users");
 const path = require("path");
 
 const getTickets = async (req, res) => {
@@ -77,10 +78,17 @@ const createTicket = async (req, res) => {
   try {
     const { userID, techID, title, description, reportDate, status } = req.body;
 
+    let assignedTechID = techID;
+
+    if (!assignedTechID) {
+      const techUsers = await userModel.find({ role: "tech" });
+      const randomTechIndex = Math.floor(Math.random() * techUsers.length);
+      assignedTechID = techUsers[randomTechIndex]._id;
+    }
+
     const ticket = await ticketModel.create({
       userID,
-      //some logic for random techID selection has to be implemented
-      techID: "679856352765feb05fde619e",
+      techID: assignedTechID,
       title,
       description,
       reportDate,
