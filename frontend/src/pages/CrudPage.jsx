@@ -53,16 +53,16 @@ const CrudPage = () => {
     let url = "";
 
     if (usersToFetch === "users") {
-      url = "http://localhost:3001/api/users/regular";
+      url = "http://localhost:3001/api/users/regular/paginate?page=1";
     }
 
     if (usersToFetch === "tech") {
-      url = "http://localhost:3001/api/users/tech";
+      url = "http://localhost:3001/api/users/tech/paginate?page=1";
     }
 
     try {
       const response = await axios.get(url);
-      setPageData(response.data);
+      setPageData(response.data.users);
       console.log(response.data);
     } catch (err) {
       console.error("Error al cargar los usuarios", err);
