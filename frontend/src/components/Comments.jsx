@@ -88,7 +88,22 @@ function Comments({
               <>
                 {data.commentsID.map((comment, commentIndex) => (
                   <div className="text-start" hidden={comment.hidden}>
-                    <h1 className="font-bold">{`${comment.userID.name} ${comment.userID.lastName}`}</h1>
+                    {data.isAnonymous === false && (
+                      <h1 className="font-bold">{`${comment.userID.name} ${comment.userID.lastName}`}</h1>
+                    )}
+
+                    {data.isAnonymous === true && (
+                      <>
+                        {data.userID._id === comment.userID._id && (
+                          <h1 className="font-bold">{`Usuario anónimo`}</h1>
+                        )}
+
+                        {data.userID._id !== comment.userID._id && (
+                          <h1 className="font-bold">{`${comment.userID.name} ${comment.userID.lastName}`}</h1>
+                        )}
+                      </>
+                    )}
+
                     <div className="flex justify-between mb-2">
                       <h2>{comment.content}</h2>
                       {(userData.id === comment.userID._id ||

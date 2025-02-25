@@ -128,21 +128,38 @@ function Post({ data = null, userData = null }) {
           <div className="rounded-lg mb-6">
             <Card className="max-w-sm md:w-96  bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl relative">
               <div className="flex gap-3">
-                <img
-                  className="rounded-full border border-azul5 w-20 h-20 dark:border-white"
-                  src={data.userID.profilePicture}
-                  alt={`foto de perfil de ${data.userID.name} ${data.userID.lastName}`}
-                />
+                {data.isAnonymous === false && (
+                  <img
+                    className="rounded-full border border-azul5 w-20 h-20 dark:border-white"
+                    src={data.userID.profilePicture}
+                    alt={`foto de perfil de ${data.userID.name} ${data.userID.lastName}`}
+                  />
+                )}
+                {data.isAnonymous === true && (
+                  <img
+                    className="rounded-full border border-azul5 w-20 h-20 dark:border-white"
+                    src={"../../public/img/default-profile-icon.jpg"}
+                    alt={`foto de perfil de usuario anónimo`}
+                  />
+                )}
+
                 {(userData.role === "tech" || userData.role === "admin") && (
                   <GiHamburgerMenu
                     className="absolute top-7 right-7 text-4xl text-black hover:text-gray-600 cursor-pointer"
                     onClick={() => prepareStatus()}
                   />
                 )}
+                {data.isAnonymous === false && (
+                  <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize">
+                    {` ${data.userID.name} ${data.userID.lastName}`}
+                  </span>
+                )}
 
-                <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize">
-                  {` ${data.userID.name} ${data.userID.lastName}`}
-                </span>
+                {data.isAnonymous === true && (
+                  <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize">
+                    {`usuario anónimo`}
+                  </span>
+                )}
               </div>
               <Card className="max-w-sm  bg-teal-500  bg-opacity-30 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-black drop-shadow-2xl shadow-2xl">
                 <form className="flex max-w-md flex-col gap-4 ">
