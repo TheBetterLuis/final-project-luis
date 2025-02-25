@@ -1,4 +1,5 @@
 const userModel = require("../models/users");
+const { sendEmail } = require("../util/helpers");
 
 const getUsers = async (req, res) => {
   const users = await userModel.find();
@@ -70,6 +71,21 @@ const createUser = async (req, res) => {
       password: await userModel.encryptPassword(password),
       role,
     });
+
+    sendEmail(
+      "L&E TELECOMS - Bienvenida",
+      `Estimado/a ${name} ${lastName},
+
+Nos complace darte la bienvenida a nuestra familia de L&E TELECOMS. Estamos emocionados de que hayas decidido unirte a nosotros y esperamos poder ofrecerte el mejor servicio posible.
+
+Si tienes alguna pregunta o necesitas asistencia, no dudes en ponerte en contacto con nuestro equipo de soporte. Estamos aquí para ayudarte en todo lo que necesites.
+
+¡Gracias por elegir L&E TELECOMS! Esperamos que disfrutes de una experiencia excepcional con nosotros.
+
+Atentamente, El equipo de L&E TELECOMS`,
+      email
+    );
+
     res.status(201).json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
