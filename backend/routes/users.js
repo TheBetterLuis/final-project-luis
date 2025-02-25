@@ -6,7 +6,9 @@ const {
   getSafeUserByUserID,
   getUsers,
   getTechUsers,
+  getPaginatedTechUsers,
   getRegularUsers,
+  getPaginatedRegularUsers,
   createUser,
   deleteUser,
   updateUser,
@@ -24,6 +26,9 @@ router.post("/make/:newRole/:id", makeRole);
 router.get("/", auth(["admin", "tech", "free"]), getUsers);
 router.get("/tech", getTechUsers);
 router.get("/regular", getRegularUsers);
+
+router.get("/tech/paginate", getPaginatedTechUsers);
+router.get("/regular/paginate", getPaginatedRegularUsers);
 
 //route to delete users by ID
 router.delete("/:id", deleteUser);

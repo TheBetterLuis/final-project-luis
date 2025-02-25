@@ -176,12 +176,116 @@ const makeRole = async (req, res) => {
   }
 };
 
+const getPaginatedOpenTicketsByTechID = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    //const limit = 10;
+    // using 1 limit for testing
+    const limit = 1;
+    const skip = (page - 1) * limit;
+
+    const { techID } = req.body;
+    const tickets = await ticketModel
+      .find({ techID: techID, status: "open" })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await ticketModel.countDocuments({ techID, status: "open" });
+
+    const totalPages = Math.ceil(total / limit);
+
+    const nextPage = page < totalPages ? page + 1 : null;
+    const previousPage = page > 1 ? page - 1 : null;
+
+    res.status(200).json({
+      tickets,
+      total,
+      totalPages,
+      currentPage: page,
+      nextPage,
+      previousPage,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getPaginatedTechUsers = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    //const limit = 10;
+    // using 3 limit for testing
+    const limit = 3;
+    const skip = (page - 1) * limit;
+
+    const users = await userModel
+      .find({ role: "tech" })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await userModel.countDocuments({ role: "tech" });
+
+    const totalPages = Math.ceil(total / limit);
+
+    const nextPage = page < totalPages ? page + 1 : null;
+    const previousPage = page > 1 ? page - 1 : null;
+
+    res.status(200).json({
+      users,
+      total,
+      totalPages,
+      currentPage: page,
+      nextPage,
+      previousPage,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getPaginatedRegularUsers = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    //const limit = 10;
+    // using 3 limit for testing
+    const limit = 3;
+    const skip = (page - 1) * limit;
+
+    const users = await userModel
+      .find({ $or: [{ role: "free" }, { role: "premium" }] })
+      .skip(skip)
+      .limit(limit);
+
+    const total = await userModel.countDocuments({
+      $or: [{ role: "free" }, { role: "premium" }],
+    });
+
+    const totalPages = Math.ceil(total / limit);
+
+    const nextPage = page < totalPages ? page + 1 : null;
+    const previousPage = page > 1 ? page - 1 : null;
+
+    res.status(200).json({
+      users,
+      total,
+      totalPages,
+      currentPage: page,
+      nextPage,
+      previousPage,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getUsers,
   getUserByUserID,
   getSafeUserByUserID,
   getTechUsers,
+  getPaginatedTechUsers,
   getRegularUsers,
+  getPaginatedRegularUsers,
   createUser,
   deleteUser,
   updateUser,
