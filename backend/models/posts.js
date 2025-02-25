@@ -26,6 +26,10 @@ const PostSchema = new mongoose.Schema(
       enum: ["public", "private"],
       default: "public",
     },
+    isAnonymous: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
