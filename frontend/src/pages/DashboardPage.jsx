@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "flowbite-react";
+import { Table, Button } from "flowbite-react";
 import { NavBar } from "../components/NavBar";
 import PageFooter from "../components/Footer";
 import CustomSidebar from "../components/CustomSidebar";
@@ -16,15 +16,108 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
-  const [openTickets, setOpenTickets] = useState();
-  const [pendingTickets, setPendingTickets] = useState();
-  const [closedTickets, setClosedTickets] = useState();
+  const [openTickets, setOpenTickets] = useState([]);
+  const [pendingTickets, setPendingTickets] = useState([]);
+  const [closedTickets, setClosedTickets] = useState([]);
+
+  const [currentPageOpen, setCurrentPageOpen] = useState(1);
+  const [totalPagesOpen, setTotalPagesOpen] = useState(0);
+
+  const [currentPagePending, setCurrentPagePending] = useState(1);
+  const [totalPagesPending, setTotalPagesPending] = useState(0);
+
+  const [currentPageClosed, setCurrentPageClosed] = useState(1);
+  const [totalPagesClosed, setTotalPagesClosed] = useState(0);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const fetchOpenTickets = async (page = 1) => {
+    console.log("fetchOpentickets Called");
+    try {
+      const openResponse = await axios.post(
+        `http://localhost:3001/api/tickets/tech/open/paginate?page=${page}`,
+        {
+          techID: userData.id,
+        }
+      );
+      setOpenTickets((prevTickets) => [
+        ...prevTickets,
+        ...openResponse.data.tickets,
+      ]);
+      //    setOpenTickets(openResponse.data.tickets);
+      setTotalPagesOpen(openResponse.data.totalPages);
+
+      //      setSuccess(true);
+    } catch (err) {
+      console.error("Error al cargar tickets abiertos", err);
+      setError(
+        err.response?.data?.message ||
+          "Ha ocurrido un error durante la carga de tickets abiertos"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchPendingTickets = async (page = 1) => {
+    console.log("fetchPendingtickets Called");
+    try {
+      const pendingResponse = await axios.post(
+        `http://localhost:3001/api/tickets/tech/pending/paginate?page=${page}`,
+        {
+          techID: userData.id,
+        }
+      );
+      setPendingTickets((prevTickets) => [
+        ...prevTickets,
+        ...pendingResponse.data.tickets,
+      ]);
+      //    setOpenTickets(openResponse.data.tickets);
+      setTotalPagesPending(pendingResponse.data.totalPages);
+
+      //      setSuccess(true);
+    } catch (err) {
+      console.error("Error al cargar tickets en revision", err);
+      setError(
+        err.response?.data?.message ||
+          "Ha ocurrido un error durante la carga de tickets en revision"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchClosedTickets = async (page = 1) => {
+    console.log("fetchClosedtickets Called");
+    try {
+      const closedResponse = await axios.post(
+        `http://localhost:3001/api/tickets/tech/closed/paginate?page=${page}`,
+        {
+          techID: userData.id,
+        }
+      );
+      setClosedTickets((prevTickets) => [
+        ...prevTickets,
+        ...closedResponse.data.tickets,
+      ]);
+      //    setOpenTickets(openResponse.data.tickets);
+      setTotalPagesClosed(closedResponse.data.totalPages);
+
+      //      setSuccess(true);
+    } catch (err) {
+      console.error("Error al cargar tickets en resueltos", err);
+      setError(
+        err.response?.data?.message ||
+          "Ha ocurrido un error durante la carga de tickets resueltos"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchTickets = async () => {
+    const fetchInfo = async () => {
       const token = localStorage.getItem("tokenSesion");
 
       if (!token) {
@@ -50,35 +143,6 @@ const Dashboard = () => {
             navigate("/login");
           }
 
-          const openResponse = await axios.post(
-            //"http://localhost:3001/api/tickets/tech/open",
-            `http://localhost:3001/api/tickets/tech/open/paginate?page=1`,
-            {
-              techID: techID,
-            }
-          );
-          setOpenTickets(openResponse.data.tickets);
-
-          const pendingResponse = await axios.post(
-            //"http://localhost:3001/api/tickets/tech/pending",
-            `http://localhost:3001/api/tickets/tech/pending/paginate?page=1`,
-            {
-              techID: techID,
-            }
-          );
-          //setPendingTickets(pendingResponse.data);
-          setPendingTickets(pendingResponse.data.tickets);
-
-          const closedResponse = await axios.post(
-            //  "http://localhost:3001/api/tickets/tech/closed",
-            `http://localhost:3001/api/tickets/tech/closed/paginate?page=1`,
-            {
-              techID: techID,
-            }
-          );
-          //setClosedTickets(closedResponse.data);
-          setClosedTickets(closedResponse.data.tickets);
-
           setLoading(false);
         } catch (e) {
           console.error("invalid token");
@@ -88,8 +152,16 @@ const Dashboard = () => {
       }
     };
 
-    fetchTickets();
+    fetchInfo();
   }, [navigate]);
+
+  useEffect(() => {
+    if (userData && userData.id) {
+      fetchOpenTickets(1);
+      fetchPendingTickets(1);
+      fetchClosedTickets(1);
+    }
+  }, [userData]);
 
   if (loading) {
     return <div>Loading tickets...</div>;
@@ -98,6 +170,25 @@ const Dashboard = () => {
   if (error) {
     return <div>{error}</div>;
   }
+
+  const loadNextOpenPage = () => {
+    setCurrentPageOpen((prevPage) => prevPage + 1);
+    fetchOpenTickets(currentPageOpen + 1);
+    console.log("loaded more");
+  };
+
+  const loadNextPendingPage = () => {
+    setCurrentPagePending((prevPage) => prevPage + 1);
+    fetchPendingTickets(currentPagePending + 1);
+    console.log("loaded more");
+  };
+
+  const loadNextClosedPage = () => {
+    setCurrentPageClosed((prevPage) => prevPage + 1);
+    fetchClosedTickets(currentPageClosed + 1);
+    console.log("loaded more");
+  };
+
   return (
     <>
       <div className={`${styles.background}`}>
@@ -130,6 +221,18 @@ const Dashboard = () => {
                   )}
                 </Table.Body>
               </Table>
+              {currentPageOpen < totalPagesOpen ? (
+                <Button
+                  className="bg-azul2 drop-shadow-md mt-4"
+                  onClick={loadNextOpenPage}
+                >
+                  Cargar mas tickets
+                </Button>
+              ) : (
+                <Button className="bg-gray-400 drop-shadow-md mt-4">
+                  No hay mas tickets disponibles
+                </Button>
+              )}
             </div>
             <br />
             <div className="flex flex-col items-center justify-around">
@@ -156,6 +259,18 @@ const Dashboard = () => {
                   )}
                 </Table.Body>
               </Table>
+              {currentPagePending < totalPagesPending ? (
+                <Button
+                  className="bg-azul2 drop-shadow-md mt-4"
+                  onClick={loadNextPendingPage}
+                >
+                  Cargar mas tickets
+                </Button>
+              ) : (
+                <Button className="bg-gray-400 drop-shadow-md mt-4">
+                  No hay mas tickets disponibles
+                </Button>
+              )}
             </div>
             <br />
             <div className="flex flex-col items-center justify-around">
@@ -182,6 +297,18 @@ const Dashboard = () => {
                   )}
                 </Table.Body>
               </Table>
+              {currentPageClosed < totalPagesClosed ? (
+                <Button
+                  className="bg-azul2 drop-shadow-md mt-4"
+                  onClick={loadNextClosedPage}
+                >
+                  Cargar mas tickets
+                </Button>
+              ) : (
+                <Button className="bg-gray-400 drop-shadow-md mt-4">
+                  No hay mas tickets disponibles
+                </Button>
+              )}
             </div>
           </div>
         </div>
