@@ -180,7 +180,15 @@ const getPaginatedClosedTicketsByTechID = async (req, res) => {
 
 const createTicket = async (req, res) => {
   try {
-    const { userID, techID, title, description, reportDate, status } = req.body;
+    const {
+      userID,
+      techID,
+      title,
+      description,
+      reportDate,
+      status,
+      isAnonymous,
+    } = req.body;
 
     let assignedTechID = techID;
 
@@ -202,6 +210,7 @@ const createTicket = async (req, res) => {
     const post = await postModel.create({
       userID,
       ticketID: ticket._id,
+      isAnonymous: isAnonymous,
     });
 
     res.status(201).json({ ticket, post });

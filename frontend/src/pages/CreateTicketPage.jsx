@@ -10,6 +10,7 @@ import {
   TextInput,
   FileInput,
   Datepicker,
+  Checkbox,
 } from "flowbite-react";
 
 import { useEffect, useState } from "react";
@@ -29,12 +30,17 @@ const CreateTicketPage = () => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isAnonymous, setIsAnonymous] = useState(false);
 
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+  };
+
+  const handleCheckboxChange = (event) => {
+    setIsAnonymous(event.target.checked);
   };
 
   useEffect(() => {
@@ -69,6 +75,7 @@ const CreateTicketPage = () => {
         userID: userData.id,
         title,
         description,
+        isAnonymous,
       });
 
       console.log("Ticket creado:", response.data);
@@ -189,9 +196,19 @@ const CreateTicketPage = () => {
                   <FileInput
                     id="adjuntar3"
                     sizing="sm"
+                    className="mb-4"
                     onChange={handleFileChange}
                   />
-
+                  <div className="flex items-center gap-2">
+                    <Checkbox
+                      checked={isAnonymous}
+                      onChange={handleCheckboxChange}
+                    />
+                    <Label
+                      className="text-white drop-shadow-md text-md"
+                      value="Ticket Anónimo"
+                    />
+                  </div>
                   <h2 className="mt-2 text-center text-red-500 text-sm">
                     {error}
                   </h2>
