@@ -19,8 +19,6 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
         console.log(response.data);
       } catch (err) {
         console.error("Error al eliminar usuario", err);
-      } finally {
-        fetchUsers(currentSection);
       }
     }
   };
@@ -34,8 +32,6 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
         );
       } catch (err) {
         console.error("Error al cambiar rol de usuario", err);
-      } finally {
-        fetchUsers(currentSection);
       }
     }
   };

@@ -1,5 +1,6 @@
 import CRUD from "../components/CRUD";
 import { NavBar } from "../components/NavBar";
+import { Button } from "flowbite-react";
 import PageFooter from "../components/Footer";
 import CustomSidebar from "../components/CustomSidebar";
 import axios from "axios";
@@ -15,10 +16,20 @@ const CrudPage = () => {
       "bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]",
   };
 
+  const [error, setError] = useState();
   const [userData, setUserData] = useState({});
   const [currentPage, setCurrentPage] = useState("users");
   const [pageData, setPageData] = useState();
-  const [error, setError] = useState();
+
+  const [usersPageData, setUsersPageData] = useState([]);
+  const [techsPageData, setTechsPageData] = useState([]);
+
+  const [totalPagesUsers, setTotalPagesUsers] = useState(0);
+  const [totalPagesTechs, setTotalPagesTechs] = useState(0);
+
+  const [currentPageUsers, setCurrentPageUsers] = useState(1);
+  const [currentPageTechs, setCurrentPageTechs] = useState(1);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,8 +57,50 @@ const CrudPage = () => {
       }
     };
     fetchInfo();
-    fetchUsers("users");
+    fetchUSERS(1);
+    fetchTECHS(1);
   }, [navigate]);
+
+  useEffect(() => {
+    if (usersPageData.length > 0) {
+      setPageData(usersPageData);
+    }
+  }, [usersPageData]);
+
+  const fetchUSERS = async (page = 1) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/api/users/regular/paginate?page=${page}`
+      );
+
+      setUsersPageData((prevInfo) => [...prevInfo, ...response.data.users]);
+      setTotalPagesUsers(response.data.totalPages);
+    } catch (err) {
+      console.error("Error al cargar usuarios", err);
+      setError(
+        err.response?.data?.message ||
+          "Ha ocurrido un error durante la carga de usuarios"
+      );
+    }
+  };
+
+  const fetchTECHS = async (page = 1) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/api/users/tech/paginate?page=${page}`
+      );
+
+      setTechsPageData((prevInfo) => [...prevInfo, ...response.data.users]);
+      setTotalPagesTechs(response.data.totalPages);
+      console.log("updated tech data", response.data.users);
+    } catch (err) {
+      console.error("Error al cargar tecnicos", err);
+      setError(
+        err.response?.data?.message ||
+          "Ha ocurrido un error durante la carga de tecnicos"
+      );
+    }
+  };
 
   const fetchUsers = async (usersToFetch) => {
     let url = "";
@@ -75,6 +128,18 @@ const CrudPage = () => {
     }
   };
 
+  const loadNextUserPage = () => {
+    setCurrentPageUsers((prevPage) => prevPage + 1);
+    fetchUSERS(currentPageUsers + 1);
+    console.log("loaded more users");
+  };
+
+  const loadNextTechPage = () => {
+    setCurrentPageTechs((prevPage) => prevPage + 1);
+    fetchTECHS(currentPageTechs + 1);
+    console.log("loaded more techs");
+  };
+
   return (
     <>
       <div className={`${styles.background}`}>
@@ -91,7 +156,8 @@ const CrudPage = () => {
                 <button
                   className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6"
                   onClick={() => {
-                    fetchUsers("users");
+                    setPageData(usersPageData);
+                    setCurrentPage("users");
                   }}
                 >
                   Usuarios
@@ -100,7 +166,8 @@ const CrudPage = () => {
                   className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6
                 "
                   onClick={() => {
-                    fetchUsers("tech");
+                    setPageData(techsPageData);
+                    setCurrentPage("tech");
                   }}
                 >
                   Tecnicos
@@ -111,6 +178,42 @@ const CrudPage = () => {
                 data={pageData}
                 fetchUsers={fetchUsers}
               />
+              {currentPage === "users" && (
+                <>
+                  {currentPageUsers < totalPagesUsers ? (
+                    <Button
+                      className="bg-azul2 drop-shadow-md mt-4"
+                      onClick={loadNextUserPage}
+                    >
+                      Cargar mas usuarios
+                    </Button>
+                  ) : (
+                    <Button className="bg-gray-400 drop-shadow-md mt-4">
+                      No hay mas usuarios disponibles
+                    </Button>
+                  )}
+                </>
+              )}
+
+              {currentPage === "tech" && (
+                <>
+                  {currentPageTechs < totalPagesTechs ? (
+                    <Button
+                      className="bg-azul2 drop-shadow-md mt-4"
+                      onClick={() => {
+                        loadNextTechPage();
+                        setPageData(techsPageData);
+                      }}
+                    >
+                      Cargar mas tecnicos
+                    </Button>
+                  ) : (
+                    <Button className="bg-gray-400 drop-shadow-md mt-4">
+                      No hay mas tecnicos disponibles
+                    </Button>
+                  )}
+                </>
+              )}
             </div>
           </div>
 
