@@ -7,7 +7,6 @@ export function NavBar() {
   const locationName = myLocation.pathname.startsWith("/#")
     ? myLocation.pathname.slice(2).split("/")[0]
     : myLocation.pathname.split("/")[1]; // Adjust for hash routing
-  //const locationName = myLocation.pathname.slice(1);
   const currentRoute = navRoutes[locationName] || navRoutes.default;
 
   const textStyles = {
@@ -38,7 +37,6 @@ export function NavBar() {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               width="2em"
-              RoutesRoutes
               height="2em"
             >
               <path

@@ -86,8 +86,12 @@ function Comments({
                 {`Comentarios`}
               </h3>
               <>
-                {data.commentsID.map((comment, commentIndex) => (
-                  <div className="text-start" hidden={comment.hidden}>
+                {data.commentsID.map((comment, commentIndex, index) => (
+                  <div
+                    key={index}
+                    className="text-start"
+                    hidden={comment.hidden}
+                  >
                     {data.isAnonymous === false && (
                       <h1 className="font-bold">{`${comment.userID.name} ${comment.userID.lastName}`}</h1>
                     )}

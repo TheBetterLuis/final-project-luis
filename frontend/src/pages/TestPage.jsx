@@ -1,6 +1,7 @@
 import CRUD from "../components/CRUD";
 import { NavBar } from "../components/NavBar";
 import PageFooter from "../components/Footer";
+import Boton from "../components/Button";
 import CustomSidebar from "../components/CustomSidebar";
 import axios from "axios";
 
@@ -90,6 +91,7 @@ const TestPage = () => {
           id="wrapper"
           className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
         >
+          <Boton />
           <div className="flex h-screen w-full  mt-16 mb-24">
             <div className="flex flex-col w-full h-screen justify-evenly items-center">
               <div className="flex flex-row justify-center items-center space-x-4 sm:space-x-80">

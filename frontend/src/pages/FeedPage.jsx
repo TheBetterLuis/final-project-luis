@@ -114,7 +114,7 @@ const FeedPage = () => {
     returnPage = (
       <>
         <div className={`${styles.background}`}>
-          <NavBar></NavBar>
+          <NavBar />
           <div
             id="wrapper"
             className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
@@ -125,7 +125,11 @@ const FeedPage = () => {
               <>
                 {postsData.map((postData) => (
                   <>
-                    <Post data={postData} userData={userData} />
+                    <Post
+                      key={postData._id}
+                      data={postData}
+                      userData={userData}
+                    />
                   </>
                 ))}
               </>
