@@ -26,7 +26,7 @@ const FeedPage = () => {
           {/*Page Component goes here*/}
 
           <div className="flex flex-col items-center ">
-            <span class="flex items-stretch transition-all duration-200 rounded-md px-4 py-2 text-md">
+            <span className="flex items-stretch transition-all duration-200 rounded-md px-4 py-2 text-md">
               Error al cargar posts
             </span>
             <Link to={"/feed"}>

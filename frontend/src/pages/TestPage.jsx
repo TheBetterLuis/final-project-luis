@@ -46,8 +46,6 @@ const TestPage = () => {
         localStorage.removeItem("tokenSesion");
         navigate("/login");
       }
-
-      setLoading(false);
     };
     fetchInfo();
   }, [navigate]);

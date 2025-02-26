@@ -2,7 +2,7 @@ import { Button, Card, Label, TextInput } from "flowbite-react";
 import { NavBar } from "../components/NavBar";
 import PageFooter from "../components/Footer";
 import CustomSidebar from "../components/CustomSidebar";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
@@ -14,7 +14,6 @@ const ChangePasswordPage = () => {
       "bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]",
   };
 
-  const [response, setResponse] = useState([]);
   const [code, setCode] = useState("");
   const [enterEmail, setEnterEmail] = useState(true);
   const [enterCode, setEnterCode] = useState(false);
@@ -197,7 +196,7 @@ const ChangePasswordPage = () => {
                       <h2 className="drop-shadow-md text-center text-white text-lg py-2">
                         Ingresa el código de 6 dígitos que ha sido enviado a tu
                         correo electrónico. Este código nos ayudará a verificar
-                        tu identidad para continuar con el proceso.{" "}
+                        tu identidad para continuar con el proceso.
                       </h2>
                       <h2 className="mt-2 text-center text-red-500 text-lg">
                         {error}
@@ -235,7 +234,7 @@ const ChangePasswordPage = () => {
                       />
                       <h2 className="drop-shadow-md text-center text-white text-lg py-2">
                         Hemos verificado tu identidad. Ahora puedes ingresar tu
-                        nueva contraseña y finalizar el proceso.{" "}
+                        nueva contraseña y finalizar el proceso.
                       </h2>
                       <h2 className="mt-2 text-center text-red-500 text-lg">
                         {error}

@@ -6,10 +6,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import { Card, Button, Modal, TextInput } from "flowbite-react";
-import { FaHeart, FaCommentDots } from "react-icons/fa";
-
-import { formatDate } from "../../common/utils";
 
 const TicketViewPage = () => {
   const styles = {

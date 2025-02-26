@@ -1,7 +1,6 @@
 import { NavBar } from "../components/NavBar";
 import PageFooter from "../components/Footer";
 import CustomSidebar from "../components/CustomSidebar";
-import Ticket from "../components/Ticket";
 import {
   Button,
   Card,

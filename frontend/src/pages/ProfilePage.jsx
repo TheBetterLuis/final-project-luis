@@ -77,7 +77,6 @@ const ProfilePage = () => {
         err.response?.data?.message ||
           "Ha ocurrido un error durante la creacion de sesion de pago"
       );
-    } finally {
     }
   };
 
@@ -99,7 +98,7 @@ const ProfilePage = () => {
 
           fetchPosts(decoded.id);
         } catch (e) {
-          console.error("invalid token");
+          console.error("invalid token", e.message);
         }
       } else {
         navigate("/login");
@@ -127,7 +126,7 @@ const ProfilePage = () => {
         {postsData !== null && userData !== null && (
           <>
             {postsData.map((post, index) => (
-              <Post data={post} userData={userData} />
+              <Post key={index} data={post} userData={userData} />
             ))}
           </>
         )}

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Flowbite } from "flowbite-react";
 import TicketViewPage from "./pages/TicketViewPage";
 import TestPage from "./pages/TestPage";

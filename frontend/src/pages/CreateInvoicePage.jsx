@@ -1,16 +1,12 @@
-import { NavBar } from "../components/NavBar";
-import { Button } from "flowbite-react";
-import PageFooter from "../components/Footer";
 import CustomSidebar from "../components/CustomSidebar";
 import Invoice from "../components/Invoice";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 const CreateInvoicePage = () => {
   const location = useLocation();
-  const [response, setResponse] = useState([]);
   const [invoiceData, setInvoiceData] = useState(null);
   const [error, setError] = useState(null);
   const [isValid, setIsValid] = useState(false);
@@ -132,7 +128,6 @@ const CreateInvoicePage = () => {
   return (
     <>
       <div className={`${styles.background}`}>
-        {/*        <NavBar />*/}
         <div
           id="wrapper"
           className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
@@ -146,7 +141,6 @@ const CreateInvoicePage = () => {
 
           {/*Page Component goes here*/}
         </div>
-        {/*        <PageFooter />*/}
       </div>
       <CustomSidebar></CustomSidebar>
     </>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Table, Button } from "flowbite-react";
 import { NavBar } from "../components/NavBar";
 import PageFooter from "../components/Footer";
@@ -45,10 +45,7 @@ const Dashboard = () => {
         ...prevTickets,
         ...openResponse.data.tickets,
       ]);
-      //    setOpenTickets(openResponse.data.tickets);
       setTotalPagesOpen(openResponse.data.totalPages);
-
-      //      setSuccess(true);
     } catch (err) {
       console.error("Error al cargar tickets abiertos", err);
       setError(
@@ -73,10 +70,7 @@ const Dashboard = () => {
         ...prevTickets,
         ...pendingResponse.data.tickets,
       ]);
-      //    setOpenTickets(openResponse.data.tickets);
       setTotalPagesPending(pendingResponse.data.totalPages);
-
-      //      setSuccess(true);
     } catch (err) {
       console.error("Error al cargar tickets en revision", err);
       setError(
@@ -101,10 +95,7 @@ const Dashboard = () => {
         ...prevTickets,
         ...closedResponse.data.tickets,
       ]);
-      //    setOpenTickets(openResponse.data.tickets);
       setTotalPagesClosed(closedResponse.data.totalPages);
-
-      //      setSuccess(true);
     } catch (err) {
       console.error("Error al cargar tickets en resueltos", err);
       setError(
@@ -127,9 +118,7 @@ const Dashboard = () => {
       if (token) {
         try {
           const decoded = jwtDecode(token);
-          //  console.log(decoded);
           setUserData(decoded);
-          const techID = decoded.id;
           const userRole = decoded.role;
           const expiry = decoded.exp;
           const currentTime = Date.now() / 1000;
@@ -145,7 +134,7 @@ const Dashboard = () => {
 
           setLoading(false);
         } catch (e) {
-          console.error("invalid token");
+          console.error("invalid token", e.message);
           setError("Error fetching tickets.");
           setLoading(false);
         }
@@ -210,7 +199,10 @@ const Dashboard = () => {
                     </h1>
                   ) : (
                     openTickets.map((ticket) => (
-                      <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
+                      <Table.Row
+                        key={ticket._id}
+                        className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70"
+                      >
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
                           <Link to={`/ticket/${ticket._id}`}>
                             {ticket.title}
@@ -248,7 +240,10 @@ const Dashboard = () => {
                     </h1>
                   ) : (
                     pendingTickets.map((ticket) => (
-                      <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
+                      <Table.Row
+                        key={ticket._id}
+                        className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70"
+                      >
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
                           <Link to={`/ticket/${ticket._id}`}>
                             {ticket.title}
@@ -286,7 +281,10 @@ const Dashboard = () => {
                     </h1>
                   ) : (
                     closedTickets.map((ticket) => (
-                      <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
+                      <Table.Row
+                        key={ticket._id}
+                        className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70"
+                      >
                         <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
                           <Link to={`/ticket/${ticket._id}`}>
                             {ticket.title}
