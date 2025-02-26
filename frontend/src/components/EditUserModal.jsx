@@ -1,4 +1,4 @@
-import { Table, Button, Modal, TextInput, Label, Select } from "flowbite-react";
+import { Button, Modal, TextInput, Label, Select } from "flowbite-react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

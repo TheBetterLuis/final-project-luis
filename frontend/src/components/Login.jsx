@@ -1,4 +1,4 @@
-import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
+import { Button, Card, Label, TextInput } from "flowbite-react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

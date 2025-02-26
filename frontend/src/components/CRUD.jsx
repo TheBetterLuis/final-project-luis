@@ -1,4 +1,4 @@
-import { Table, Button, Modal } from "flowbite-react";
+import { Table, Button } from "flowbite-react";
 import axios from "axios";
 import { useState } from "react";
 import EditUserModal from "./EditUserModal";
@@ -81,8 +81,11 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
             </Table.Head>
 
             <Table.Body className="divide-y bg-white/19">
-              {data.map((user) => (
-                <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
+              {data.map((user, index) => (
+                <Table.Row
+                  key={index}
+                  className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70"
+                >
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 capitalize">
                     {`${user.name} ${user.lastName}`}
                   </Table.Cell>
@@ -148,8 +151,11 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
             </Table.Head>
 
             <Table.Body className="divide-y bg-white/19">
-              {data.map((user) => (
-                <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
+              {data.map((user, index) => (
+                <Table.Row
+                  key={index}
+                  className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70"
+                >
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 capitalize">
                     {`${user.name} ${user.lastName}`}
                   </Table.Cell>

@@ -9,17 +9,6 @@ import {
 } from "flowbite-react";
 
 const Ticket = () => {
-  /*
-    colors: {
-      azul1: "#9CFFE5",
-      azul2: "#6C9DFF",
-      azul3: "#4491A1",
-      azul4: "#074572",
-      azul5: "#0B2545",
-      azul6: "#00171F",
-    }
-    */
-
   return (
     <div className="py-2">
       <h1 className="drop-shadow-md text-center text-white text-xl pb-4">

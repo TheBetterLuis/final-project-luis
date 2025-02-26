@@ -1,17 +1,6 @@
 import { Button, Card, Checkbox } from "flowbite-react";
 
 const TicketList = () => {
-  /*
-    colors: {
-      azul1: "#9CFFE5",
-      azul2: "#6C9DFF",
-      azul3: "#4491A1",
-      azul4: "#074572",
-      azul5: "#0B2545",
-      azul6: "#00171F",
-    }
-    */
-
   return (
     <div className="py-2">
       <Card className="max-w-sm bg-azul4 drop-shadow-md text-center text-white text-xl  mb-4 border-azul4 ">

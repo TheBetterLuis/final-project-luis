@@ -2,7 +2,7 @@ import { Footer } from "flowbite-react";
 const Test = () => {
   return (
     <div>
-      <h1 class="text-[#333] dark:text-[#dddcdc] hover:text-[#878787] dark:hover:text-[#fff]">
+      <h1 className="text-[#333] dark:text-[#dddcdc] hover:text-[#878787] dark:hover:text-[#fff]">
         Esto es un componente Prueba
       </h1>
       <Footer container>

@@ -1,11 +1,6 @@
-import { Card, Button, Modal, TextInput } from "flowbite-react";
+import { Button, Modal, TextInput } from "flowbite-react";
 import axios from "axios";
 import { useState } from "react";
-import EditUserModal from "./EditUserModal";
-import { Link } from "react-router-dom";
-import { FaHeart, FaCommentDots } from "react-icons/fa";
-
-import { formatDate } from "../../common/utils";
 
 function Comments({
   data = null,
@@ -15,7 +10,6 @@ function Comments({
   handleCloseComments,
   handleMessageComments,
 }) {
-  const [testModal, setTestModal] = useState(true);
   const [newComment, setNewComment] = useState("");
 
   const handleNewComment = async (content) => {
@@ -34,7 +28,7 @@ function Comments({
 
         handleMessageComments(response.data.message);
       } catch (err) {
-        setError(err.response?.data?.message || "Error al crear comentario");
+        console.log(err.response?.data?.message || "Error al crear comentario");
       } finally {
         setNewComment("");
         // window.location.reload();
@@ -42,7 +36,7 @@ function Comments({
     }
   };
 
-  const handleDeleteComment = async (commentID, commentIndex) => {
+  const handleDeleteComment = async (commentID) => {
     const isConfirmed = window.confirm("Eliminar comentario?");
 
     if (isConfirmed) {
