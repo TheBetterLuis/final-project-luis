@@ -28,6 +28,42 @@ const getInvoicesByUserID = async (req, res) => {
   }
 };
 
+const getPaginatedInvoicesByUserID = async (req, res) => {
+  try {
+    const { userID } = req.params;
+
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    const invoices = await invoiceModel
+      .find({ userID })
+      //remove if not working, to sort from new to old
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .populate("userID", "name lastName profilePicture");
+
+    const total = await invoiceModel.countDocuments({ userID });
+
+    const totalPages = Math.ceil(total / limit);
+
+    const nextPage = page < totalPages ? page + 1 : null;
+    const previousPage = page > 1 ? page - 1 : null;
+
+    res.status(200).json({
+      invoices,
+      total,
+      totalPages,
+      currentPage: page,
+      nextPage,
+      previousPage,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const createInvoice = async (req, res) => {
   try {
     const { userID, paymentDate } = req.body;
@@ -195,6 +231,7 @@ const validateLatestInvoiceByUserID = async (req, res) => {
 module.exports = {
   getInvoices,
   getInvoicesByUserID,
+  getPaginatedInvoicesByUserID,
   createInvoice,
   deleteInvoice,
   checkInvoiceDate,

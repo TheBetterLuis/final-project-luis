@@ -6,6 +6,7 @@ const {
   getInvoices,
   deleteInvoice,
   getInvoicesByUserID,
+  getPaginatedInvoicesByUserID,
   checkInvoiceDate,
   checkInvoiceDateAndUpdateRole,
   validateLatestInvoiceByUserID,
@@ -18,5 +19,6 @@ router.post("/checkandupdate/:id", checkInvoiceDateAndUpdateRole);
 router.delete("/delete/:id", deleteInvoice);
 router.get("/all", getInvoices);
 router.get("/user/:userID", getInvoicesByUserID);
+router.get("/paginate/user/:userID", getPaginatedInvoicesByUserID);
 
 module.exports = router;
