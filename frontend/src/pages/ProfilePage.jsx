@@ -181,6 +181,7 @@ const ProfilePage = () => {
                   className="relative "
                   userData={viewedUserData}
                   showRole={true}
+                  profilePictureLink={true}
                 />
               </div>
             )}
