@@ -1,4 +1,5 @@
 const postModel = require("../models/posts");
+const userModel = require("../models/users");
 const ticketModel = require("../models/tickets");
 
 const getPosts = async (req, res) => {
@@ -253,6 +254,10 @@ const getPersonalProfilePostsPaginatedByUserID = async (req, res) => {
     const limit = 10;
     const skip = (page - 1) * limit;
 
+    const user = await userModel
+      .findById(userID)
+      .select("name lastName profilePicture role");
+
     const posts = await postModel
       .find({ userID })
       //remove if not working, to sort from new to old
@@ -283,6 +288,7 @@ const getPersonalProfilePostsPaginatedByUserID = async (req, res) => {
     const previousPage = page > 1 ? page - 1 : null;
 
     res.status(200).json({
+      user,
       posts,
       total,
       totalPages,
@@ -302,6 +308,10 @@ const getPublicProfilePostsPaginatedByUserID = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = 10;
     const skip = (page - 1) * limit;
+
+    const user = await userModel
+      .findById(userID)
+      .select("name lastName profilePicture role");
 
     const posts = await postModel
       .find({ status: "public", userID, isAnonymous: false })
@@ -337,6 +347,7 @@ const getPublicProfilePostsPaginatedByUserID = async (req, res) => {
     const previousPage = page > 1 ? page - 1 : null;
 
     res.status(200).json({
+      user,
       posts,
       total,
       totalPages,

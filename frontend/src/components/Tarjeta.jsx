@@ -1,6 +1,6 @@
 import { Card } from "flowbite-react";
 
-export function Tarjeta({ userData }) {
+export function Tarjeta({ userData, showRole = false }) {
   const defaultUserData = {
     profilePicture: "../../public/img/default-profile-icon.jpg",
     name: "User",
@@ -33,9 +33,12 @@ export function Tarjeta({ userData }) {
               20
             </h6>
           </div>
-          <span className={`text-xl font-bold ${roleColor} uppercase`}>
-            {actualUserData.role}
-          </span>
+          {showRole && (
+            <span className={`text-xl font-bold ${roleColor} uppercase`}>
+              {actualUserData.role}
+            </span>
+          )}
+
           <div className="flex flex-col items-center justify-between w-full">
             <h1 className="text-xl text-gray-500 dark:text-white">LIKES</h1>
             <h6 className="text-4xl font-bold text-gray-900 dark:text-white">

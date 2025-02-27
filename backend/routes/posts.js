@@ -25,12 +25,12 @@ router.get("/", auth(["admin", "tech", "free"]), getPosts);
 router.get("/:_id", getPostByTicketID);
 router.post("/user", getPostsByUserID);
 router.get("/user/public", getPublicPostsByUserID);
-router.get(
+router.post(
   "/paginate/personalprofile/",
   getPersonalProfilePostsPaginatedByUserID
 );
 
-router.get("/paginate/publicprofile/", getPublicProfilePostsPaginatedByUserID);
+router.post("/paginate/publicprofile/", getPublicProfilePostsPaginatedByUserID);
 
 router.post("/paginate", getPublicPostsPaginated);
 router.get("/user/private", getPrivatePostsByUserID);

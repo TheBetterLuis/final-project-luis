@@ -129,11 +129,13 @@ function Post({ data = null, userData = null }) {
             <Card className="max-w-sm md:w-96  bg-white/19 backdrop-blur-2xl backdrop-saturate-90 rounded-lg border border-gray-200/30 drop-shadow-2xl shadow-2xl relative">
               <div className="flex gap-3">
                 {data.isAnonymous === false && (
-                  <img
-                    className="rounded-full border border-azul5 w-20 h-20 dark:border-white"
-                    src={data.userID.profilePicture}
-                    alt={`foto de perfil de ${data.userID.name} ${data.userID.lastName}`}
-                  />
+                  <Link to={`/public-profile/${data.userID._id}`}>
+                    <img
+                      className="rounded-full border border-azul5 w-20 h-20 dark:border-white"
+                      src={data.userID.profilePicture}
+                      alt={`foto de perfil de ${data.userID.name} ${data.userID.lastName}`}
+                    />
+                  </Link>
                 )}
                 {data.isAnonymous === true && (
                   <img
@@ -151,7 +153,9 @@ function Post({ data = null, userData = null }) {
                 )}
                 {data.isAnonymous === false && (
                   <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize">
-                    {` ${data.userID.name} ${data.userID.lastName}`}
+                    <Link to={`/public-profile/${data.userID._id}`}>
+                      {` ${data.userID.name} ${data.userID.lastName}`}
+                    </Link>
                   </span>
                 )}
 
