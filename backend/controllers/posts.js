@@ -245,6 +245,56 @@ const getPublicPostsPaginated = async (req, res) => {
   }
 };
 
+const getPublicPostsPaginatedByUserID = async (req, res) => {
+  try {
+    const { userID } = req.params;
+
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    const posts = await postModel
+      .find({ status: "public", userID })
+      //remove if not working, to sort from new to old
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .populate({
+        path: "commentsID",
+        populate: {
+          path: "userID",
+          model: "users",
+          select: "name lastName profilePicture",
+        },
+      })
+      .populate("ticketID")
+      .populate({
+        path: "userID",
+        model: "users",
+        select: "name lastName profilePicture",
+      })
+      .exec();
+
+    const total = await postModel.countDocuments({ status: "public", userID });
+
+    const totalPages = Math.ceil(total / limit);
+
+    const nextPage = page < totalPages ? page + 1 : null;
+    const previousPage = page > 1 ? page - 1 : null;
+
+    res.status(200).json({
+      posts,
+      total,
+      totalPages,
+      currentPage: page,
+      nextPage,
+      previousPage,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 const likePost = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -307,6 +357,7 @@ module.exports = {
   getPublicPostsByUserID,
   getPublicPostsPaginated,
   getPrivatePostsByUserID,
+  getPublicPostsPaginatedByUserID,
   createPost,
   deletePost,
   deleteAllPosts,
