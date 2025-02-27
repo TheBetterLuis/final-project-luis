@@ -245,16 +245,16 @@ const getPublicPostsPaginated = async (req, res) => {
   }
 };
 
-const getPublicPostsPaginatedByUserID = async (req, res) => {
+const getPersonalProfilePostsPaginatedByUserID = async (req, res) => {
   try {
-    const { userID } = req.params;
+    const { userID } = req.body;
 
     const page = parseInt(req.query.page) || 1;
     const limit = 10;
     const skip = (page - 1) * limit;
 
     const posts = await postModel
-      .find({ status: "public", userID })
+      .find({ userID })
       //remove if not working, to sort from new to old
       .sort({ createdAt: -1 })
       .skip(skip)
@@ -276,6 +276,60 @@ const getPublicPostsPaginatedByUserID = async (req, res) => {
       .exec();
 
     const total = await postModel.countDocuments({ status: "public", userID });
+
+    const totalPages = Math.ceil(total / limit);
+
+    const nextPage = page < totalPages ? page + 1 : null;
+    const previousPage = page > 1 ? page - 1 : null;
+
+    res.status(200).json({
+      posts,
+      total,
+      totalPages,
+      currentPage: page,
+      nextPage,
+      previousPage,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getPublicProfilePostsPaginatedByUserID = async (req, res) => {
+  try {
+    const { userID } = req.body;
+
+    const page = parseInt(req.query.page) || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    const posts = await postModel
+      .find({ status: "public", userID, isAnonymous: false })
+      //remove if not working, to sort from new to old
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .populate({
+        path: "commentsID",
+        populate: {
+          path: "userID",
+          model: "users",
+          select: "name lastName profilePicture",
+        },
+      })
+      .populate("ticketID")
+      .populate({
+        path: "userID",
+        model: "users",
+        select: "name lastName profilePicture",
+      })
+      .exec();
+
+    const total = await postModel.countDocuments({
+      status: "public",
+      userID,
+      isAnonymous: false,
+    });
 
     const totalPages = Math.ceil(total / limit);
 
@@ -357,7 +411,8 @@ module.exports = {
   getPublicPostsByUserID,
   getPublicPostsPaginated,
   getPrivatePostsByUserID,
-  getPublicPostsPaginatedByUserID,
+  getPersonalProfilePostsPaginatedByUserID,
+  getPublicProfilePostsPaginatedByUserID,
   createPost,
   deletePost,
   deleteAllPosts,

@@ -15,7 +15,8 @@ const {
   fetchPrivatePostsAndTickets,
   getPostByTicketID,
   likePost,
-  getPublicPostsPaginatedByUserID,
+  getPersonalProfilePostsPaginatedByUserID,
+  getPublicProfilePostsPaginatedByUserID,
 } = require("../controllers/posts");
 
 const { auth } = require("../middleware/auth");
@@ -24,7 +25,13 @@ router.get("/", auth(["admin", "tech", "free"]), getPosts);
 router.get("/:_id", getPostByTicketID);
 router.post("/user", getPostsByUserID);
 router.get("/user/public", getPublicPostsByUserID);
-router.get("/paginate/user/:userID/public/", getPublicPostsPaginatedByUserID);
+router.get(
+  "/paginate/personalprofile/",
+  getPersonalProfilePostsPaginatedByUserID
+);
+
+router.get("/paginate/publicprofile/", getPublicProfilePostsPaginatedByUserID);
+
 router.post("/paginate", getPublicPostsPaginated);
 router.get("/user/private", getPrivatePostsByUserID);
 router.get("/tickets/public", fetchPublicPostsAndTickets);
