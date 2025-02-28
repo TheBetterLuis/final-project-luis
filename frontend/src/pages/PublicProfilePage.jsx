@@ -8,7 +8,6 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Post from "../components/Post";
-import EditUserModal from "../components/EditUserModal";
 
 const PublicProfilePage = () => {
   const styles = {
@@ -29,24 +28,6 @@ const PublicProfilePage = () => {
   const navigate = useNavigate();
 
   const { userID } = useParams();
-  const [modalData, setModalData] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
-  const [message, setMessage] = useState("");
-
-  const prepareModal = async (user) => {
-    setModalData(user);
-    setOpenModal(true);
-  };
-
-  const handleCloseModal = async () => {
-    setModalData(null);
-    setMessage("");
-    setOpenModal(false);
-  };
-
-  const handleMessage = async (message) => {
-    setMessage(message);
-  };
 
   const fetchProfilePosts = async (page = 1) => {
     setLoading(true);
@@ -183,17 +164,11 @@ const PublicProfilePage = () => {
                 <>
                   <Button
                     className=" md:block md:top-40 md:left-28 lg:left-32 xl:left-72  2xl:left-96 bg-azul4 absolute top-40 left-60 top-20 left-20 sm:left-40 z-10"
-                    onClick={() => {}}
-                  >
-                    Facturas
-                  </Button>
-                  <Button
-                    className="md:block md:top-40 md:right-16 lg:right-32 xl:right-52 2xl:right-96 bg-azul4 absolute top-40 right-[300px] top-20 right-20 sm:right-40 z-10"
                     onClick={() => {
-                      prepareModal(userData);
+                      navigate(`/invoices/${userID}/`);
                     }}
                   >
-                    Configuracion
+                    Facturas
                   </Button>
                 </>
               )}
@@ -204,15 +179,6 @@ const PublicProfilePage = () => {
         <PageFooter />
       </div>
       <CustomSidebar></CustomSidebar>
-      <EditUserModal
-        data={modalData}
-        setOpenModal={setOpenModal}
-        openModal={openModal}
-        handleCloseModal={handleCloseModal}
-        handleMessage={handleMessage}
-        message={message}
-        logout={true}
-      />
     </>
   );
 };

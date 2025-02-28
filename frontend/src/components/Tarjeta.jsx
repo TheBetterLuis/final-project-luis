@@ -51,9 +51,9 @@ export function Tarjeta({
         <div className="flex flex-row justify-between w-full">
           <div className="flex flex-col items-center justify-between w-full">
             <h1 className="text-md text-gray-500 dark:text-gray-300">TICKET</h1>
-            {actualUserData.postCount && (
+            {actualUserData.postCount > 0 && (
               <h6 className="text-4xl font-bold text-gray-900 dark:text-white">
-                {actualUserData.postCount}
+                {`${actualUserData.postCount}`}
               </h6>
             )}
           </div>
@@ -65,9 +65,9 @@ export function Tarjeta({
 
           <div className="flex flex-col items-center justify-between w-full">
             <h1 className="text-md text-gray-500 dark:text-white">LIKES</h1>
-            {actualUserData.totalLikes && (
+            {actualUserData.totalLikes > 0 && (
               <h6 className="text-4xl font-bold text-gray-900 dark:text-white">
-                {actualUserData.totalLikes}
+                {`${actualUserData.totalLikes}`}
               </h6>
             )}
           </div>
