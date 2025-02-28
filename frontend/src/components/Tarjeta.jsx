@@ -11,6 +11,8 @@ export function Tarjeta({
     name: "User",
     lastName: "Name",
     role: "free",
+    postCount: "0",
+    totalLikes: "0",
   };
 
   const actualUserData = userData || defaultUserData;
@@ -48,22 +50,26 @@ export function Tarjeta({
 
         <div className="flex flex-row justify-between w-full">
           <div className="flex flex-col items-center justify-between w-full">
-            <h1 className="text-xl text-gray-500 dark:text-gray-300">TICKET</h1>
-            <h6 className="text-4xl font-bold text-gray-900 dark:text-white">
-              20
-            </h6>
+            <h1 className="text-md text-gray-500 dark:text-gray-300">TICKET</h1>
+            {actualUserData.postCount && (
+              <h6 className="text-4xl font-bold text-gray-900 dark:text-white">
+                {actualUserData.postCount}
+              </h6>
+            )}
           </div>
           {showRole && (
-            <span className={`text-xl font-bold ${roleColor} uppercase`}>
+            <span className={`text-md font-bold ${roleColor} uppercase`}>
               {actualUserData.role}
             </span>
           )}
 
           <div className="flex flex-col items-center justify-between w-full">
-            <h1 className="text-xl text-gray-500 dark:text-white">LIKES</h1>
-            <h6 className="text-4xl font-bold text-gray-900 dark:text-white">
-              200
-            </h6>
+            <h1 className="text-md text-gray-500 dark:text-white">LIKES</h1>
+            {actualUserData.totalLikes && (
+              <h6 className="text-4xl font-bold text-gray-900 dark:text-white">
+                {actualUserData.totalLikes}
+              </h6>
+            )}
           </div>
         </div>
       </div>

@@ -106,6 +106,7 @@ const createPost = async (req, res) => {
       likes,
       status,
     });
+
     res.status(201).json(post);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -222,7 +223,7 @@ const getPublicPostsPaginated = async (req, res) => {
       .populate({
         path: "userID",
         model: "users",
-        select: "name lastName profilePicture",
+        select: "name lastName profilePicture role postCount totalLikes",
       })
       .exec();
 
@@ -257,6 +258,13 @@ const getPersonalProfilePostsPaginatedByUserID = async (req, res) => {
     const user = await userModel
       .findById(userID)
       .select("name lastName profilePicture role");
+
+    const userPostCount = await postModel.countDocuments({ userID });
+    const userTotalLikes = await postModel.countDocuments({
+      likes: {
+        $elemMatch: { $eq: userID },
+      },
+    });
 
     const posts = await postModel
       .find({ userID })
@@ -294,6 +302,8 @@ const getPersonalProfilePostsPaginatedByUserID = async (req, res) => {
       totalPages,
       currentPage: page,
       nextPage,
+      userPostCount,
+      userTotalLikes,
       previousPage,
     });
   } catch (error) {
@@ -313,6 +323,13 @@ const getPublicProfilePostsPaginatedByUserID = async (req, res) => {
       .findById(userID)
       .select("name lastName profilePicture role");
 
+    const userPostCount = await postModel.countDocuments({ userID });
+    const userTotalLikes = await postModel.countDocuments({
+      likes: {
+        $elemMatch: { $eq: userID },
+      },
+    });
+
     const posts = await postModel
       .find({ status: "public", userID, isAnonymous: false })
       //remove if not working, to sort from new to old
@@ -324,7 +341,7 @@ const getPublicProfilePostsPaginatedByUserID = async (req, res) => {
         populate: {
           path: "userID",
           model: "users",
-          select: "name lastName profilePicture",
+          select: "name lastName profilePicture role postCount totalLikes",
         },
       })
       .populate("ticketID")
@@ -354,6 +371,8 @@ const getPublicProfilePostsPaginatedByUserID = async (req, res) => {
       currentPage: page,
       nextPage,
       previousPage,
+      userPostCount,
+      userTotalLikes,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

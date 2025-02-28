@@ -54,6 +54,14 @@ const UserSchema = new mongoose.Schema(
       ref: "invoice",
       default: null,
     },
+    totalLikes: {
+      type: Number,
+      default: 0,
+    },
+    postCount: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

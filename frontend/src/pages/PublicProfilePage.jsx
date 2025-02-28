@@ -57,7 +57,11 @@ const PublicProfilePage = () => {
       );
       setPostsData((prevPosts) => [...prevPosts, ...response.data.posts]);
       setTotalPages(response.data.totalPages);
-      setViewedUserData(response.data.user);
+      setViewedUserData({
+        ...response.data.user,
+        postCount: response.data.userPostCount,
+        totalLikes: response.data.userTotalLikes,
+      });
 
       setSuccess(true);
     } catch (err) {
