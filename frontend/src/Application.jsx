@@ -15,6 +15,7 @@ import Dashboard from "./pages/DashboardPage";
 import CrudPage from "./pages/CrudPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import CreateInvoicePage from "./pages/CreateInvoicePage";
+import InvoicesPage from "./pages/InvoicesPage";
 import Chat from "./pages/Chat";
 
 const Application = () => {
@@ -40,6 +41,7 @@ const Application = () => {
           <Route path="/change-password" element={<ChangePasswordPage />} />
 
           <Route path="/create-invoice" element={<CreateInvoicePage />} />
+          <Route path="/invoices/:userID" element={<InvoicesPage />} />
 
           <Route path="/test" element={<TestPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
