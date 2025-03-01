@@ -192,17 +192,20 @@ function Post({ data = null, userData = null }) {
                 </form>
               </Card>
               <div className="flex justify-between">
-                <FaHeart
-                  size={26}
-                  className={`${
-                    liked
-                      ? "text-red-500 hover:text-black"
-                      : "text-black hover:text-red-500"
-                  } cursor-pointer`}
-                  onClick={() => {
-                    handleLike(data._id);
-                  }}
-                />
+                <div className="flex space-between gap-1">
+                  <FaHeart
+                    size={26}
+                    className={`${
+                      liked
+                        ? "text-red-500 hover:text-black"
+                        : "text-black hover:text-red-500"
+                    } cursor-pointer`}
+                    onClick={() => {
+                      handleLike(data._id);
+                    }}
+                  />
+                  <span>{data.likes.length}</span>
+                </div>
                 {(userData.id === data.userID._id ||
                   userData.role === "admin") && (
                   <>
@@ -228,12 +231,14 @@ function Post({ data = null, userData = null }) {
                     </Button>
                   </>
                 )}
-
-                <FaCommentDots
-                  size={26}
-                  className="text-white hover:text-black dark:hover:text-gray-400 cursor-pointer"
-                  onClick={() => prepareComments()}
-                />
+                <div className="flex space-between gap-2">
+                  <span>{data.commentsID.length}</span>
+                  <FaCommentDots
+                    size={26}
+                    className="text-white hover:text-black dark:hover:text-gray-400 cursor-pointer"
+                    onClick={() => prepareComments()}
+                  />
+                </div>
               </div>
             </Card>
           </div>
