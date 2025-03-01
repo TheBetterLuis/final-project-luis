@@ -18,6 +18,7 @@ import CreateInvoicePage from "./pages/CreateInvoicePage";
 import InvoicesPage from "./pages/InvoicesPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Chat from "./pages/Chat";
+import ChatroomPage from "./pages/ChatroomPage";
 
 const Application = () => {
   return (
@@ -47,6 +48,7 @@ const Application = () => {
           <Route path="/test" element={<TestPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/Chat" element={<Chat />} />
+          <Route path="/chatroom/:id" element={<ChatroomPage />} />
 
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
