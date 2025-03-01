@@ -2,12 +2,14 @@ import { Table, Button } from "flowbite-react";
 import axios from "axios";
 import { useState } from "react";
 import EditUserModal from "./EditUserModal";
+import { useNavigate } from "react-router-dom";
 
 function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
   const [modalData, setModalData] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState("");
 
+  const navigate = useNavigate();
   const handleDelete = async (userID, currentSection) => {
     // console.log(userID);
     const isConfirmed = window.confirm("Eliminar usuario?");
@@ -82,7 +84,12 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                   key={index}
                   className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70"
                 >
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 capitalize">
+                  <Table.Cell
+                    className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 capitalize cursor-pointer"
+                    onClick={() => {
+                      navigate(`/public-profile/${user._id}`);
+                    }}
+                  >
                     {`${user.name} ${user.lastName}`}
                   </Table.Cell>
                   <Table.Cell>{user.email}</Table.Cell>
