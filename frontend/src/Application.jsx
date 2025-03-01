@@ -16,6 +16,7 @@ import CrudPage from "./pages/CrudPage";
 import ChangePasswordPage from "./pages/ChangePasswordPage";
 import CreateInvoicePage from "./pages/CreateInvoicePage";
 import InvoicesPage from "./pages/InvoicesPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import Chat from "./pages/Chat";
 
 const Application = () => {
@@ -47,7 +48,7 @@ const Application = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/Chat" element={<Chat />} />
 
-          <Route path="/*" element={<>not found</>} />
+          <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </Flowbite>
     </>

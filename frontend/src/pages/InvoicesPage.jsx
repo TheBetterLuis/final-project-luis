@@ -6,7 +6,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import EditUserModal from "../components/EditUserModal";
 import Invoice from "../components/Invoice";
 
 const InvoicesPage = () => {
