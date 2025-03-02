@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Flowbite } from "flowbite-react";
 import TicketViewPage from "./pages/TicketViewPage";
-import TestPage from "./pages/TestPage";
+import PrivateChat from "./pages/TestPage";
 import FeedPage from "./pages/FeedPage";
 import ProfilePage from "./pages/ProfilePage";
 import ProfilePicturePage from "./pages/ProfilePicturePage";
@@ -45,7 +45,10 @@ const Application = () => {
           <Route path="/create-invoice" element={<CreateInvoicePage />} />
           <Route path="/invoices/:userID" element={<InvoicesPage />} />
 
-          <Route path="/test" element={<TestPage />} />
+          <Route
+            path="/test"
+            element={<PrivateChat roomId="room_123_456" username="User1" />}
+          />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/Chat" element={<Chat />} />
           <Route path="/chatroom/:id" element={<ChatroomPage />} />
