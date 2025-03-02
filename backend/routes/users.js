@@ -9,6 +9,7 @@ const {
   getPaginatedTechUsers,
   getRegularUsers,
   getPaginatedRegularUsers,
+  getPaginatedPremiumUsers,
   createUser,
   deleteUser,
   updateUser,
@@ -29,6 +30,7 @@ router.get("/regular", getRegularUsers);
 
 router.get("/tech/paginate", getPaginatedTechUsers);
 router.get("/regular/paginate", getPaginatedRegularUsers);
+router.get("/premium/paginate", getPaginatedPremiumUsers);
 
 //route to delete users by ID
 router.delete("/:id", deleteUser);
