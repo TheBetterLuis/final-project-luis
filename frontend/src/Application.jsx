@@ -47,7 +47,9 @@ const Application = () => {
 
           <Route
             path="/test"
-            element={<PrivateChat roomId="room_123_456" username="User1" />}
+            element={
+              <PrivateChat roomId="679856862765feb05fde61a9" username="test" />
+            }
           />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/Chat" element={<Chat />} />

@@ -11,12 +11,18 @@ const PrivateChat = ({ roomId, username }) => {
     // Join the specific room
     socket.emit("join_room", roomId);
 
+    // Receive previous messages
+    socket.on("previous_messages", (previousMessages) => {
+      setMessages(previousMessages);
+    });
+
     // Listen for messages in this room
     socket.on("private_message", (message) => {
       setMessages((prev) => [...prev, message]);
     });
 
     return () => {
+      socket.off("previous_message");
       socket.off("private_message");
     };
   }, [roomId]);
@@ -30,10 +36,10 @@ const PrivateChat = ({ roomId, username }) => {
 
   return (
     <div>
-      <h3>Sala De Chat</h3>
+      <h3>Sala De Chat: {roomId}</h3>
       <div>
         {messages.map((msg, index) => (
-          <p key={index}>{msg}</p>
+          <p key={index}>{msg.message}</p>
         ))}
       </div>
       <input
