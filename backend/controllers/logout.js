@@ -14,6 +14,13 @@ const logout = async (req, res) => {
 
     const user = await userModel.findById(id);
 
+    if (!user) {
+      return res.status(404).json({ message: "Usuario requerido" });
+    }
+
+    user.isOnline = false;
+    await user.save();
+
     const token = jwt.sign(
       { id: user._id, name: user.name },
       process.env.SECRET_KEY,

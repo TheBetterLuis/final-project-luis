@@ -37,6 +37,9 @@ const login = async (req, res) => {
 
     //if user logs in we reset sessionAttemtps to 3
     userFind.sessionAttempts = 3;
+    //update isOnline status
+    userFind.isOnline = true;
+
     const updatedUser = await userFind.save();
     //if login is successful we create a token with user data
     const token = jwt.sign(

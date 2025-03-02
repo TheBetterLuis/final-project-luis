@@ -1,49 +1,37 @@
-import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import CustomSidebar from "../components/CustomSidebar";
+import PageFooter from "../components/Footer";
+import PrivateChat from "../components/Chatroom";
+import { NavBar } from "../components/NavBar";
 
-const socket = io("http://localhost:3001");
-
-const PrivateChat = ({ roomId, username }) => {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
-
-  useEffect(() => {
-    // Join the specific room
-    socket.emit("join_room", roomId);
-
-    // Listen for messages in this room
-    socket.on("private_message", (message) => {
-      setMessages((prev) => [...prev, message]);
-    });
-
-    return () => {
-      socket.off("private_message");
-    };
-  }, [roomId]);
-
-  const sendMessage = () => {
-    if (input.trim() === "") return;
-    const messageData = { roomId, message: `${username}: ${input}` };
-    socket.emit("private_message", messageData);
-    setInput(""); // Clear input field
+const ChatroomPage = () => {
+  const styles = {
+    background: "bg-gradient-to-tr from-azul4 via-[#52A2AB] to-azul1 ",
+    background_feed:
+      "bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]",
   };
 
   return (
-    <div>
-      <h3>Sala De Chat</h3>
-      <div>
-        {messages.map((msg, index) => (
-          <p key={index}>{msg}</p>
-        ))}
+    <>
+      <div className={`${styles.background}`}>
+        <NavBar />
+        <div
+          id="wrapper"
+          className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
+        >
+          {/*Page Component goes here*/}
+          <>
+            <PrivateChat
+              roomId={"679856862765feb05fde61a9"}
+              username={`test`}
+            />
+          </>
+          {/*Page Component goes here*/}
+        </div>
+        <PageFooter />
       </div>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={sendMessage}>Send</button>
-    </div>
+      <CustomSidebar></CustomSidebar>
+    </>
   );
 };
 
-export default PrivateChat;
+export default ChatroomPage;
