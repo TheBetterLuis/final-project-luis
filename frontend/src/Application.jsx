@@ -19,6 +19,8 @@ import InvoicesPage from "./pages/InvoicesPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Chat from "./pages/Chat";
 import ChatroomPage from "./pages/ChatroomPage";
+import ChatroomTechPage from "./pages/ChatroomTechPage";
+import ChatList from "./pages/ChatList";
 
 const Application = () => {
   return (
@@ -53,7 +55,9 @@ const Application = () => {
           />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/Chat" element={<Chat />} />
-          <Route path="/chatroom/:id" element={<ChatroomPage />} />
+          <Route path="/chatroom" element={<ChatroomPage />} />
+          <Route path="/chatroom-tech/:userID" element={<ChatroomTechPage />} />
+          <Route path="/chatlist" element={<ChatList />} />
 
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
