@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Post from "../components/Post";
 import EditUserModal from "../components/EditUserModal";
+import OtroSidebar from "../components/OtroSidebar";
 
 const ProfilePage = () => {
   const styles = {
@@ -214,7 +215,25 @@ const ProfilePage = () => {
         </div>
         <PageFooter />
       </div>
-      <CustomSidebar></CustomSidebar>
+      {userData !== null && (
+        <OtroSidebar
+          buttons={[
+            { name: "Inicio", link: "/feed" },
+            { name: "Perfil", link: "/profile" },
+          ]}
+          userData={userData}
+        />
+      )}
+
+      {userData === null && (
+        <OtroSidebar
+          buttons={[
+            { name: "Inicio", link: "/feed" },
+            { name: "Perfil", link: "/profile" },
+          ]}
+        />
+      )}
+
       <EditUserModal
         data={modalData}
         setOpenModal={setOpenModal}

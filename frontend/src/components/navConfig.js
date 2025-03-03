@@ -65,13 +65,30 @@ export const navRoutes = {
     },
   },
 
+  test: {
+    first: { name: "Cerrar sesion", link: "/logout" },
+    second: { name: "Perfil", link: "/profile" },
+    third: { name: "Reportar ticket", link: "/createticket" },
+    logo: { link: "/feed" },
+    drawer: {
+      display: true,
+      title: "Menu",
+      image: { src: "../../public/img/default-profile-icon.jpg" },
+      buttons: {
+        first: { name: "Perfil", link: "/profile" },
+        second: { name: "Chat", link: "/chat" },
+        third: { name: "Ticket", link: "/createticket" },
+      },
+    },
+  },
+
   profile: {
     first: { name: "Cerrar sesion", link: "/logout" },
     second: { name: "Feed", link: "/feed" },
     third: { name: "Reportar ticket", link: "/createticket" },
     logo: { link: "/profile" },
     drawer: {
-      display: false,
+      display: true,
       title: "Menu",
       image: { src: "../../public/img/default-profile-icon.jpg" },
       buttons: {

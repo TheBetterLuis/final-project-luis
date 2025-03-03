@@ -1,8 +1,7 @@
-import CustomSidebar from "../components/CustomSidebar";
+import OtroSidebar from "../components/OtroSidebar";
 import PageFooter from "../components/Footer";
 import PrivateChat from "../components/Chatroom";
 import { NavBar } from "../components/NavBar";
-//import CustomSidebar from "../components/CustomSidebar";
 
 const ChatroomPage = () => {
   const styles = {
@@ -26,7 +25,12 @@ const ChatroomPage = () => {
         </div>
         <PageFooter />
       </div>
-      {/*     <CustomSidebar newButtons={{ link: esteve, name: "esteve" }} />*/}
+      <OtroSidebar
+        buttons={[
+          { name: "Inicio", link: "/feed" },
+          { name: "Perfil", link: "/profile" },
+        ]}
+      />
     </>
   );
 };
