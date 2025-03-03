@@ -196,9 +196,9 @@ const Dashboard = () => {
               </button>
               <br />
               <Table className="drop-shadow-2xl ">
-                <Table.Body className="divide-y bg-white/19">
+                <Table.Body className="bg-white/30">
                   {openTickets.length === 0 ? (
-                    <h1 className="text-black text-lg">
+                    <h1 className="text-black text-lg p-2 rounded-lg">
                       No tienes tickets abiertos
                     </h1>
                   ) : (
@@ -237,9 +237,9 @@ const Dashboard = () => {
               </button>
               <br />
               <Table className="drop-shadow-2xl ">
-                <Table.Body className="divide-y bg-white/19">
+                <Table.Body className="divide-y bg-white/30">
                   {pendingTickets.length === 0 ? (
-                    <h1 className="text-black text-lg">
+                    <h1 className="text-black text-lg p-2 rounded-lg">
                       No tienes tickets en revision
                     </h1>
                   ) : (
@@ -278,9 +278,9 @@ const Dashboard = () => {
               </button>
               <br />
               <Table className="drop-shadow-2xl ">
-                <Table.Body className="divide-y bg-white/19">
+                <Table.Body className="divide-y bg-white/30">
                   {closedTickets.length === 0 ? (
-                    <h1 className="text-black text-lg">
+                    <h1 className="text-black text-lg p-2 rounded-lg">
                       No tienes tickets resueltos
                     </h1>
                   ) : (

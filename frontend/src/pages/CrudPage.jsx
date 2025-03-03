@@ -150,7 +150,7 @@ const CrudPage = () => {
 
         <div
           id="wrapper"
-          className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
+          className="pt-24 pb-28 px-9 py-9 min-h-screen flex flex-col items-center justify-center"
         >
           {/*Page Component goes here*/}
 

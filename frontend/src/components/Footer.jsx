@@ -8,7 +8,7 @@ const PageFooter = () => {
 
   return (
     <Footer
-      className="bg-azul6 fixed bottom-0 left-0 w-full z-50 rounded-none"
+      className="bg-azul6 block bottom-0 left-0 w-full z-50 rounded-none"
       container
     >
       <img

@@ -19,7 +19,10 @@ const ChatList = () => {
   let returnPage = (
     <>
       <div className={`${styles.background}`}>
-        <NavBar />
+        <div className="relative z-40">
+          <NavBar />
+        </div>
+
         <div
           id="wrapper"
           className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
@@ -122,12 +125,18 @@ const ChatList = () => {
     returnPage = (
       <>
         <div className={`${styles.background}`}>
-          <NavBar />
+          <div className="relative z-40">
+            <NavBar />
+          </div>
           <div
             id="wrapper"
             className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
           >
             {/*Page Component goes here*/}
+            <h1 className="text-4xl font-bold text-white drop-shadow-2xl">
+              Usuarios
+            </h1>
+            <br />
 
             {listData !== null && userData !== null && (
               <>
