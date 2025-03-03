@@ -2,6 +2,7 @@ import CustomSidebar from "../components/CustomSidebar";
 import PageFooter from "../components/Footer";
 import PrivateChat from "../components/Chatroom";
 import { NavBar } from "../components/NavBar";
+//import CustomSidebar from "../components/CustomSidebar";
 
 const ChatroomPage = () => {
   const styles = {
@@ -19,17 +20,13 @@ const ChatroomPage = () => {
           className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
         >
           {/*Page Component goes here*/}
-          <>
-            <PrivateChat
-              roomId={"679856862765feb05fde61a9"}
-              username={`test`}
-            />
-          </>
+          <></>
+
           {/*Page Component goes here*/}
         </div>
         <PageFooter />
       </div>
-      <CustomSidebar></CustomSidebar>
+      {/*     <CustomSidebar newButtons={{ link: esteve, name: "esteve" }} />*/}
     </>
   );
 };

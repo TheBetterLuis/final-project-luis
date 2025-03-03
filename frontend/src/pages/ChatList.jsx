@@ -132,6 +132,25 @@ const ChatList = () => {
               <>
                 {listData.map((user) => (
                   <>
+                    <div
+                      className="max-w-sm flex flex-col w-3/4 h-3/4 px-16 py-4 bg-white/20 backdrop-blur-2xl backdrop-saturate-90 rounded-lg drop-shadow-2xl shadow-2xl my-1"
+                      key={user._id}
+                    >
+                      <Link to={`/chatroom-tech/${user._id}`}>
+                        <div
+                          className={`capitalize my-1 cursor-pointer rounded-md px-4 py-2 text-md ${
+                            user.isOnline === true
+                              ? "bg-green-500"
+                              : "bg-red-500"
+                          } `}
+                        >
+                          {`${user.name} ${user.lastName}`}
+                        </div>
+                      </Link>
+                    </div>
+                  </>
+                  /*
+                  <>
                     <div key={user._id}>
                       <Link to={`/chatroom-tech/${user._id}`}>
                         <h1
@@ -144,6 +163,7 @@ const ChatList = () => {
                       </Link>
                     </div>
                   </>
+                  */
                 ))}
               </>
             )}

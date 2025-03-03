@@ -65,6 +65,7 @@ const FeedPage = () => {
       const response = await axios.post(
         `http://localhost:3001/api/posts/paginate?page=${page}`
       );
+      console.log(response.data.posts);
       setPostsData((prevPosts) => [...prevPosts, ...response.data.posts]);
       setTotalPages(response.data.totalPages);
 
@@ -109,6 +110,13 @@ const FeedPage = () => {
     fetchPosts(currentPage + 1);
     console.log("loaded more");
   };
+
+  useEffect(() => {
+    if (userData && postsData) {
+      console.log(userData);
+      console.log(postsData);
+    }
+  }, [userData]);
 
   if (success) {
     returnPage = (
