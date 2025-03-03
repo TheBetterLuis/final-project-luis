@@ -12,7 +12,7 @@ function OtroSidebar({ buttons = null, userData = null }) {
       aria-describedby="drawer-dialog-:r1:"
       role="dialog"
       data-testid="flowbite-drawer"
-      className="fixed z-40 overflow-y-auto p-4 transition-transform dark:bg-gray-800 left-0 top-0 h-screen w-80 transform-none bg-white/30 sidebar-toggle hidden"
+      className="fixed z-40 overflow-y-auto p-4 transition-transform dark:bg-gray-800 left-0 top-0 h-screen w-80 transform-none bg-azul4 sidebar-toggle hidden"
     >
       <div>
         <h5
@@ -28,7 +28,8 @@ function OtroSidebar({ buttons = null, userData = null }) {
             className="rounded-full border border-4 border-[#074572] dark:border-gray-400 w-36 h-36 mx-auto mb-6"
           />
         )}
-        {userData === null && <div className="my-6"></div>}
+
+        {userData === null && <div className="my-4"></div>}
 
         <button
           data-testid="close-drawer"

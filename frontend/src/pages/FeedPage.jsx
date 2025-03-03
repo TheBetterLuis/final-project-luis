@@ -7,6 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import { Button } from "flowbite-react";
+import OtroSidebar from "../components/OtroSidebar";
 
 const FeedPage = () => {
   const styles = {
@@ -122,7 +123,9 @@ const FeedPage = () => {
     returnPage = (
       <>
         <div className={`${styles.background}`}>
-          <NavBar />
+          <div className="relative z-40">
+            <NavBar />
+          </div>
           <div
             id="wrapper"
             className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
@@ -159,11 +162,31 @@ const FeedPage = () => {
           </div>
           <PageFooter />
         </div>
+        {/*
         <CustomSidebar
           name={userData.name}
           lastName={userData.lastName}
           image={userData.profilePicture}
         />
+        */}
+        {userData !== null && (
+          <OtroSidebar
+            buttons={[
+              { name: "Inicio", link: "/feed" },
+              { name: "Perfil", link: "/profile" },
+            ]}
+            userData={userData}
+          />
+        )}
+
+        {userData === null && (
+          <OtroSidebar
+            buttons={[
+              { name: "Inicio", link: "/feed" },
+              { name: "Perfil", link: "/profile" },
+            ]}
+          />
+        )}
       </>
     );
   }
