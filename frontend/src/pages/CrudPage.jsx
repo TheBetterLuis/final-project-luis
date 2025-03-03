@@ -12,7 +12,7 @@ import OtroSidebar from "../components/OtroSidebar";
 
 const CrudPage = () => {
   const styles = {
-    background: "bg-gradient-to-tr from-azul4 via-[#52A2AB] to-azul1",
+    background: "bg-gradient-to-br from-azul3  to-azul1",
     background_feed:
       "bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]",
   };
@@ -158,7 +158,7 @@ const CrudPage = () => {
             <div className="flex flex-col w-full h-screen justify-evenly items-center">
               <div className="flex flex-row justify-center items-center space-x-4 sm:space-x-80">
                 <button
-                  className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6"
+                  className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-2xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6"
                   onClick={() => {
                     setPageData(usersPageData);
                     setCurrentPage("users");
@@ -167,7 +167,7 @@ const CrudPage = () => {
                   Usuarios
                 </button>
                 <button
-                  className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6
+                  className="bg-azul4 text-white px-10 py-3 sm:px-20 sm:py-6 rounded-lg text-2xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg my-6
                 "
                   onClick={() => {
                     setPageData(techsPageData);

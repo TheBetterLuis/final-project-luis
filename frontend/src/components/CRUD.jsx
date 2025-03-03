@@ -67,13 +67,13 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
         <div className="w-full h-screen overflow-x-auto" hidden={hidden}>
           <Table className="drop-shadow-md">
             <Table.Head>
-              <Table.HeadCell className="bg-white/30  dark:border-gray-700 dark:bg-gray-800/70 dark:text-white">
+              <Table.HeadCell className="bg-white/30  dark:border-gray-700 dark:bg-gray-800/70 dark:text-white text-lg">
                 Nombre
               </Table.HeadCell>
-              <Table.HeadCell className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70 dark:text-white">
+              <Table.HeadCell className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70 dark:text-white text-lg">
                 Correo
               </Table.HeadCell>
-              <Table.HeadCell className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70 dark:text-white">
+              <Table.HeadCell className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70 dark:text-white text-lg">
                 Opciones
               </Table.HeadCell>
             </Table.Head>
@@ -85,14 +85,14 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                   className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70"
                 >
                   <Table.Cell
-                    className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 capitalize cursor-pointer"
+                    className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 capitalize cursor-pointer text-xl"
                     onClick={() => {
                       navigate(`/public-profile/${user._id}`);
                     }}
                   >
                     {`${user.name} ${user.lastName}`}
                   </Table.Cell>
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 text-xl">
                     {user.email}
                   </Table.Cell>
                   <Table.Cell>
@@ -103,7 +103,7 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                           prepareModal(user);
                         }}
                       >
-                        Editar
+                        <span className="text-lg">Editar</span>
                       </Button>
                       <Button
                         className="bg-red-500"
@@ -111,7 +111,7 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                           handleDelete(user._id, "users");
                         }}
                       >
-                        Eliminar
+                        <span className="text-lg">Eliminar</span>
                       </Button>
                       <Button
                         className="bg-yellow-400"
@@ -119,7 +119,7 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                           handleMakeAdmin(user._id, "users");
                         }}
                       >
-                        Dar admin
+                        <span className="text-lg">Dar Admin</span>
                       </Button>
                     </Button.Group>
                   </Table.Cell>
@@ -142,72 +142,80 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
 
       {data !== null && view === "tech" && (
         <div className="w-full h-screen overflow-x-auto" hidden={hidden}>
-          <Table className="drop-shadow-md">
-            <Table.Head>
-              <Table.HeadCell className="bg-white/30  dark:border-gray-700 dark:bg-gray-800/70 dark:text-white">
-                Nombre
-              </Table.HeadCell>
-              <Table.HeadCell className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70 dark:text-white">
-                Correo
-              </Table.HeadCell>
-              <Table.HeadCell className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70 dark:text-white">
-                Opciones
-              </Table.HeadCell>
-            </Table.Head>
+          <div className="w-full h-screen overflow-x-auto" hidden={hidden}>
+            <Table className="drop-shadow-md">
+              <Table.Head>
+                <Table.HeadCell className="bg-white/30  dark:border-gray-700 dark:bg-gray-800/70 dark:text-white text-lg">
+                  Nombre
+                </Table.HeadCell>
+                <Table.HeadCell className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70 dark:text-white text-lg">
+                  Correo
+                </Table.HeadCell>
+                <Table.HeadCell className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70 dark:text-white text-lg">
+                  Opciones
+                </Table.HeadCell>
+              </Table.Head>
 
-            <Table.Body className="divide-y bg-white/19">
-              {data.map((user, index) => (
-                <Table.Row
-                  key={index}
-                  className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70"
-                >
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 capitalize">
-                    {`${user.name} ${user.lastName}`}
-                  </Table.Cell>
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                    {user.email}
-                  </Table.Cell>
-                  <Table.Cell>
-                    <Button.Group>
-                      <Button
-                        className="bg-azul2"
-                        onClick={() => {
-                          prepareModal(user);
-                        }}
-                      >
-                        Editar
-                      </Button>
-                      <Button
-                        className="bg-red-500"
-                        onClick={() => {
-                          handleDelete(user._id, "tech");
-                        }}
-                      >
-                        Eliminar
-                      </Button>
-                      <Button
-                        className="bg-yellow-400"
-                        onClick={() => {
-                          handleMakeAdmin(user._id, "tech");
-                        }}
-                      >
-                        Dar admin
-                      </Button>
-                    </Button.Group>
-                  </Table.Cell>
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table>
+              <Table.Body className="divide-y bg-white/19">
+                {data.map((user, index) => (
+                  <Table.Row
+                    key={index}
+                    className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70"
+                  >
+                    <Table.Cell
+                      className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 capitalize cursor-pointer text-xl"
+                      onClick={() => {
+                        navigate(`/public-profile/${user._id}`);
+                      }}
+                    >
+                      {`${user.name} ${user.lastName}`}
+                    </Table.Cell>
+                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 text-xl">
+                      {user.email}
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Button.Group>
+                        <Button
+                          className="bg-azul2"
+                          onClick={() => {
+                            prepareModal(user);
+                          }}
+                        >
+                          <span className="text-lg">Editar</span>
+                        </Button>
+                        <Button
+                          className="bg-red-500"
+                          onClick={() => {
+                            handleDelete(user._id, "users");
+                          }}
+                        >
+                          <span className="text-lg">Eliminar</span>
+                        </Button>
+                        <Button
+                          className="bg-yellow-400"
+                          onClick={() => {
+                            handleMakeAdmin(user._id, "users");
+                          }}
+                        >
+                          <span className="text-lg">Dar Admin</span>
+                        </Button>
+                      </Button.Group>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table>
 
-          <EditUserModal
-            data={modalData}
-            setOpenModal={setOpenModal}
-            openModal={openModal}
-            handleCloseModal={handleCloseModal}
-            handleMessage={handleMessage}
-            showRoleSelection={true}
-          />
+            <EditUserModal
+              data={modalData}
+              setOpenModal={setOpenModal}
+              openModal={openModal}
+              handleCloseModal={handleCloseModal}
+              handleMessage={handleMessage}
+              message={message}
+              showRoleSelection={true}
+            />
+          </div>
         </div>
       )}
     </>

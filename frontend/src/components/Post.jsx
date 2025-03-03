@@ -152,7 +152,7 @@ function Post({ data = null, userData = null }) {
                   />
                 )}
                 {data.isAnonymous === false && (
-                  <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize">
+                  <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize text-xl font-bold">
                     <Link to={`/publicprofile/${data.userID._id}`}>
                       {` ${data.userID.name} ${data.userID.lastName}`}
                     </Link>
@@ -160,7 +160,7 @@ function Post({ data = null, userData = null }) {
                 )}
 
                 {data.isAnonymous === true && (
-                  <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize">
+                  <span className="text-sm text-gray-700 flex items-center justify-center drop-shadow-md dark:text-white capitalize text-xl font-bold">
                     {`usuario anónimo`}
                   </span>
                 )}
@@ -170,14 +170,14 @@ function Post({ data = null, userData = null }) {
                   <div>
                     <div className="mb-2 block">
                       <Link to={`/ticket/${data.ticketID._id}`}>
-                        <span className="text-black flex items-center justify-center drop-shadow-md dark:text-white">
+                        <span className="text-black flex items-center justify-center drop-shadow-md dark:text-white text-2xl">
                           {data.ticketID.title}
                         </span>
                       </Link>
                     </div>
                   </div>
                   <div className="p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-xs h-32 overflow-y-auto">
-                    <p className="text-black dark:text-gray-400">
+                    <p className="text-black dark:text-gray-400 text-lg">
                       {data.ticketID.description}
                     </p>
                   </div>
@@ -215,7 +215,7 @@ function Post({ data = null, userData = null }) {
                         handleDeletePost(data._id);
                       }}
                     >
-                      <p className="text-xs">Eliminar Post</p>
+                      <p className="text-md">Eliminar Post</p>
                     </Button>
                     <Button
                       className="bg-gray-500 hover:bg-gray-600"
@@ -223,7 +223,7 @@ function Post({ data = null, userData = null }) {
                         handleHidePost(data._id);
                       }}
                     >
-                      <p className="text-xs">
+                      <p className="text-md">
                         {data.status === "private"
                           ? "Publicar Post"
                           : "Ocultar Post"}

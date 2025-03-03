@@ -10,7 +10,7 @@ function OtroSidebar({ buttons = null, userData = null }) {
 
   return (
     <>
-      {/*<div className="absolute w-full h-screen bg-black/30 top-0 right-0"></div>*/}
+      {/* <div className="absolute w-full h-screen top-0 right-0 wrapper"></div>*/}
       <div
         aria-modal="true"
         aria-describedby="drawer-dialog-:r1:"

@@ -13,7 +13,7 @@ import OtroSidebar from "../components/OtroSidebar";
 
 const ProfilePage = () => {
   const styles = {
-    background: "bg-gradient-to-tr from-azul4 via-[#52A2AB] to-azul1",
+    background: "bg-gradient-to-r from-azul3  to-azul1",
     background_feed:
       "bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]",
   };
@@ -167,7 +167,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <div className={`${styles.background}`}>
+      <div className={`${styles.background} `}>
         <div
           id="wrapper"
           className="pt-10 pb-28 min-h-screen flex flex-col items-center justify-center "

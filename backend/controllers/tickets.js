@@ -81,7 +81,7 @@ const getPaginatedOpenTicketsByTechID = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     //const limit = 10;
     // using 1 limit for testing
-    const limit = 1;
+    const limit = 4;
     const skip = (page - 1) * limit;
 
     const { techID } = req.body;
@@ -115,7 +115,7 @@ const getPaginatedPendingTicketsByTechID = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     //const limit = 10;
     // using 1 limit for testing
-    const limit = 1;
+    const limit = 4;
     const skip = (page - 1) * limit;
 
     const { techID } = req.body;
@@ -152,7 +152,7 @@ const getPaginatedClosedTicketsByTechID = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     //const limit = 10;
     // using 1 limit for testing
-    const limit = 1;
+    const limit = 4;
     const skip = (page - 1) * limit;
 
     const { techID } = req.body;

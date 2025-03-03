@@ -11,7 +11,7 @@ import { FaPencilAlt } from "react-icons/fa";
 
 const Dashboard = () => {
   const styles = {
-    background: "bg-gradient-to-tr from-azul4 via-[#52A2AB] to-azul1",
+    background: "bg-gradient-to-r from-azul3  to-azul1",
     background_feed:
       "bg-gradient-to-b from-[#EFFFFB] via-[#BFCCC8] to-[#8f9996]",
   };
