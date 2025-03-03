@@ -170,7 +170,7 @@ const ProfilePage = () => {
       <div className={`${styles.background}`}>
         <div
           id="wrapper"
-          className="pt-10 pb-28 min-h-screen flex flex-col items-center justify-center"
+          className="pt-10 pb-28 min-h-screen flex flex-col items-center justify-center "
         >
           <div className="relative z-40">
             <NavBar />

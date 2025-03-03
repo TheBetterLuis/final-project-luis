@@ -25,7 +25,7 @@ const FeedPage = () => {
 
         <div
           id="wrapper"
-          className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
+          className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center wrapper"
         >
           {/*Page Component goes here*/}
 

@@ -13,13 +13,18 @@ const ChatroomPage = () => {
   return (
     <>
       <div className={`${styles.background}`}>
-        <NavBar />
+        <div className="relative z-40">
+          <NavBar />
+        </div>
+
         <div
           id="wrapper"
-          className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
+          className={`pt-24 pb-28 min-h-screen flex flex-col items-center justify-center wrapper`}
         >
           {/*Page Component goes here*/}
-          <></>
+          <>
+            <h1>jksdfkj</h1>
+          </>
 
           {/*Page Component goes here*/}
         </div>

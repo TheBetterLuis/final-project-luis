@@ -27,11 +27,13 @@ export function NavBar() {
         {currentRoute.drawer.display && (
           <button
             className="inline-flex items-center rounded-lg p-2 text-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden text-white dark:text-white hover:text-black md:hover:text-gray-400 md:dark:hover:text-gray-400"
-            onClick={() =>
+            onClick={() => {
               document
                 .querySelector(".sidebar-toggle")
-                .classList.toggle("hidden")
-            }
+                .classList.toggle("hidden");
+
+              document.querySelector(".wrapper").classList.add("bg-black/30");
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -54,11 +56,12 @@ export function NavBar() {
         {currentRoute.drawer.display && (
           <Navbar.Link
             className={`${textStyles.color}`}
-            onClick={() =>
+            onClick={() => {
               document
                 .querySelector(".sidebar-toggle")
-                .classList.toggle("hidden")
-            }
+                .classList.toggle("hidden");
+              document.querySelector(".wrapper").classList.add("bg-black/30");
+            }}
           >
             {currentRoute.drawer.title}
           </Navbar.Link>

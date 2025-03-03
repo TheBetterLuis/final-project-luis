@@ -187,7 +187,6 @@ const Dashboard = () => {
         </div>
 
         <div className="flex h-screen w-full bg-gradient-to-tr from-azul4 via-azul3 to-azul1 ">
-          <div className="hidden sm:block sm:w-1/6 sm:h-full"></div>
           <div className="flex flex-col  sm:flex-row items-center justify-around w-full h-full max-sm:mt-60 mb-24">
             <div className="flex flex-col items-center justify-around">
               <button className="bg-azul4 text-white px-10 py-3 sm:px-16 sm:py-5 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg text-center my-3">
