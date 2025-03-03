@@ -8,6 +8,7 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Post from "../components/Post";
+import OtroSidebar from "../components/OtroSidebar";
 
 const PublicProfilePage = () => {
   const styles = {
@@ -131,17 +132,14 @@ const PublicProfilePage = () => {
 
   return (
     <>
-      <div className={`${styles.background_feed}`}>
+      <div className={`${styles.background}`}>
         <div
           id="wrapper"
-          className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center"
+          className="pt-10 pb-28 min-h-screen flex flex-col items-center justify-center"
         >
           <div className="relative z-40">
             <NavBar />
           </div>
-          <div
-            className={`${styles.background} fixed top-0 left-0 w-screen h-1/4 z-1 `}
-          ></div>
           <div className="grid place-items-center py-2 font-roboto mt-20">
             {/*COMPONENT GOES HERE*/}
             {userData && viewedUserData && (
@@ -178,7 +176,76 @@ const PublicProfilePage = () => {
         </div>
         <PageFooter />
       </div>
-      <CustomSidebar></CustomSidebar>
+      {userData !== null && (
+        <>
+          {userData.role === "admin" && (
+            <OtroSidebar
+              buttons={[
+                { name: "Perfil", link: "/profile" },
+                { name: "Feed", link: "/feed" },
+                { name: "Dashboard", link: "/dashboard" },
+                { name: "CRUD", link: "/crud" },
+                { name: "Lista De Chats", link: "/chatlist" },
+                { name: "Reportar Ticket", link: "/createticket" },
+                { name: "Cerrar Sesion", link: "/logout" },
+              ]}
+              userData={userData}
+            />
+          )}
+
+          {userData.role === "tech" && (
+            <OtroSidebar
+              buttons={[
+                { name: "Perfil", link: "/profile" },
+                { name: "Feed", link: "/feed" },
+                { name: "Dashboard", link: "/dashboard" },
+                { name: "Lista De Chats", link: "/chatlist" },
+                { name: "Reportar Ticket", link: "/createticket" },
+                { name: "Cerrar Sesion", link: "/logout" },
+              ]}
+              userData={userData}
+            />
+          )}
+
+          {userData.role === "free" && (
+            <OtroSidebar
+              buttons={[
+                { name: "Perfil", link: "/profile" },
+                { name: "Feed", link: "/feed" },
+                { name: "Reportar Ticket", link: "/createticket" },
+                { name: "Cerrar Sesion", link: "/logout" },
+              ]}
+              userData={userData}
+            />
+          )}
+
+          {userData.role === "premium" && (
+            <OtroSidebar
+              buttons={[
+                { name: "Perfil", link: "/profile" },
+                { name: "Feed", link: "/feed" },
+                { name: "Chat", link: "/chatroom" },
+                { name: "Reportar Ticket", link: "/createticket" },
+                { name: "Cerrar Sesion", link: "/logout" },
+              ]}
+              userData={userData}
+            />
+          )}
+        </>
+      )}
+
+      {userData === null && (
+        <>
+          <OtroSidebar
+            buttons={[
+              { name: "Perfil", link: "/profile" },
+              { name: "Feed", link: "/feed" },
+              { name: "Reportar Ticket", link: "/createticket" },
+              { name: "Cerrar Sesion", link: "/logout" },
+            ]}
+          />
+        </>
+      )}
     </>
   );
 };

@@ -1,7 +1,9 @@
 import { useLocation } from "react-router-dom";
 import { navRoutes } from "./navConfig";
+import { useNavigate } from "react-router-dom";
 
 function OtroSidebar({ buttons = null, userData = null }) {
+  const navigate = useNavigate();
   const myLocation = useLocation();
   const locationName = myLocation.pathname.slice(1);
   const currentRoute = navRoutes[locationName] || navRoutes.default;
@@ -16,7 +18,7 @@ function OtroSidebar({ buttons = null, userData = null }) {
     >
       <div>
         <h5
-          className="mb-4 inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400"
+          className="mb-4 inline-flex items-center text-base font-semibold text-white dark:text-gray-400"
           id=":r1:"
         >
           MENU
@@ -25,7 +27,10 @@ function OtroSidebar({ buttons = null, userData = null }) {
           <img
             src={`${userData.profilePicture}`}
             alt="user profile image"
-            className="rounded-full border border-4 border-[#074572] dark:border-gray-400 w-36 h-36 mx-auto mb-6"
+            className="rounded-full border border-4 border-[#074572] dark:border-gray-400 w-36 h-36 mx-auto mb-6 cursor-pointer"
+            onClick={() => {
+              navigate("/profilepicture");
+            }}
           />
         )}
 
@@ -33,7 +38,7 @@ function OtroSidebar({ buttons = null, userData = null }) {
 
         <button
           data-testid="close-drawer"
-          className="group absolute end-2.5 top-2.5 flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+          className="group absolute end-2.5 top-2.5 flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-white hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
         >
           <svg
             stroke="currentColor"

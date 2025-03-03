@@ -33,7 +33,7 @@ const Application = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/profilepicture" element={<ProfilePicturePage />} />
           <Route
-            path="/public-profile/:userID"
+            path="/publicprofile/:userID"
             element={<PublicProfilePage />}
           />
           <Route path="/login" element={<LoginPage />} />
@@ -56,7 +56,7 @@ const Application = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/Chat" element={<Chat />} />
           <Route path="/chatroom" element={<ChatroomPage />} />
-          <Route path="/chatroom-tech/:userID" element={<ChatroomTechPage />} />
+          <Route path="/chatroom_tech/:userID" element={<ChatroomTechPage />} />
           <Route path="/chatlist" element={<ChatList />} />
 
           <Route path="/*" element={<NotFoundPage />} />

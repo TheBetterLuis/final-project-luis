@@ -7,6 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import { Button } from "flowbite-react";
+import OtroSidebar from "../components/OtroSidebar";
 
 const ChatList = () => {
   const styles = {
@@ -136,7 +137,7 @@ const ChatList = () => {
                       className="max-w-sm flex flex-col w-3/4 h-3/4 px-16 py-4 bg-white/20 backdrop-blur-2xl backdrop-saturate-90 rounded-lg drop-shadow-2xl shadow-2xl my-1"
                       key={user._id}
                     >
-                      <Link to={`/chatroom-tech/${user._id}`}>
+                      <Link to={`/chatroom_tech/${user._id}`}>
                         <div
                           className={`capitalize my-1 cursor-pointer rounded-md px-4 py-2 text-md ${
                             user.isOnline === true
@@ -152,7 +153,7 @@ const ChatList = () => {
                   /*
                   <>
                     <div key={user._id}>
-                      <Link to={`/chatroom-tech/${user._id}`}>
+                      <Link to={`/chatroom_tech/${user._id}`}>
                         <h1
                           className={`capitalize my-1 cursor-pointer ${
                             user.isOnline === true
@@ -184,11 +185,76 @@ const ChatList = () => {
           </div>
           <PageFooter />
         </div>
-        <CustomSidebar
-          name={userData.name}
-          lastName={userData.lastName}
-          image={userData.profilePicture}
-        />
+        {userData !== null && (
+          <>
+            {userData.role === "admin" && (
+              <OtroSidebar
+                buttons={[
+                  { name: "Perfil", link: "/profile" },
+                  { name: "Feed", link: "/feed" },
+                  { name: "Dashboard", link: "/dashboard" },
+                  { name: "CRUD", link: "/crud" },
+                  { name: "Lista De Chats", link: "/chatlist" },
+                  { name: "Reportar Ticket", link: "/createticket" },
+                  { name: "Cerrar Sesion", link: "/logout" },
+                ]}
+                userData={userData}
+              />
+            )}
+
+            {userData.role === "tech" && (
+              <OtroSidebar
+                buttons={[
+                  { name: "Perfil", link: "/profile" },
+                  { name: "Feed", link: "/feed" },
+                  { name: "Dashboard", link: "/dashboard" },
+                  { name: "Lista De Chats", link: "/chatlist" },
+                  { name: "Reportar Ticket", link: "/createticket" },
+                  { name: "Cerrar Sesion", link: "/logout" },
+                ]}
+                userData={userData}
+              />
+            )}
+
+            {userData.role === "free" && (
+              <OtroSidebar
+                buttons={[
+                  { name: "Perfil", link: "/profile" },
+                  { name: "Feed", link: "/feed" },
+                  { name: "Reportar Ticket", link: "/createticket" },
+                  { name: "Cerrar Sesion", link: "/logout" },
+                ]}
+                userData={userData}
+              />
+            )}
+
+            {userData.role === "premium" && (
+              <OtroSidebar
+                buttons={[
+                  { name: "Perfil", link: "/profile" },
+                  { name: "Feed", link: "/feed" },
+                  { name: "Chat", link: "/chatroom" },
+                  { name: "Reportar Ticket", link: "/createticket" },
+                  { name: "Cerrar Sesion", link: "/logout" },
+                ]}
+                userData={userData}
+              />
+            )}
+          </>
+        )}
+
+        {userData === null && (
+          <>
+            <OtroSidebar
+              buttons={[
+                { name: "Perfil", link: "/profile" },
+                { name: "Feed", link: "/feed" },
+                { name: "Reportar Ticket", link: "/createticket" },
+                { name: "Cerrar Sesion", link: "/logout" },
+              ]}
+            />
+          </>
+        )}
       </>
     );
   }

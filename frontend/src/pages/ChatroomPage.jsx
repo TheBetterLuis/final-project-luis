@@ -5,6 +5,7 @@ import { NavBar } from "../components/NavBar";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import OtroSidebar from "../components/OtroSidebar";
 
 const ChatroomPage = () => {
   const styles = {
@@ -74,7 +75,76 @@ const ChatroomPage = () => {
         </div>
         <PageFooter />
       </div>
-      <CustomSidebar></CustomSidebar>
+      {userData !== null && (
+        <>
+          {userData.role === "admin" && (
+            <OtroSidebar
+              buttons={[
+                { name: "Perfil", link: "/profile" },
+                { name: "Feed", link: "/feed" },
+                { name: "Dashboard", link: "/dashboard" },
+                { name: "CRUD", link: "/crud" },
+                { name: "Lista De Chats", link: "/chatlist" },
+                { name: "Reportar Ticket", link: "/createticket" },
+                { name: "Cerrar Sesion", link: "/logout" },
+              ]}
+              userData={userData}
+            />
+          )}
+
+          {userData.role === "tech" && (
+            <OtroSidebar
+              buttons={[
+                { name: "Perfil", link: "/profile" },
+                { name: "Feed", link: "/feed" },
+                { name: "Dashboard", link: "/dashboard" },
+                { name: "Lista De Chats", link: "/chatlist" },
+                { name: "Reportar Ticket", link: "/createticket" },
+                { name: "Cerrar Sesion", link: "/logout" },
+              ]}
+              userData={userData}
+            />
+          )}
+
+          {userData.role === "free" && (
+            <OtroSidebar
+              buttons={[
+                { name: "Perfil", link: "/profile" },
+                { name: "Feed", link: "/feed" },
+                { name: "Reportar Ticket", link: "/createticket" },
+                { name: "Cerrar Sesion", link: "/logout" },
+              ]}
+              userData={userData}
+            />
+          )}
+
+          {userData.role === "premium" && (
+            <OtroSidebar
+              buttons={[
+                { name: "Perfil", link: "/profile" },
+                { name: "Feed", link: "/feed" },
+                { name: "Chat", link: "/chatroom" },
+                { name: "Reportar Ticket", link: "/createticket" },
+                { name: "Cerrar Sesion", link: "/logout" },
+              ]}
+              userData={userData}
+            />
+          )}
+        </>
+      )}
+
+      {userData === null && (
+        <>
+          <OtroSidebar
+            buttons={[
+              { name: "Perfil", link: "/profile" },
+              { name: "Feed", link: "/feed" },
+              { name: "Reportar Ticket", link: "/createticket" },
+              { name: "Cerrar Sesion", link: "/logout" },
+            ]}
+          />
+        </>
+      )}
     </>
   );
 };
