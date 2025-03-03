@@ -196,7 +196,7 @@ const Dashboard = () => {
               </button>
               <br />
               <Table className="drop-shadow-2xl ">
-                <Table.Body className="bg-white/30">
+                <Table.Body className="divide-y bg-white/30">
                   {openTickets.length === 0 ? (
                     <h1 className="text-black text-lg p-2 rounded-lg">
                       No tienes tickets abiertos
