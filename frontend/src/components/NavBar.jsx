@@ -32,7 +32,7 @@ export function NavBar() {
                 .querySelector(".sidebar-toggle")
                 .classList.toggle("hidden");
 
-              document.querySelector(".wrapper").classList.add("bg-black/30");
+              // document.querySelector(".wrapper").classList.add("bg-black/30");
             }}
           >
             <svg
@@ -60,7 +60,7 @@ export function NavBar() {
               document
                 .querySelector(".sidebar-toggle")
                 .classList.toggle("hidden");
-              document.querySelector(".wrapper").classList.add("bg-black/30");
+              // document.querySelector(".wrapper").classList.add("bg-black/30");
             }}
           >
             {currentRoute.drawer.title}

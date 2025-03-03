@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-import { Button } from "flowbite-react";
+import { Button, Table } from "flowbite-react";
 import OtroSidebar from "../components/OtroSidebar";
+import { FaUser } from "react-icons/fa";
 
 const ChatList = () => {
   const styles = {
@@ -133,56 +134,62 @@ const ChatList = () => {
             className="pt-24 pb-28 min-h-screen flex flex-col items-center justify-center wrapper"
           >
             {/*Page Component goes here*/}
-            <h1 className="text-4xl font-bold text-white drop-shadow-2xl">
-              Usuarios
-            </h1>
+            <button className="bg-azul4 text-white px-10 py-3 sm:px-16 sm:py-5 rounded-lg text-3xl   duration-300  drop-shadow-lg text-center my-3">
+              Chats de Usuarios
+            </button>
             <br />
 
             {listData !== null && userData !== null && (
               <>
-                {listData.map((user) => (
-                  <>
-                    <div key={user._id}>
-                      <Link to={`/chatroom_tech/${user._id}`}>
-                        <div
-                          className={`capitalize my-1 cursor-pointer rounded-md px-4 py-2 text-md ${
-                            user.isOnline === true
-                              ? "bg-green-500"
-                              : "bg-red-500"
-                          } `}
+                <Table>
+                  <Table.Head>
+                    <Table.HeadCell className="bg-white/60 font-bold text-lg text-center">
+                      Usuario
+                    </Table.HeadCell>
+                    <Table.HeadCell className="bg-white/60 font-bold text-lg text-center">
+                      Estado
+                    </Table.HeadCell>
+                  </Table.Head>
+                  <Table.Body className="divide-y bg-white/30">
+                    {listData.map((user) => (
+                      <>
+                        <Table.Row
+                          className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70 cursor-pointer"
+                          key={user._id}
+                          onClick={() => {
+                            navigate(`/chatroom_tech/${user._id}`);
+                          }}
                         >
-                          {`${user.name} ${user.lastName}`}
-                        </div>
-                      </Link>
-                    </div>
-                  </>
-                  /*
-                  <>
-                    <div key={user._id}>
-                      <Link to={`/chatroom_tech/${user._id}`}>
-                        <h1
-                          className={`capitalize my-1 cursor-pointer ${
-                            user.isOnline === true
-                              ? "bg-green-500"
-                              : "bg-red-500"
-                          } `}
-                        >{`${user.name} ${user.lastName}`}</h1>
-                      </Link>
-                    </div>
-                  </>
-                  */
-                ))}
+                          <Link to={`/chatroom_tech/${user._id}`}>
+                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 font-bold uppercase">
+                              {`${user.name} ${user.lastName}`}{" "}
+                            </Table.Cell>
+                          </Link>
+                          <Table.Cell className="whitespace-nowrap  text-blue-700 dark:text-gray-200 font-bold ">
+                            <FaUser
+                              className={`${
+                                user.isOnline === true
+                                  ? "text-green-500"
+                                  : "text-red-500"
+                              } text-2xl mx-auto`}
+                            />
+                          </Table.Cell>
+                        </Table.Row>
+                      </>
+                    ))}
+                  </Table.Body>
+                </Table>
               </>
             )}
             {currentPage < totalPages ? (
               <Button
-                className="bg-azul2 drop-shadow-md "
+                className="bg-azul2 drop-shadow-md mt-4"
                 onClick={loadNextPage}
               >
                 Cargar mas usuarios
               </Button>
             ) : (
-              <Button className="bg-gray-400 drop-shadow-md">
+              <Button className="bg-gray-400 drop-shadow-md mt-4">
                 No hay mas usuarios disponibles
               </Button>
             )}

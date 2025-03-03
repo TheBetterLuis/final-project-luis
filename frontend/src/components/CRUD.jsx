@@ -92,7 +92,9 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                   >
                     {`${user.name} ${user.lastName}`}
                   </Table.Cell>
-                  <Table.Cell>{user.email}</Table.Cell>
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
+                    {user.email}
+                  </Table.Cell>
                   <Table.Cell>
                     <Button.Group>
                       <Button
@@ -162,7 +164,9 @@ function CRUD({ hidden = false, view = "users", data = null, fetchUsers }) {
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 capitalize">
                     {`${user.name} ${user.lastName}`}
                   </Table.Cell>
-                  <Table.Cell>{user.email}</Table.Cell>
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
+                    {user.email}
+                  </Table.Cell>
                   <Table.Cell>
                     <Button.Group>
                       <Button

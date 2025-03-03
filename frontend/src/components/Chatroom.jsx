@@ -37,7 +37,7 @@ const PrivateChat = ({ roomId, username }) => {
   return (
     <div className="p-4 bg-gray-100 max-w-md mx-auto rounded shadow">
       <h3 className="text-lg font-bold mb-4 text-center text-gray-800">
-        Sala De Chat: {roomId}
+        Sala De Chat
       </h3>
       <div className="bg-white p-3 rounded shadow-inner max-h-60 overflow-y-auto">
         {messages.map((msg, index) => (
@@ -58,7 +58,7 @@ const PrivateChat = ({ roomId, username }) => {
           onClick={sendMessage}
           className="px-4 py-2 bg-blue-500 text-white font-semibold text-sm rounded hover:bg-blue-600 transition"
         >
-          Send
+          Enviar
         </button>
       </div>
     </div>

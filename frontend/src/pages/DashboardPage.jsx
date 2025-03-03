@@ -7,6 +7,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate, Link } from "react-router-dom";
 import OtroSidebar from "../components/OtroSidebar";
+import { FaPencilAlt } from "react-icons/fa";
 
 const Dashboard = () => {
   const styles = {
@@ -189,27 +190,41 @@ const Dashboard = () => {
         <div className="flex h-screen w-full bg-gradient-to-tr from-azul4 via-azul3 to-azul1 ">
           <div className="flex flex-col  sm:flex-row items-center justify-around w-full h-full max-sm:mt-60 mb-24">
             <div className="flex flex-col items-center justify-around">
-              <button className="bg-azul4 text-white px-10 py-3 sm:px-16 sm:py-5 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg text-center my-3">
+              <button className="bg-azul4 text-white px-10 py-3 sm:px-16 sm:py-5 rounded-lg text-xl   duration-300  drop-shadow-lg text-center my-3">
                 Tickets <br />
                 abiertos
               </button>
               <br />
               <Table className="drop-shadow-2xl ">
+                <Table.Head>
+                  <Table.HeadCell className="bg-white/60 font-bold text-lg text-center">
+                    Titulo
+                  </Table.HeadCell>
+                  <Table.HeadCell className="bg-white/60">
+                    <FaPencilAlt className="text-lg" />
+                  </Table.HeadCell>
+                </Table.Head>
                 <Table.Body className="divide-y bg-white/30">
                   {openTickets.length === 0 ? (
-                    <h1 className="text-black text-lg p-2 rounded-lg">
-                      No tienes tickets abiertos
-                    </h1>
+                    <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
+                      <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200 font-bold uppercase">
+                        No tienes tickets abiertos
+                      </Table.Cell>
+
+                      <Table.Cell className="whitespace-nowrap  text-blue-700 dark:text-gray-200 font-bold"></Table.Cell>
+                    </Table.Row>
                   ) : (
                     openTickets.map((ticket) => (
                       <Table.Row
                         key={ticket._id}
                         className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70"
                       >
-                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                          <Link to={`/ticket/${ticket._id}`}>
-                            {ticket.title}
-                          </Link>
+                        <Table.Cell className="whitespace-nowrap font-semibold text-gray-900 dark:text-gray-200  uppercase">
+                          {ticket.title}
+                        </Table.Cell>
+
+                        <Table.Cell className="whitespace-nowrap  text-blue-700 dark:text-gray-200 font-bold">
+                          <Link to={`/ticket/${ticket._id}`}>Ver</Link>
                         </Table.Cell>
                       </Table.Row>
                     ))
@@ -231,26 +246,41 @@ const Dashboard = () => {
             </div>
             <br />
             <div className="flex flex-col items-center justify-around">
-              <button className="bg-azul4 text-white px-10 py-3 sm:px-16 sm:py-5 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg text-center my-3">
+              <button className="bg-azul4 text-white px-10 py-3 sm:px-16 sm:py-5 rounded-lg text-xl   duration-300  drop-shadow-lg text-center my-3">
                 Tickets <br /> en revisión
               </button>
               <br />
               <Table className="drop-shadow-2xl ">
+                <Table.Head>
+                  <Table.HeadCell className="bg-white/60 font-bold text-lg text-center">
+                    Titulo
+                  </Table.HeadCell>
+                  <Table.HeadCell className="bg-white/60">
+                    <FaPencilAlt className="text-lg" />
+                  </Table.HeadCell>
+                </Table.Head>
+
                 <Table.Body className="divide-y bg-white/30">
                   {pendingTickets.length === 0 ? (
-                    <h1 className="text-black text-lg p-2 rounded-lg">
-                      No tienes tickets en revision
-                    </h1>
+                    <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
+                      <Table.Cell className="whitespace-nowrap  text-gray-900 dark:text-gray-200 font-bold uppercase">
+                        No tienes tickets abiertos
+                      </Table.Cell>
+
+                      <Table.Cell className="whitespace-nowrap  text-blue-700 dark:text-gray-200 font-bold"></Table.Cell>
+                    </Table.Row>
                   ) : (
                     pendingTickets.map((ticket) => (
                       <Table.Row
                         key={ticket._id}
                         className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70"
                       >
-                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                          <Link to={`/ticket/${ticket._id}`}>
-                            {ticket.title}
-                          </Link>
+                        <Table.Cell className="whitespace-nowrap  text-gray-900 dark:text-gray-200  uppercase font-bold">
+                          {ticket.title}
+                        </Table.Cell>
+
+                        <Table.Cell className="whitespace-nowrap font-medium text-blue-700 dark:text-gray-200 font-bold">
+                          <Link to={`/ticket/${ticket._id}`}>Ver</Link>
                         </Table.Cell>
                       </Table.Row>
                     ))
@@ -272,27 +302,41 @@ const Dashboard = () => {
             </div>
             <br />
             <div className="flex flex-col items-center justify-around">
-              <button className="bg-azul4 text-white px-10 py-3 sm:px-16 sm:py-5 rounded-lg text-xl hover:-translate-y-1 hover:scale-110  duration-300  drop-shadow-lg text-center my-3">
+              <button className="bg-azul4 text-white px-10 py-3 sm:px-16 sm:py-5 rounded-lg text-xl   duration-300  drop-shadow-lg text-center my-3">
                 Tickets <br /> resueltos
               </button>
               <br />
               <Table className="drop-shadow-2xl ">
+                <Table.Head>
+                  <Table.HeadCell className="bg-white/60 font-bold text-lg text-center">
+                    Titulo
+                  </Table.HeadCell>
+                  <Table.HeadCell className="bg-white/60">
+                    <FaPencilAlt className="text-lg" />
+                  </Table.HeadCell>
+                </Table.Head>
+
                 <Table.Body className="divide-y bg-white/30">
                   {closedTickets.length === 0 ? (
-                    <h1 className="text-black text-lg p-2 rounded-lg">
-                      No tienes tickets resueltos
-                    </h1>
+                    <Table.Row className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70">
+                      <Table.Cell className="whitespace-nowrap  text-gray-900 dark:text-gray-200 font-bold uppercase">
+                        No tienes tickets abiertos
+                      </Table.Cell>
+
+                      <Table.Cell className="whitespace-nowrap  text-blue-700 dark:text-gray-200 font-bold"></Table.Cell>
+                    </Table.Row>
                   ) : (
                     closedTickets.map((ticket) => (
                       <Table.Row
                         key={ticket._id}
                         className="bg-white/30 dark:border-gray-700 dark:bg-gray-800/70"
                       >
-                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-gray-200">
-                          <Link to={`/ticket/${ticket._id}`}>
-                            {ticket.title}
-                          </Link>
+                        <Table.Cell className="whitespace-nowrap  text-gray-900 dark:text-gray-200  uppercase font-semibold">
+                          {ticket.title}
                         </Table.Cell>
+                        <Table.Cell className="whitespace-nowrap  text-blue-700 dark:text-gray-200 font-bold">
+                          <Link to={`/ticket/${ticket._id}`}>Ver</Link>
+                        </Table.Cell>{" "}
                       </Table.Row>
                     ))
                   )}

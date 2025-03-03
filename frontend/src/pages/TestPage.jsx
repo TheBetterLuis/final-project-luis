@@ -19,7 +19,7 @@ const ChatroomPage = () => {
 
         <div
           id="wrapper"
-          className={`pt-24 pb-28 min-h-screen flex flex-col items-center justify-center wrapper`}
+          className={`pt-24 pb-28 min-h-screen flex flex-col items-center justify-center `}
         >
           {/*Page Component goes here*/}
           <>
