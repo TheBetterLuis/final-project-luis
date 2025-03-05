@@ -1,5 +1,6 @@
 const userModel = require("../models/users");
 const { sendEmail } = require("../util/helpers");
+const invoiceModel = require("../models/invoice");
 
 const getUsers = async (req, res) => {
   const users = await userModel.find();
@@ -134,6 +135,15 @@ const updateUser = async (req, res) => {
       user.password = await userModel.encryptPassword(req.body.password);
 
     if (req.body.role) user.role = req.body.role;
+
+    if (req.body.role === "premium") {
+      const newInvoice = await invoiceModel.create({
+        userID: id,
+        paymentDate: Date.now(),
+      });
+      user.latestInvoiceID = newInvoice._id;
+    }
+
     if (req.body.sessionAttempts)
       user.sessionAttempts = req.body.sessionAttempts;
     if (req.body.plan) user.plan = req.body.plan;
